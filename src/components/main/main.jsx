@@ -138,7 +138,7 @@ Main.propTypes = {
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
-  films: PropTypes.array.isRequired
+  films: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 export default Main;
