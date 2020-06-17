@@ -1,14 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
+import FilmsList from "./films-list.jsx";
 
-const Settings = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Action`,
-  RELEASE_DATE: 1996
-};
-
-const films = [
+const filmsInfo = [
   {
     title: `Fantastic Beasts`,
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -51,13 +45,10 @@ const films = [
   }
 ];
 
-it(`Should Main render correctly`, () => {
+it(`Should FilmsList render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      title={Settings.FILM_TITLE}
-      genre={Settings.FILM_GENRE}
-      releaseDate={Settings.RELEASE_DATE}
-      films={films}
+    .create(<FilmsList
+      films={filmsInfo}
       onTitleClickHandler={() => {}}
     />)
     .toJSON();

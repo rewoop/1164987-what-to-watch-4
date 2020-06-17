@@ -1,14 +1,9 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import Main from "./main";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import FilmCard from "./film-card.jsx";
 
-const Settings = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Action`,
-  RELEASE_DATE: 1996
-};
-
-const films = [
+const filmsInfo = [
   {
     title: `Fantastic Beasts`,
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -51,16 +46,24 @@ const films = [
   }
 ];
 
-it(`Should Main render correctly`, () => {
-  const tree = renderer
-    .create(<Main
-      title={Settings.FILM_TITLE}
-      genre={Settings.FILM_GENRE}
-      releaseDate={Settings.RELEASE_DATE}
-      films={films}
-      onTitleClickHandler={() => {}}
-    />)
-    .toJSON();
+Enzyme.configure({
+  adapter: new Adapter(),
+});
 
-  expect(tree).toMatchSnapshot();
+it(`Should film card be hover`, () => {
+  const onMouseOver = jest.fn();
+
+  const filmCard = shallow(
+      <FilmCard
+        films={filmsInfo}
+        onTitleClickHandler={() => {}}
+        onMouseOver={onMouseOver}
+      />
+  );
+
+  const filmCards = filmCard.find(`small-movie-card`);
+
+  filmCards.forEach((card) => card.props().onMouseOver());
+
+  expect(onMouseOver.mock.calls.length).toBe(filmCards.length);
 });
