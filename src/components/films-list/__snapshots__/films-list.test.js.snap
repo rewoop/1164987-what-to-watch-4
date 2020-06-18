@@ -6,7 +6,8 @@ exports[`Should FilmsList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -32,7 +33,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -58,7 +60,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -84,7 +87,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -110,7 +114,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -136,7 +141,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -162,7 +168,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -188,7 +195,8 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"

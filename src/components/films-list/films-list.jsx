@@ -16,11 +16,22 @@ class FilmsList extends PureComponent {
 
     return (
       <div className="catalog__movies-list">
-        <FilmCard films={films} onTitleClickHandler={onTitleClickHandler} onMouseOver={(currentFilm) => {
-          this.setState({
-            activeCard: currentFilm,
-          });
-        }}/>
+        {films.map((film) => {
+          return <FilmCard
+            key={film.title}
+            film={film}
+            onTitleClickHandler={onTitleClickHandler}
+            onMouseEnter={(currentFilm) => {
+              this.setState({
+                activeCard: currentFilm,
+              });
+            }}
+            onMouseLeave={() => {
+              this.setState({
+                activeCard: {},
+              });
+            }}/>;
+        })}
       </div>
     );
   }

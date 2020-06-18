@@ -1,214 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should FilmCard render correctly 1`] = `
-Array [
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+<article
+  className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <div
+    className="small-movie-card__image"
   >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Fantastic Beasts
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
+    <img
+      alt="Fantastic Beasts"
+      height="175"
+      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      className="small-movie-card__link"
+      href="movie-page.html"
+      onClick={[Function]}
     >
-      <img
-        alt="Bohemian Rhapsody"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Bohemian Rhapsody
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="Macbeth"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Macbeth
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="The Shawshank Redemption"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        The Shawshank Redemption
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="The Green Mile"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        The Green Mile
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="Forrest Gump"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Forrest Gump
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="Schindler's List"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Schindler's List
-      </a>
-    </h3>
-  </article>,
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseOver={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="Intouchables"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Intouchables
-      </a>
-    </h3>
-  </article>,
-]
+      Fantastic Beasts
+    </a>
+  </h3>
+</article>
 `;

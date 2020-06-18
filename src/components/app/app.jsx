@@ -1,8 +1,8 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
-class App extends PureComponent {
+class App extends React.Component {
   constructor(props) {
     super(props);
   }
