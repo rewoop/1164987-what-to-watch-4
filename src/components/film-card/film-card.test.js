@@ -13,8 +13,7 @@ it(`Should FilmCard render correctly`, () => {
     .create(<FilmCard
       film={filmInfo}
       onTitleClickHandler={() => {}}
-      onMouseEnter={() => {}}
-      onMouseLeave={() => {}}
+      onCardHover={() => {}}
     />)
     .toJSON();
 

@@ -13,24 +13,20 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should film card be hover`, () => {
-  const onMouseEnter = jest.fn();
-  const onMouseLeave = jest.fn();
+it(`Should Card be hovered with correct args`, () => {
+  const onCardHover = jest.fn();
 
   const filmCard = shallow(
       <FilmCard
         film={filmInfo}
         onTitleClickHandler={() => {}}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onCardHover={onCardHover}
       />
   );
 
-  const filmCards = filmCard.find(`small-movie-card`);
+  const card = filmCard.find(`.small-movie-card`);
+  card.simulate(`mouseenter`);
 
-  filmCards.forEach((card) => card.props().onMouseEnter());
-  filmCards.forEach((card) => card.props().onMouseLeave());
-
-  expect(onMouseEnter.mock.calls.length).toBe(filmCards.length);
-  expect(onMouseLeave.mock.calls.length).toBe(filmCards.length);
+  expect(onCardHover.mock.calls.length).toBe(1);
+  expect(onCardHover).toHaveBeenCalledWith(filmInfo);
 });

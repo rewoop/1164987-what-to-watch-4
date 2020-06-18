@@ -2,26 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const onTitleClickHandler = () => {};
 
-  onTitleClickHandler() {}
+const App = (props) => {
+  const {filmTitle, filmGenre, filmReleaseDate, films} = props;
 
-  render() {
-    const {filmTitle, filmGenre, filmReleaseDate, films} = this.props;
-
-    return (
-      <Main title={filmTitle}
-        genre={filmGenre}
-        releaseDate={filmReleaseDate}
-        films={films}
-        onTitleClickHandler={this.onTitleClickHandler}
-      />
-    );
-  }
-}
+  return (
+    <Main title={filmTitle}
+      genre={filmGenre}
+      releaseDate={filmReleaseDate}
+      films={films}
+      onTitleClickHandler={onTitleClickHandler}
+    />
+  );
+};
 
 App.propTypes = {
   filmTitle: PropTypes.string.isRequired,

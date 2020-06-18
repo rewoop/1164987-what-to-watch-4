@@ -21,14 +21,9 @@ class FilmsList extends PureComponent {
             key={film.title}
             film={film}
             onTitleClickHandler={onTitleClickHandler}
-            onMouseEnter={(currentFilm) => {
+            onCardHover={(currentFilm) => {
               this.setState({
                 activeCard: currentFilm,
-              });
-            }}
-            onMouseLeave={() => {
-              this.setState({
-                activeCard: {},
               });
             }}/>;
         })}
