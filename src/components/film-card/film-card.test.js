@@ -13,6 +13,7 @@ it(`Should FilmCard render correctly`, () => {
     .create(<FilmCard
       film={filmInfo}
       onTitleClickHandler={() => {}}
+      onPosterClickHandler={() => {}}
       onCardHover={() => {}}
     />)
     .toJSON();

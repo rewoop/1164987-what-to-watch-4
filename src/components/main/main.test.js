@@ -59,6 +59,7 @@ it(`Should Main render correctly`, () => {
       releaseDate={Settings.RELEASE_DATE}
       films={films}
       onTitleClickHandler={() => {}}
+      onPosterClickHandler={() => {}}
     />)
     .toJSON();
 

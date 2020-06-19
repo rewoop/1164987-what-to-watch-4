@@ -58,6 +58,7 @@ Enzyme.configure({
 
 it(`Should film title be pressed`, () => {
   const onTitleClickHandler = jest.fn();
+  const onPosterClickHandler = jest.fn();
 
   const main = shallow(
       <Main
@@ -66,12 +67,16 @@ it(`Should film title be pressed`, () => {
         releaseDate={Settings.RELEASE_DATE}
         films={filmsInfo}
         onTitleClickHandler={onTitleClickHandler}
+        onPosterClickHandler={onPosterClickHandler}
       />
   );
 
-  const filmTitles = main.find(`small-movie-card__link`);
+  const filmPosters = main.find(`.small-movie-card`);
+  const filmTitles = main.find(`.small-movie-card__link`);
 
+  filmPosters.forEach((filmPoster) => filmPoster.props().onClick());
   filmTitles.forEach((filmTitle) => filmTitle.props().onClick());
 
   expect(onTitleClickHandler.mock.calls.length).toBe(filmTitles.length);
+  expect(onPosterClickHandler.mock.calls.length).toBe(filmPosters.length);
 });

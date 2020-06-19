@@ -1,21 +1,82 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
+import FilmPage from "../film-page/film-page.jsx";
 
-const onTitleClickHandler = () => {};
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const App = (props) => {
-  const {filmTitle, filmGenre, filmReleaseDate, films} = props;
+    this._onTitleClickHandler = this._onTitleClickHandler.bind(this);
 
-  return (
-    <Main title={filmTitle}
+    this.state = {
+      activePage: `index`,
+    };
+  }
+
+  _onTitleClickHandler(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      activePage: `filmPage`
+    });
+  }
+
+  _renderApp() {
+    const {activePage} = this.state;
+
+    return activePage === `index` ? this._renderMain() : this._renderFilmPage();
+  }
+
+  _renderMain() {
+    const {filmTitle, filmGenre, filmReleaseDate, films} = this.props;
+
+    return (
+      <Main title={filmTitle}
+        genre={filmGenre}
+        releaseDate={filmReleaseDate}
+        films={films}
+        onTitleClickHandler={this._onTitleClickHandler}
+        onPosterClickHandler={this._onTitleClickHandler}
+      />
+    );
+  }
+
+  _renderFilmPage() {
+    const {filmTitle, filmGenre, filmReleaseDate, backgroundFilmPoster, filmPoster, ratingScore, ratingLevel, ratingCount, filmDescription, filmDirector, filmStarring} = this.props;
+
+    return <FilmPage
+      title={filmTitle}
       genre={filmGenre}
       releaseDate={filmReleaseDate}
-      films={films}
-      onTitleClickHandler={onTitleClickHandler}
-    />
-  );
-};
+      backgroundFilmPoster={backgroundFilmPoster}
+      filmPoster={filmPoster}
+      ratingScore={ratingScore}
+      ratingLevel={ratingLevel}
+      ratingCount={ratingCount}
+      filmDescription={filmDescription}
+      filmDirector={filmDirector}
+      filmStarring={filmStarring}
+    />;
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/dev-film">
+            {this._renderFilmPage()}
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
+
 
 App.propTypes = {
   filmTitle: PropTypes.string.isRequired,
@@ -27,7 +88,15 @@ App.propTypes = {
         image: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
       }).isRequired
-  ).isRequired
+  ).isRequired,
+  backgroundFilmPoster: PropTypes.string.isRequired,
+  filmPoster: PropTypes.string.isRequired,
+  ratingScore: PropTypes.string.isRequired,
+  ratingLevel: PropTypes.string.isRequired,
+  ratingCount: PropTypes.string.isRequired,
+  filmDescription: PropTypes.string.isRequired,
+  filmDirector: PropTypes.string.isRequired,
+  filmStarring: PropTypes.string.isRequired,
 };
 
 export default App;

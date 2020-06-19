@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const FilmCard = (props) => {
-  const {film, onTitleClickHandler, onCardHover} = props;
+  const {film, onTitleClickHandler, onPosterClickHandler, onCardHover} = props;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
+      onClick={onPosterClickHandler}
       onMouseEnter={() => onCardHover(film)}
       onMouseLeave={() => onCardHover({})}>
       <div className="small-movie-card__image">
@@ -26,6 +27,7 @@ FilmCard.propTypes = {
     link: PropTypes.string.isRequired,
   }).isRequired,
   onTitleClickHandler: PropTypes.func.isRequired,
+  onPosterClickHandler: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
 };
 

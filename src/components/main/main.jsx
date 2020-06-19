@@ -8,7 +8,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {title, genre, releaseDate, films, onTitleClickHandler} = this.props;
+    const {title, genre, releaseDate, films, onTitleClickHandler, onPosterClickHandler} = this.props;
 
     return (
       <React.Fragment>
@@ -104,7 +104,11 @@ class Main extends PureComponent {
               </li>
             </ul>
 
-            <FilmsList films={films} onTitleClickHandler={onTitleClickHandler}/>
+            <FilmsList
+              films={films}
+              onTitleClickHandler={onTitleClickHandler}
+              onPosterClickHandler={onPosterClickHandler}
+            />
 
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
@@ -141,7 +145,8 @@ Main.propTypes = {
         link: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onTitleClickHandler: PropTypes.func.isRequired
+  onTitleClickHandler: PropTypes.func.isRequired,
+  onPosterClickHandler: PropTypes.func.isRequired,
 };
 
 export default Main;
