@@ -29,15 +29,18 @@ it(`Should Card be hovered with correct args`, () => {
 
   const card = filmCard.find(`.small-movie-card`);
   const filmTitle = filmCard.find(`.small-movie-card__link`);
+  const mockEvent = {
+    preventDefault() {}
+  };
 
   card.simulate(`mouseenter`);
   card.props().onClick();
-  filmTitle.props().onClick();
+  filmTitle.simulate(`click`, mockEvent);
 
   expect(onCardHover.mock.calls.length).toBe(1);
   expect(onTitleClickHandler.mock.calls.length).toBe(1);
   expect(onPosterClickHandler.mock.calls.length).toBe(1);
   expect(onCardHover).toHaveBeenCalledWith(filmInfo);
-  expect(onTitleClickHandler.mock.calls[0][1]).toMatchObject(filmInfo);
-  expect(onPosterClickHandler.mock.calls[0][1]).toMatchObject(filmInfo);
+  expect(onTitleClickHandler).toHaveBeenCalledWith(filmInfo);
+  expect(onPosterClickHandler).toHaveBeenCalledWith(filmInfo);
 });

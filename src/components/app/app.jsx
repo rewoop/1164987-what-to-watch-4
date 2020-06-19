@@ -15,9 +15,7 @@ class App extends PureComponent {
     };
   }
 
-  _onTitleClickHandler(evt, film) {
-    evt.preventDefault();
-
+  _onTitleClickHandler(film) {
     this.setState({
       activePage: film
     });
