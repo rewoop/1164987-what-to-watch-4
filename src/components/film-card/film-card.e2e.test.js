@@ -38,4 +38,6 @@ it(`Should Card be hovered with correct args`, () => {
   expect(onTitleClickHandler.mock.calls.length).toBe(1);
   expect(onPosterClickHandler.mock.calls.length).toBe(1);
   expect(onCardHover).toHaveBeenCalledWith(filmInfo);
+  expect(onTitleClickHandler.mock.calls[0][1]).toMatchObject(filmInfo);
+  expect(onPosterClickHandler.mock.calls[0][1]).toMatchObject(filmInfo);
 });

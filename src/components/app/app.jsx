@@ -11,22 +11,22 @@ class App extends PureComponent {
     this._onTitleClickHandler = this._onTitleClickHandler.bind(this);
 
     this.state = {
-      activePage: `index`,
+      activePage: {},
     };
   }
 
-  _onTitleClickHandler(evt) {
+  _onTitleClickHandler(evt, film) {
     evt.preventDefault();
 
     this.setState({
-      activePage: `filmPage`
+      activePage: film
     });
   }
 
   _renderApp() {
     const {activePage} = this.state;
 
-    return activePage === `index` ? this._renderMain() : this._renderFilmPage();
+    return Object.keys(activePage).length === 0 ? this._renderMain() : this._renderFilmPage();
   }
 
   _renderMain() {
