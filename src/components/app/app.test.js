@@ -8,7 +8,13 @@ const Settings = {
   RELEASE_DATE: 1996
 };
 
-const films = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
+const films = [
+  {
+    title: `Fantastic Beasts`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  }
+];
 
 it(`Render App`, () => {
   const tree = renderer

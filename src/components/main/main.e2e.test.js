@@ -9,7 +9,48 @@ const Settings = {
   RELEASE_DATE: 1996
 };
 
-const films = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
+const filmsInfo = [
+  {
+    title: `Fantastic Beasts`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `Bohemian Rhapsody`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `Macbeth`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `The Shawshank Redemption`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `The Green Mile`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `Forrest Gump`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `Schindler's List`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  },
+  {
+    title: `Intouchables`,
+    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    link: `movie-page.html`
+  }
+];
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -23,7 +64,7 @@ it(`Should film title be pressed`, () => {
         title={Settings.FILM_TITLE}
         genre={Settings.FILM_GENRE}
         releaseDate={Settings.RELEASE_DATE}
-        films={films}
+        films={filmsInfo}
         onTitleClickHandler={onTitleClickHandler}
       />
   );
