@@ -2,19 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 import films from "./mocks/films";
-
-const Settings = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Action`,
-  RELEASE_DATE: 1996
-};
+import film from "./mocks/film.js";
 
 ReactDOM.render(
     <App
-      filmTitle={Settings.FILM_TITLE}
-      filmGenre={Settings.FILM_GENRE}
-      filmReleaseDate={Settings.RELEASE_DATE}
+      filmTitle={film.FILM_TITLE}
+      filmGenre={film.FILM_GENRE}
+      filmReleaseDate={film.RELEASE_DATE}
       films={films}
+      backgroundFilmPoster={film.BACKGROUND_POSTER}
+      filmPoster={film.FILM_POSTER}
+      ratingScore={film.RATING.SCORE}
+      ratingLevel={film.RATING.LEVEL}
+      ratingCount={film.RATING.COUNT}
+      filmDescription={film.FILM_DESCRIPTION}
+      filmDirector={film.FILM_DIRECTOR}
+      filmStarring={film.FILM_STARRING}
     />,
     document.querySelector(`#root`)
 );

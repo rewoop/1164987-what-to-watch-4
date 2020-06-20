@@ -50,6 +50,7 @@ it(`Should FilmsList render correctly`, () => {
     .create(<FilmsList
       films={filmsInfo}
       onTitleClickHandler={() => {}}
+      onPosterClickHandler={() => {}}
     />)
     .toJSON();
 

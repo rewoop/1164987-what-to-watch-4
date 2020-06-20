@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import FilmPage from "./film-page.jsx";
 
 const Settings = {
   FILM_TITLE: `The Rock`,
@@ -19,21 +19,12 @@ const Settings = {
   FILM_STARRING: `Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`
 };
 
-const films = [
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`
-  }
-];
-
-it(`Render App`, () => {
+it(`Should FilmPage render correctly`, () => {
   const tree = renderer
-    .create(<App
-      filmTitle={Settings.FILM_TITLE}
-      filmGenre={Settings.FILM_GENRE}
-      filmReleaseDate={Settings.RELEASE_DATE}
-      films={films}
+    .create(<FilmPage
+      title={Settings.FILM_TITLE}
+      genre={Settings.FILM_GENRE}
+      releaseDate={Settings.RELEASE_DATE}
       backgroundFilmPoster={Settings.BACKGROUND_POSTER}
       filmPoster={Settings.FILM_POSTER}
       ratingScore={Settings.RATING.SCORE}
