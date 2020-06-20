@@ -13,34 +13,66 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should Card be hovered with correct args`, () => {
-  const onCardHover = jest.fn();
-  const onTitleClickHandler = jest.fn();
-  const onPosterClickHandler = jest.fn();
+describe(`Should film card work right`, () => {
+  it(`Should card title be pressed`, () => {
+    const onTitleClickHandler = jest.fn();
 
-  const filmCard = shallow(
-      <FilmCard
-        film={filmInfo}
-        onTitleClickHandler={onTitleClickHandler}
-        onPosterClickHandler={onPosterClickHandler}
-        onCardHover={onCardHover}
-      />
-  );
+    const filmCard = shallow(
+        <FilmCard
+          film={filmInfo}
+          onTitleClickHandler={onTitleClickHandler}
+          onPosterClickHandler={() => {}}
+          onCardHover={() => {}}
+        />
+    );
 
-  const card = filmCard.find(`.small-movie-card`);
-  const filmTitle = filmCard.find(`.small-movie-card__link`);
-  const mockEvent = {
-    preventDefault() {}
-  };
+    const mockEvent = {
+      preventDefault() {}
+    };
 
-  card.simulate(`mouseenter`);
-  card.props().onClick();
-  filmTitle.simulate(`click`, mockEvent);
+    const filmTitle = filmCard.find(`.small-movie-card__link`);
+    filmTitle.simulate(`click`, mockEvent);
 
-  expect(onCardHover.mock.calls.length).toBe(1);
-  expect(onTitleClickHandler.mock.calls.length).toBe(1);
-  expect(onPosterClickHandler.mock.calls.length).toBe(1);
-  expect(onCardHover).toHaveBeenCalledWith(filmInfo);
-  expect(onTitleClickHandler).toHaveBeenCalledWith(filmInfo);
-  expect(onPosterClickHandler).toHaveBeenCalledWith(filmInfo);
+    expect(onTitleClickHandler).toHaveBeenCalledTimes(1);
+    expect(onTitleClickHandler).toHaveBeenCalledWith(filmInfo);
+  });
+
+  it(`Should card poster click`, () => {
+    const onPosterClickHandler = jest.fn();
+
+    const filmCard = shallow(
+        <FilmCard
+          film={filmInfo}
+          onTitleClickHandler={() => {}}
+          onPosterClickHandler={onPosterClickHandler}
+          onCardHover={() => {}}
+        />
+    );
+
+    const card = filmCard.find(`.small-movie-card`);
+    card.simulate(`click`);
+
+    expect(onPosterClickHandler).toHaveBeenCalledTimes(1);
+    expect(onPosterClickHandler).toHaveBeenCalledWith(filmInfo);
+  });
+
+  it(`Should Card be hovered with correct args`, () => {
+    const onCardHover = jest.fn();
+
+
+    const filmCard = shallow(
+        <FilmCard
+          film={filmInfo}
+          onTitleClickHandler={() => {}}
+          onPosterClickHandler={() => {}}
+          onCardHover={onCardHover}
+        />
+    );
+
+    const card = filmCard.find(`.small-movie-card`);
+    card.simulate(`mouseenter`);
+
+    expect(onCardHover).toHaveBeenCalledTimes(1);
+    expect(onCardHover).toHaveBeenCalledWith(filmInfo);
+  });
 });
