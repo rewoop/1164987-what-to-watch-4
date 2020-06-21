@@ -56,27 +56,42 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should film title be pressed`, () => {
-  const onTitleClickHandler = jest.fn();
-  const onPosterClickHandler = jest.fn();
+describe(`Should Main work right`, () => {
+  it(`Should film title be pressed`, () => {
+    const onTitleClickHandler = jest.fn();
 
-  const main = shallow(
-      <Main
-        title={Settings.FILM_TITLE}
-        genre={Settings.FILM_GENRE}
-        releaseDate={Settings.RELEASE_DATE}
-        films={filmsInfo}
-        onTitleClickHandler={onTitleClickHandler}
-        onPosterClickHandler={onPosterClickHandler}
-      />
-  );
+    const main = shallow(
+        <Main
+          title={Settings.FILM_TITLE}
+          genre={Settings.FILM_GENRE}
+          releaseDate={Settings.RELEASE_DATE}
+          films={filmsInfo}
+          onTitleClickHandler={onTitleClickHandler}
+          onPosterClickHandler={() => {}}
+        />
+    );
 
-  const filmPosters = main.find(`.small-movie-card`);
-  const filmTitles = main.find(`.small-movie-card__link`);
+    const filmTitles = main.find(`.small-movie-card__link`);
+    filmTitles.forEach((filmTitle) => filmTitle.simulate(`click`));
+    expect(onTitleClickHandler).toHaveBeenCalledTimes(filmTitles.length);
+  });
 
-  filmPosters.forEach((filmPoster) => filmPoster.props().onClick());
-  filmTitles.forEach((filmTitle) => filmTitle.props().onClick());
+  it(`Should film poster be clicked`, () => {
+    const onPosterClickHandler = jest.fn();
 
-  expect(onTitleClickHandler.mock.calls.length).toBe(filmTitles.length);
-  expect(onPosterClickHandler.mock.calls.length).toBe(filmPosters.length);
+    const main = shallow(
+        <Main
+          title={Settings.FILM_TITLE}
+          genre={Settings.FILM_GENRE}
+          releaseDate={Settings.RELEASE_DATE}
+          films={filmsInfo}
+          onTitleClickHandler={() => {}}
+          onPosterClickHandler={onPosterClickHandler}
+        />
+    );
+
+    const filmPosters = main.find(`.small-movie-card`);
+    filmPosters.forEach((filmPoster) => filmPoster.simulate(`click`));
+    expect(onPosterClickHandler).toHaveBeenCalledTimes(filmPosters.length);
+  });
 });
