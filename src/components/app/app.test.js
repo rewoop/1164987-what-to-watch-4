@@ -23,7 +23,8 @@ const films = [
   {
     title: `Fantastic Beasts`,
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`
+    link: `movie-page.html`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
