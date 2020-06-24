@@ -23,7 +23,8 @@ const films = [
   {
     title: `Fantastic Beasts`,
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`
+    link: `movie-page.html`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }
 ];
 
@@ -42,8 +43,11 @@ it(`Render App`, () => {
       filmDescription={Settings.FILM_DESCRIPTION}
       filmDirector={Settings.FILM_DIRECTOR}
       filmStarring={Settings.FILM_STARRING}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

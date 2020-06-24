@@ -13,6 +13,10 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      />
       <img
         alt="Fantastic Beasts"
         height="175"
@@ -41,10 +45,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/bohemian-rhapsody.jpg"
+      />
       <img
         alt="Bohemian Rhapsody"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/bohemian-rhapsody.jpg"
         width="280"
       />
     </div>
@@ -69,10 +77,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/macbeth.jpg"
+      />
       <img
         alt="Macbeth"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/macbeth.jpg"
         width="280"
       />
     </div>
@@ -97,10 +109,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/aviator.jpg"
+      />
       <img
-        alt="The Shawshank Redemption"
+        alt="Aviator"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/aviator.jpg"
         width="280"
       />
     </div>
@@ -112,7 +128,7 @@ exports[`Should FilmsList render correctly 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        The Shawshank Redemption
+        Aviator
       </a>
     </h3>
   </article>
@@ -125,10 +141,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/we-need-to-talk-about-kevin.jpg"
+      />
       <img
-        alt="The Green Mile"
+        alt="We need to talk about Kevin"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/we-need-to-talk-about-kevin.jpg"
         width="280"
       />
     </div>
@@ -140,7 +160,7 @@ exports[`Should FilmsList render correctly 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        The Green Mile
+        We need to talk about Kevin
       </a>
     </h3>
   </article>
@@ -153,10 +173,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/what-we-do-in-the-shadows.jpg"
+      />
       <img
-        alt="Forrest Gump"
+        alt="What We Do in the Shadows"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/what-we-do-in-the-shadows.jpg"
         width="280"
       />
     </div>
@@ -168,7 +192,7 @@ exports[`Should FilmsList render correctly 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Forrest Gump
+        What We Do in the Shadows
       </a>
     </h3>
   </article>
@@ -181,10 +205,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/revenant.jpg"
+      />
       <img
-        alt="Schindler's List"
+        alt="Revenant"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/revenant.jpg"
         width="280"
       />
     </div>
@@ -196,7 +224,7 @@ exports[`Should FilmsList render correctly 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Schindler's List
+        Revenant
       </a>
     </h3>
   </article>
@@ -209,10 +237,14 @@ exports[`Should FilmsList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
+      <video
+        className="player__video"
+        poster="img/johnny-english.jpg"
+      />
       <img
-        alt="Intouchables"
+        alt="Johnny English"
         height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        src="img/johnny-english.jpg"
         width="280"
       />
     </div>
@@ -224,7 +256,7 @@ exports[`Should FilmsList render correctly 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Intouchables
+        Johnny English
       </a>
     </h3>
   </article>

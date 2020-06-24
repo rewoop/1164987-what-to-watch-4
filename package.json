@@ -8,7 +8,8 @@
     "eslint": "eslint --ext .jsx --ext .js src/",
     "start": "webpack-dev-server",
     "test": "npm run eslint && npm run test.jest",
-    "test.jest": "jest"
+    "test.jest": "jest",
+    "update.jest": "jest -u"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
