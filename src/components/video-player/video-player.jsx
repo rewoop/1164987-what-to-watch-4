@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment, createRef} from "react";
+import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 
 
@@ -7,24 +7,7 @@ export default class VideoPlayer extends PureComponent {
     super(props);
 
     this._videoRef = createRef();
-
-    this.state = {
-      isPlaying: props.isPlaying,
-    };
-  }
-
-  render() {
-    const {poster} = this.props;
-
-    return (
-      <Fragment>
-        <video
-          className={`player__video`}
-          ref={this._videoRef}
-          poster={poster}
-        />
-      </Fragment>
-    );
+    this._timeoutPlayHandler = null;
   }
 
   componentDidMount() {
@@ -33,12 +16,6 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = src;
     video.muted = muted;
-
-    video.onplay = () => {
-      this.setState({
-        isPlaying: true,
-      });
-    };
   }
 
   componentWillUnmount() {
@@ -52,10 +29,26 @@ export default class VideoPlayer extends PureComponent {
     const video = this._videoRef.current;
 
     if (this.props.isPlaying) {
-      setTimeout(() => video.play(), 1000);
+      this._timeoutPlayHandler = setTimeout(() => video.play(), 1000);
     } else {
-      setTimeout(() => video.load(), 1000);
+      if (this._timeoutPlayHandler) {
+        clearTimeout(this._timeoutPlayHandler);
+        this._timeoutPlayHandler = null;
+      }
+      video.load();
     }
+  }
+
+  render() {
+    const {poster} = this.props;
+
+    return (
+      <video
+        className={`player__video`}
+        ref={this._videoRef}
+        poster={poster}
+      />
+    );
   }
 }
 
