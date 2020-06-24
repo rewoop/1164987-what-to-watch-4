@@ -68,8 +68,11 @@ it(`Should Main render correctly`, () => {
       films={films}
       onTitleClickHandler={() => {}}
       onPosterClickHandler={() => {}}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

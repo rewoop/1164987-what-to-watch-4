@@ -43,8 +43,11 @@ it(`Render App`, () => {
       filmDescription={Settings.FILM_DESCRIPTION}
       filmDirector={Settings.FILM_DIRECTOR}
       filmStarring={Settings.FILM_STARRING}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -16,8 +16,11 @@ it(`Should FilmCard render correctly`, () => {
       onTitleClickHandler={() => {}}
       onPosterClickHandler={() => {}}
       onCardHover={() => {}}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

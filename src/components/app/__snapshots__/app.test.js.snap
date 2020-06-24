@@ -266,6 +266,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
+            <video
+              className="player__video"
+              muted={true}
+              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            />
             <img
               alt="Fantastic Beasts"
               height="175"

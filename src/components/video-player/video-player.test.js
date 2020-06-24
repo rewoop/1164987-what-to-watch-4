@@ -15,7 +15,11 @@ it(`VideoPlayer is rendered correctly`, () => {
     src={src}
     poster={image}
     muted
-  />).toJSON();
+  />, {
+    createNodeMock: () => {
+      return {};
+    }
+  }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
