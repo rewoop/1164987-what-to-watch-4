@@ -32,7 +32,12 @@ class FilmCard extends PureComponent {
           });
         }}>
         <div className="small-movie-card__image">
-          <VideoPlayer isPlaying={isPlaying} src={film.src} poster={film.image}/>
+          <VideoPlayer
+            isPlaying={isPlaying}
+            src={film.src}
+            poster={film.image}
+            muted
+          />
           <img src={film.image} alt={film.title} width="280" height="175"/>
         </div>
         <h3 className="small-movie-card__title">

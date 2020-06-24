@@ -268,7 +268,6 @@ Array [
           >
             <video
               className="player__video"
-              muted={true}
               poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             />
             <img
