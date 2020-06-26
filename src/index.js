@@ -18,6 +18,8 @@ ReactDOM.render(
       filmDescription={film.FILM_DESCRIPTION}
       filmDirector={film.FILM_DIRECTOR}
       filmStarring={film.FILM_STARRING}
+      runTime={film.RUN_TIME}
+      reviews={film.REVIEWS}
     />,
     document.querySelector(`#root`)
 );

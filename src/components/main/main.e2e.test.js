@@ -57,7 +57,7 @@ Enzyme.configure({
 });
 
 describe(`Should Main work right`, () => {
-  it(`Should film title be pressed`, () => {
+  it(`Should film title be clicked`, () => {
     const onTitleClickHandler = jest.fn();
 
     const main = shallow(
