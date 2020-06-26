@@ -181,11 +181,7 @@ FilmPage.propTypes = {
       }
       ).isRequired
   ).isRequired,
-  sortedFilms: PropTypes.shape({
-    title: PropTypes.string,
-    image: PropTypes.string,
-    link: PropTypes.string,
-  }).isRequired
+  sortedFilms: PropTypes.element.isRequired
 };
 
 export default FilmPage;
