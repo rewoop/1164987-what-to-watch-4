@@ -20,11 +20,6 @@ class FilmPage extends PureComponent {
   _setActiveTab(tab) {
     return (evt) => {
       evt.preventDefault();
-      const activeClass = document.querySelectorAll(`.movie-nav__item--active`);
-      activeClass.forEach((item) => {
-        item.classList.remove(`movie-nav__item--active`);
-      });
-      evt.target.closest(`.movie-nav__item`).classList.add(`movie-nav__item--active`);
       this.setState({
         activeTab: tab
       });
@@ -44,8 +39,8 @@ class FilmPage extends PureComponent {
         />;
       case Tab.DETAILS:
         return <FilmPageDetails
-          genre={this.props.genre}
-          releaseDate={this.props.releaseDate}
+          genre={this.props.filmGenre}
+          releaseDate={this.props.filmReleaseDate}
           filmDirector={this.props.filmDirector}
           filmStarring={this.props.filmStarring}
           runTime={this.props.runTime}
@@ -60,7 +55,7 @@ class FilmPage extends PureComponent {
   }
 
   render() {
-    const {title, genre, releaseDate, backgroundFilmPoster, filmPoster, sortedFilms} = this.props;
+    const {filmTitle: title, filmGenre: genre, filmReleaseDate: releaseDate, backgroundFilmPoster, filmPoster, sortedFilms} = this.props;
 
     return (
       <React.Fragment>
@@ -125,6 +120,7 @@ class FilmPage extends PureComponent {
                 <nav className="movie-nav movie-card__nav">
                   <Tabs
                     onLinkClickHandler={this._setActiveTab}
+                    currentTab={this.state.activeTab}
                   />
                 </nav>
 
@@ -161,9 +157,9 @@ class FilmPage extends PureComponent {
 }
 
 FilmPage.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  filmTitle: PropTypes.string.isRequired,
+  filmGenre: PropTypes.string.isRequired,
+  filmReleaseDate: PropTypes.number.isRequired,
   backgroundFilmPoster: PropTypes.string.isRequired,
   filmPoster: PropTypes.string.isRequired,
   ratingScore: PropTypes.string.isRequired,
@@ -185,7 +181,11 @@ FilmPage.propTypes = {
       }
       ).isRequired
   ).isRequired,
-  sortedFilms: PropTypes.object.isRequired,
+  sortedFilms: PropTypes.shape({
+    title: PropTypes.string,
+    image: PropTypes.string,
+    link: PropTypes.string,
+  }).isRequired
 };
 
 export default FilmPage;

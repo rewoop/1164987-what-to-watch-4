@@ -16,7 +16,7 @@ class App extends PureComponent {
     };
   }
 
-  _getSortedFilms(genre) {
+  _getFilmsByGenre(genre) {
     const {films} = this.props;
 
     return (
@@ -64,23 +64,11 @@ class App extends PureComponent {
   }
 
   _renderFilmPage() {
-    const {filmTitle, filmGenre, filmReleaseDate, backgroundFilmPoster, filmPoster, ratingScore, ratingLevel, ratingCount, filmDescription, filmDirector, filmStarring, runTime, reviews} = this.props;
+    const {filmGenre} = this.props;
 
     return <FilmPage
-      title={filmTitle}
-      genre={filmGenre}
-      releaseDate={filmReleaseDate}
-      backgroundFilmPoster={backgroundFilmPoster}
-      filmPoster={filmPoster}
-      ratingScore={ratingScore}
-      ratingLevel={ratingLevel}
-      ratingCount={ratingCount}
-      filmDescription={filmDescription}
-      filmDirector={filmDirector}
-      filmStarring={filmStarring}
-      runTime={runTime}
-      reviews={reviews}
-      sortedFilms={this._getSortedFilms(filmGenre)}
+      {...this.props}
+      sortedFilms={this._getFilmsByGenre(filmGenre)}
     />;
   }
 

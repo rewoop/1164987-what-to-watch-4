@@ -56,9 +56,9 @@ const Settings = {
 it(`Should FilmPage render correctly`, () => {
   const tree = renderer
     .create(<FilmPage
-      title={Settings.FILM_TITLE}
-      genre={Settings.FILM_GENRE}
-      releaseDate={Settings.RELEASE_DATE}
+      filmTitle={Settings.FILM_TITLE}
+      filmGenre={Settings.FILM_GENRE}
+      filmReleaseDate={Settings.RELEASE_DATE}
       backgroundFilmPoster={Settings.BACKGROUND_POSTER}
       filmPoster={Settings.FILM_POSTER}
       ratingScore={Settings.RATING.SCORE}
