@@ -89,7 +89,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Action
+              Thriller
             </span>
             <span
               className="movie-card__year"

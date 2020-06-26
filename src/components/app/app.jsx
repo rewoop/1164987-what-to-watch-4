@@ -3,6 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
+import FilmCard from "../film-card/film-card.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -13,6 +14,27 @@ class App extends PureComponent {
     this.state = {
       activePage: {},
     };
+  }
+
+  _getSortedFilms(genre) {
+    const {films} = this.props;
+
+    return (
+      <div className="catalog__movies-list">
+        {films.filter((film) => film.genre === genre).map((film) => {
+          return <FilmCard
+            key={film.title}
+            film={film}
+            onTitleClickHandler={this._onTitleClickHandler}
+            onPosterClickHandler={this._onTitleClickHandler}
+            onCardHover={(currentFilm) => {
+              this.setState({
+                activeCard: currentFilm,
+              });
+            }}/>;
+        })}
+      </div>
+    );
   }
 
   _onTitleClickHandler(film) {
@@ -42,7 +64,7 @@ class App extends PureComponent {
   }
 
   _renderFilmPage() {
-    const {filmTitle, filmGenre, filmReleaseDate, backgroundFilmPoster, filmPoster, ratingScore, ratingLevel, ratingCount, filmDescription, filmDirector, filmStarring} = this.props;
+    const {filmTitle, filmGenre, filmReleaseDate, backgroundFilmPoster, filmPoster, ratingScore, ratingLevel, ratingCount, filmDescription, filmDirector, filmStarring, runTime, reviews} = this.props;
 
     return <FilmPage
       title={filmTitle}
@@ -56,6 +78,9 @@ class App extends PureComponent {
       filmDescription={filmDescription}
       filmDirector={filmDirector}
       filmStarring={filmStarring}
+      runTime={runTime}
+      reviews={reviews}
+      sortedFilms={this._getSortedFilms(filmGenre)}
     />;
   }
 
@@ -94,7 +119,20 @@ App.propTypes = {
   ratingCount: PropTypes.string.isRequired,
   filmDescription: PropTypes.string.isRequired,
   filmDirector: PropTypes.string.isRequired,
-  filmStarring: PropTypes.string.isRequired,
+  filmStarring: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
+  runTime: PropTypes.string.isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+      }
+      ).isRequired
+  ).isRequired,
 };
 
 export default App;
