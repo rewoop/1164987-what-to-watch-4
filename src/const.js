@@ -1,7 +1,7 @@
-const Tab = {
+export const Tab = {
   OVERVIEW: `overview`,
   DETAILS: `details`,
   REVIEWS: `reviews`
 };
 
-export {Tab};
+export const ALL_GENRES = `All genres`;

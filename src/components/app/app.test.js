@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const Settings = {
   FILM_TITLE: `The Rock`,
@@ -41,31 +45,40 @@ const films = [
     image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     link: `movie-page.html`,
     src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: `Action`
   }
 ];
 
 it(`Render App`, () => {
+  const store = mockStore({
+    genre: `All genres`
+  });
+
   const tree = renderer
-    .create(<App
-      filmTitle={Settings.FILM_TITLE}
-      filmGenre={Settings.FILM_GENRE}
-      filmReleaseDate={Settings.RELEASE_DATE}
-      films={films}
-      backgroundFilmPoster={Settings.BACKGROUND_POSTER}
-      filmPoster={Settings.FILM_POSTER}
-      ratingScore={Settings.RATING.SCORE}
-      ratingLevel={Settings.RATING.LEVEL}
-      ratingCount={Settings.RATING.COUNT}
-      filmDescription={Settings.FILM_DESCRIPTION}
-      filmDirector={Settings.FILM_DIRECTOR}
-      filmStarring={Settings.FILM_STARRING}
-      runTime={Settings.RUN_TIME}
-      reviews={Settings.REVIEWS}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Provider store={store}>
+          <App
+            filmTitle={Settings.FILM_TITLE}
+            filmGenre={Settings.FILM_GENRE}
+            filmReleaseDate={Settings.RELEASE_DATE}
+            films={films}
+            backgroundFilmPoster={Settings.BACKGROUND_POSTER}
+            filmPoster={Settings.FILM_POSTER}
+            ratingScore={Settings.RATING.SCORE}
+            ratingLevel={Settings.RATING.LEVEL}
+            ratingCount={Settings.RATING.COUNT}
+            filmDescription={Settings.FILM_DESCRIPTION}
+            filmDirector={Settings.FILM_DIRECTOR}
+            filmStarring={Settings.FILM_STARRING}
+            runTime={Settings.RUN_TIME}
+            reviews={Settings.REVIEWS}
+            activeGenreFilter={`All genres`}
+            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))} onGenreClickHandler={() => {}}/>
+        </Provider>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
