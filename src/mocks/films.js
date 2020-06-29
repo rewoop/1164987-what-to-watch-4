@@ -39,7 +39,7 @@ export default [
     image: `img/what-we-do-in-the-shadows.jpg`,
     link: `movie-page.html`,
     src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    genre: `Thriller`
+    genre: `Horror`
   },
   {
     title: `Revenant`,
@@ -53,6 +53,6 @@ export default [
     image: `img/johnny-english.jpg`,
     link: `movie-page.html`,
     src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    genre: `Thriller`
+    genre: `Romance`
   }
 ];

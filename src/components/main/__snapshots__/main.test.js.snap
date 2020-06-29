@@ -154,7 +154,8 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -165,16 +166,18 @@ Array [
         </li>
         <li
           className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
             href="#"
           >
-            Comedies
+            Comedy
           </a>
         </li>
         <li
           className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -185,6 +188,7 @@ Array [
         </li>
         <li
           className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -195,16 +199,29 @@ Array [
         </li>
         <li
           className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
             href="#"
           >
-            Dramas
+            Drama
           </a>
         </li>
         <li
           className="catalog__genres-item"
+          onClick={[Function]}
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+          >
+            Thriller
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
@@ -215,42 +232,13 @@ Array [
         </li>
         <li
           className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
+          onClick={[Function]}
         >
           <a
             className="catalog__genres-link"
             href="#"
           >
             Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Thrillers
           </a>
         </li>
       </ul>

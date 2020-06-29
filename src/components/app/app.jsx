@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
 import FilmCard from "../film-card/film-card.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this._onTitleClickHandler = this._onTitleClickHandler.bind(this);
 
@@ -50,15 +52,18 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {filmTitle, filmGenre, filmReleaseDate, films} = this.props;
+    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, activeGenreFilter} = this.props;
 
     return (
       <Main title={filmTitle}
         genre={filmGenre}
+        genres={genresList}
         releaseDate={filmReleaseDate}
         films={films}
         onTitleClickHandler={this._onTitleClickHandler}
         onPosterClickHandler={this._onTitleClickHandler}
+        onGenreClickHandler={onGenreClickHandler}
+        activeGenreFilter={activeGenreFilter}
       />
     );
   }
@@ -90,6 +95,7 @@ class App extends PureComponent {
 
 
 App.propTypes = {
+  activeGenreFilter: PropTypes.string.isRequired,
   filmTitle: PropTypes.string.isRequired,
   filmGenre: PropTypes.string.isRequired,
   filmReleaseDate: PropTypes.number.isRequired,
@@ -99,6 +105,9 @@ App.propTypes = {
         image: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
       }).isRequired
+  ).isRequired,
+  genresList: PropTypes.arrayOf(
+      PropTypes.string.isRequired
   ).isRequired,
   backgroundFilmPoster: PropTypes.string.isRequired,
   filmPoster: PropTypes.string.isRequired,
@@ -121,6 +130,33 @@ App.propTypes = {
       }
       ).isRequired
   ).isRequired,
+  onGenreClickHandler: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activeGenreFilter: state.genre,
+  filmTitle: state.film.FILM_TITLE,
+  filmGenre: state.film.FILM_GENRE,
+  filmReleaseDate: state.film.RELEASE_DATE,
+  films: state.films,
+  genresList: state.genresList,
+  backgroundFilmPoster: state.film.BACKGROUND_POSTER,
+  filmPoster: state.film.FILM_POSTER,
+  ratingScore: state.film.RATING.SCORE,
+  ratingLevel: state.film.RATING.LEVEL,
+  ratingCount: state.film.RATING.COUNT,
+  filmDescription: state.film.FILM_DESCRIPTION,
+  filmDirector: state.film.FILM_DIRECTOR,
+  filmStarring: state.film.FILM_STARRING,
+  runTime: state.film.RUN_TIME,
+  reviews: state.film.REVIEWS,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClickHandler(genre) {
+    dispatch(ActionCreator.setCurrentGenre(genre));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
