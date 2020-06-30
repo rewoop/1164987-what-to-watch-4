@@ -66,7 +66,8 @@ const Settings = {
   FILM_GENRE: `Action`,
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
-  GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))
+  GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.genre)))),
+  IS_MORE_FILMS: true
 };
 
 it(`Should Main render correctly`, () => {
@@ -80,6 +81,8 @@ it(`Should Main render correctly`, () => {
       onTitleClickHandler={() => {}}
       onPosterClickHandler={() => {}}
       onGenreClickHandler={() => {}}
+      onShowButtonClickHandler={() => {}}
+      isMoreFilms={Settings.IS_MORE_FILMS}
       activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
     />, {
       createNodeMock: () => {
