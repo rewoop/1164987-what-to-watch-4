@@ -7,10 +7,10 @@ const initialState = {
   genre: ALL_GENRES,
   genresList: getGenresList(films),
   film,
-  films: films.slice(0, MAX_FILMS_LENGTH),
+  films,
+  showedFilmsCount: MAX_FILMS_LENGTH,
   filmsByGenre: null,
-  isMoreFilms: true,
-  isGenreSort: false
+  isMoreFilms: true
 };
 
 const ActionType = {
@@ -31,7 +31,6 @@ const ActionCreator = {
   setFilms: () => {
     return {
       type: ActionType.SHOW_MORE_FILMS,
-      films,
     };
   }
 };
@@ -41,26 +40,15 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FILTER_BY_GENRE:
       return extend(state, {
         genre: action.genre,
-        films: action.films.slice(0, MAX_FILMS_LENGTH),
+        films: action.films,
         filmsByGenre: action.filmsByGenre,
         isMoreFilms: action.films.length > MAX_FILMS_LENGTH,
-        isGenreSort: true,
+        showedFilmsCount: MAX_FILMS_LENGTH,
       });
     case ActionType.SHOW_MORE_FILMS:
       return extend(state, {
-        films: state.isGenreSort ?
-          state.films
-            .concat(state.filmsByGenre
-              .slice(state.films.length, state.films.length + MAX_FILMS_LENGTH))
-          :
-          state.films
-            .concat(action.films
-              .slice(state.films.length, state.films.length + MAX_FILMS_LENGTH)),
-        isMoreFilms: state.genre !== ALL_GENRES && state.isGenreSort ?
-          (state.filmsByGenre - state.films.length) > MAX_FILMS_LENGTH
-          :
-          (action.films.length - state.films.length) > MAX_FILMS_LENGTH,
-        isGenreSort: false,
+        showedFilmsCount: state.showedFilmsCount + MAX_FILMS_LENGTH,
+        isMoreFilms: (state.films.length - state.showedFilmsCount) > 0,
       });
     default:
       return state;

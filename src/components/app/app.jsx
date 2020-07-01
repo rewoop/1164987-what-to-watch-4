@@ -52,7 +52,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms} = this.props;
+    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
 
     return (
       <Main title={filmTitle}
@@ -66,6 +66,7 @@ class App extends PureComponent {
         onShowButtonClickHandler={onShowButtonClickHandler}
         activeGenreFilter={activeGenreFilter}
         isMoreFilms={isMoreFilms}
+        showedFilmsCount={showedFilmsCount}
       />
     );
   }
@@ -135,6 +136,7 @@ App.propTypes = {
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
+  showedFilmsCount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -155,6 +157,7 @@ const mapStateToProps = (state) => ({
   runTime: state.film.RUN_TIME,
   reviews: state.film.REVIEWS,
   isMoreFilms: state.isMoreFilms,
+  showedFilmsCount: state.showedFilmsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({

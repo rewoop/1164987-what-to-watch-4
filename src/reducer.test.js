@@ -122,7 +122,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     films: films.slice(0, 8),
     filmsByGenre: null,
     isMoreFilms: true,
-    isGenreSort: false
+    showedFilmsCount: 8,
   });
 });
 
@@ -137,7 +137,7 @@ it(`Reducer should set current filter by a given value`, () => {
     genre: `Action`,
     films,
     isMoreFilms: false,
-    isGenreSort: true,
+    showedFilmsCount: 8,
   });
 
   expect(reducer({
@@ -150,7 +150,7 @@ it(`Reducer should set current filter by a given value`, () => {
     genre: `Comedy`,
     films,
     isMoreFilms: false,
-    isGenreSort: true,
+    showedFilmsCount: 8,
   });
 });
 
@@ -168,7 +168,7 @@ it(`Reducer should render filtered films by a given current genre`, () => {
     films: filterFilms(films, `Drama`),
     filmsByGenre: filterFilms(films, `Drama`),
     isMoreFilms: false,
-    isGenreSort: true,
+    showedFilmsCount: 8,
   });
 
   expect(reducer({
@@ -184,7 +184,7 @@ it(`Reducer should render filtered films by a given current genre`, () => {
     films: filterFilms(films, `Horror`),
     filmsByGenre: filterFilms(films, `Horror`),
     isMoreFilms: false,
-    isGenreSort: true,
+    showedFilmsCount: 8,
   });
 });
 
@@ -194,16 +194,15 @@ it(`Reducer should show more films by a press the button`, () => {
     films,
     filmsByGenre: films,
     isMoreFilms: true,
-    isGenreSort: false,
+    showedFilmsCount: 8,
   }, {
     type: ActionType.SHOW_MORE_FILMS,
-    films,
   })).toEqual({
     genre: `All genres`,
     films,
     filmsByGenre: films,
     isMoreFilms: false,
-    isGenreSort: false,
+    showedFilmsCount: 16,
   });
 
   expect(reducer({
@@ -211,15 +210,14 @@ it(`Reducer should show more films by a press the button`, () => {
     films: filterFilms(films, `Horror`),
     filmsByGenre: filterFilms(films, `Horror`),
     isMoreFilms: true,
-    isGenreSort: true,
+    showedFilmsCount: 8,
   }, {
     type: ActionType.SHOW_MORE_FILMS,
-    films,
   })).toEqual({
     genre: `Horror`,
     films: filterFilms(films, `Horror`),
     filmsByGenre: filterFilms(films, `Horror`),
     isMoreFilms: false,
-    isGenreSort: false,
+    showedFilmsCount: 16,
   });
 });

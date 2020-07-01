@@ -5,7 +5,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
-  const {title, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms} = props;
+  const {title, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = props;
 
   return (
     <React.Fragment>
@@ -75,14 +75,15 @@ const Main = (props) => {
           />
 
           <FilmsList
-            films={films}
+            films={films.slice(0, showedFilmsCount)}
             onTitleClickHandler={onTitleClickHandler}
             onPosterClickHandler={onPosterClickHandler}
           />
 
-          {isMoreFilms ? <ShowMore
-            onShowButtonClickHandler={onShowButtonClickHandler}
-          /> : ``}
+          {isMoreFilms && (films.length - showedFilmsCount) > 0 ?
+            <ShowMore
+              onShowButtonClickHandler={onShowButtonClickHandler}
+            /> : ``}
         </section>
 
         <footer className="page-footer">
@@ -123,6 +124,7 @@ Main.propTypes = {
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
+  showedFilmsCount: PropTypes.number.isRequired,
 };
 
 export default Main;

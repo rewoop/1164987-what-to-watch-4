@@ -84,6 +84,7 @@ it(`Should Main render correctly`, () => {
       onShowButtonClickHandler={() => {}}
       isMoreFilms={Settings.IS_MORE_FILMS}
       activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
+      showedFilmsCount={8}
     />, {
       createNodeMock: () => {
         return {};
