@@ -52,7 +52,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, activeGenreFilter} = this.props;
+    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
 
     return (
       <Main title={filmTitle}
@@ -63,7 +63,10 @@ class App extends PureComponent {
         onTitleClickHandler={this._onTitleClickHandler}
         onPosterClickHandler={this._onTitleClickHandler}
         onGenreClickHandler={onGenreClickHandler}
+        onShowButtonClickHandler={onShowButtonClickHandler}
         activeGenreFilter={activeGenreFilter}
+        isMoreFilms={isMoreFilms}
+        showedFilmsCount={showedFilmsCount}
       />
     );
   }
@@ -131,6 +134,9 @@ App.propTypes = {
       ).isRequired
   ).isRequired,
   onGenreClickHandler: PropTypes.func.isRequired,
+  onShowButtonClickHandler: PropTypes.func.isRequired,
+  isMoreFilms: PropTypes.bool.isRequired,
+  showedFilmsCount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -150,12 +156,17 @@ const mapStateToProps = (state) => ({
   filmStarring: state.film.FILM_STARRING,
   runTime: state.film.RUN_TIME,
   reviews: state.film.REVIEWS,
+  isMoreFilms: state.isMoreFilms,
+  showedFilmsCount: state.showedFilmsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClickHandler(genre) {
     dispatch(ActionCreator.setCurrentGenre(genre));
   },
+  onShowButtonClickHandler() {
+    dispatch(ActionCreator.setFilms());
+  }
 });
 
 export {App};

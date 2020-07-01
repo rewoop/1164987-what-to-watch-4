@@ -2,8 +2,9 @@ import {ALL_GENRES} from "./const.js";
 
 export const formatReviewDate = (dateString) => {
   const date = new Date(dateString);
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
+  const dateTimeFormat = new Intl.DateTimeFormat(`en`, {year: `numeric`, month: `2-digit`, day: `2-digit`});
+  const [{value: month},, {value: day},, {value: year}] = dateTimeFormat.formatToParts(date);
+  return `${year}-${month}-${day}`;
 };
 
 export const extend = (a, b) => {

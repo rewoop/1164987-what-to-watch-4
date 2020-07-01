@@ -119,7 +119,10 @@ it(`Reducer without additional parameters should return initial state`, () => {
     genre: `All genres`,
     genresList: getGenresList(films),
     film,
-    films,
+    films: films.slice(0, 8),
+    filmsByGenre: null,
+    isMoreFilms: true,
+    showedFilmsCount: 8,
   });
 });
 
@@ -129,8 +132,12 @@ it(`Reducer should set current filter by a given value`, () => {
   }, {
     type: ActionType.SET_FILTER_BY_GENRE,
     genre: `Action`,
+    films,
   })).toEqual({
     genre: `Action`,
+    films,
+    isMoreFilms: false,
+    showedFilmsCount: 8,
   });
 
   expect(reducer({
@@ -138,8 +145,12 @@ it(`Reducer should set current filter by a given value`, () => {
   }, {
     type: ActionType.SET_FILTER_BY_GENRE,
     genre: `Comedy`,
+    films,
   })).toEqual({
     genre: `Comedy`,
+    films,
+    isMoreFilms: false,
+    showedFilmsCount: 8,
   });
 });
 
@@ -150,10 +161,14 @@ it(`Reducer should render filtered films by a given current genre`, () => {
   }, {
     type: ActionType.SET_FILTER_BY_GENRE,
     genre: `Drama`,
-    films: filterFilms(films, `Drama`)
+    films: filterFilms(films, `Drama`),
+    filmsByGenre: filterFilms(films, `Drama`),
   })).toEqual({
     genre: `Drama`,
     films: filterFilms(films, `Drama`),
+    filmsByGenre: filterFilms(films, `Drama`),
+    isMoreFilms: false,
+    showedFilmsCount: 8,
   });
 
   expect(reducer({
@@ -162,9 +177,47 @@ it(`Reducer should render filtered films by a given current genre`, () => {
   }, {
     type: ActionType.SET_FILTER_BY_GENRE,
     genre: `Horror`,
-    films: filterFilms(films, `Horror`)
+    films: filterFilms(films, `Horror`),
+    filmsByGenre: filterFilms(films, `Horror`),
   })).toEqual({
     genre: `Horror`,
     films: filterFilms(films, `Horror`),
+    filmsByGenre: filterFilms(films, `Horror`),
+    isMoreFilms: false,
+    showedFilmsCount: 8,
+  });
+});
+
+it(`Reducer should show more films by a press the button`, () => {
+  expect(reducer({
+    genre: `All genres`,
+    films,
+    filmsByGenre: films,
+    isMoreFilms: true,
+    showedFilmsCount: 8,
+  }, {
+    type: ActionType.SHOW_MORE_FILMS,
+  })).toEqual({
+    genre: `All genres`,
+    films,
+    filmsByGenre: films,
+    isMoreFilms: false,
+    showedFilmsCount: 16,
+  });
+
+  expect(reducer({
+    genre: `Horror`,
+    films: filterFilms(films, `Horror`),
+    filmsByGenre: filterFilms(films, `Horror`),
+    isMoreFilms: true,
+    showedFilmsCount: 8,
+  }, {
+    type: ActionType.SHOW_MORE_FILMS,
+  })).toEqual({
+    genre: `Horror`,
+    films: filterFilms(films, `Horror`),
+    filmsByGenre: filterFilms(films, `Horror`),
+    isMoreFilms: false,
+    showedFilmsCount: 16,
   });
 });

@@ -37,6 +37,7 @@ const Settings = {
       rating: `8,9`,
     }
   ],
+  IS_MORE_FILMS: true
 };
 
 const films = [
@@ -72,8 +73,12 @@ it(`Render App`, () => {
             filmStarring={Settings.FILM_STARRING}
             runTime={Settings.RUN_TIME}
             reviews={Settings.REVIEWS}
+            onShowButtonClickHandler={() => {}}
+            isMoreFilms={Settings.IS_MORE_FILMS}
             activeGenreFilter={`All genres`}
-            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))} onGenreClickHandler={() => {}}/>
+            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))} onGenreClickHandler={() => {}}
+            showedFilmsCount={8}
+          />
         </Provider>, {
           createNodeMock: () => {
             return {};

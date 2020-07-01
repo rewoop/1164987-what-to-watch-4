@@ -16,9 +16,9 @@ class FilmsList extends PureComponent {
 
     return (
       <div className="catalog__movies-list">
-        {films.map((film) => {
+        {films.map((film, i) => {
           return <FilmCard
-            key={film.title}
+            key={`${i} - ${film.title}`}
             film={film}
             onTitleClickHandler={onTitleClickHandler}
             onPosterClickHandler={onPosterClickHandler}
