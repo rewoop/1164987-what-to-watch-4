@@ -28,7 +28,7 @@ const ActionCreator = {
       filmsByGenre: sortedFilms,
     };
   },
-  setFilms: () => {
+  setFilmsByShowMoreBtnClick: () => {
     return {
       type: ActionType.SHOW_MORE_FILMS,
     };

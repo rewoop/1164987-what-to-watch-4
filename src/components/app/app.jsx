@@ -165,7 +165,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setCurrentGenre(genre));
   },
   onShowButtonClickHandler() {
-    dispatch(ActionCreator.setFilms());
+    dispatch(ActionCreator.setFilmsByShowMoreBtnClick());
   }
 });
 
