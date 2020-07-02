@@ -24,6 +24,8 @@ describe(`Should film card work right`, () => {
           onTitleClickHandler={onTitleClickHandler}
           onPosterClickHandler={() => {}}
           onCardHover={() => {}}
+          isPlaying={false}
+          setPlayingFilm={() => {}}
         />
     );
 
@@ -47,6 +49,8 @@ describe(`Should film card work right`, () => {
           onTitleClickHandler={() => {}}
           onPosterClickHandler={onPosterClickHandler}
           onCardHover={() => {}}
+          isPlaying={false}
+          setPlayingFilm={() => {}}
         />
     );
 
@@ -55,25 +59,5 @@ describe(`Should film card work right`, () => {
 
     expect(onPosterClickHandler).toHaveBeenCalledTimes(1);
     expect(onPosterClickHandler).toHaveBeenCalledWith(filmInfo);
-  });
-
-  it(`Should Card be hovered with correct args`, () => {
-    const onCardHover = jest.fn();
-
-
-    const filmCard = shallow(
-        <FilmCard
-          film={filmInfo}
-          onTitleClickHandler={() => {}}
-          onPosterClickHandler={() => {}}
-          onCardHover={onCardHover}
-        />
-    );
-
-    const card = filmCard.find(`.small-movie-card`);
-    card.simulate(`mouseenter`);
-
-    expect(onCardHover).toHaveBeenCalledTimes(1);
-    expect(onCardHover).toHaveBeenCalledWith(filmInfo);
   });
 });

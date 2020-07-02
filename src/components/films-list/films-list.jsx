@@ -1,37 +1,26 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FilmCard from "../film-card/film-card.jsx";
+import withVideo from "../../hocs/with-video/with-video";
 
-class FilmsList extends PureComponent {
-  constructor(props) {
-    super(props);
+const FilmCardWrapped = withVideo(FilmCard);
 
-    this.state = {
-      activeCard: {},
-    };
-  }
+const FilmsList = (props) => {
+  const {films, onTitleClickHandler, onPosterClickHandler} = props;
 
-  render() {
-    const {films, onTitleClickHandler, onPosterClickHandler} = this.props;
-
-    return (
-      <div className="catalog__movies-list">
-        {films.map((film, i) => {
-          return <FilmCard
-            key={`${i} - ${film.title}`}
-            film={film}
-            onTitleClickHandler={onTitleClickHandler}
-            onPosterClickHandler={onPosterClickHandler}
-            onCardHover={(currentFilm) => {
-              this.setState({
-                activeCard: currentFilm,
-              });
-            }}/>;
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {films.map((film, i) => {
+        return <FilmCardWrapped
+          key={`${i} - ${film.title}`}
+          film={film}
+          onTitleClickHandler={onTitleClickHandler}
+          onPosterClickHandler={onPosterClickHandler}
+        />;
+      })}
+    </div>
+  );
+};
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(

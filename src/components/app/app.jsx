@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
 import FilmCard from "../film-card/film-card.jsx";
+import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
+import withVideo from "../../hocs/with-video/with-video";
+
+const FilmPageWrapped = withActiveTab(FilmPage);
+const FilmCardWrapped = withVideo(FilmCard);
 
 class App extends PureComponent {
   constructor() {
@@ -24,16 +29,12 @@ class App extends PureComponent {
     return (
       <div className="catalog__movies-list">
         {films.filter((film) => film.genre === genre).map((film) => {
-          return <FilmCard
+          return <FilmCardWrapped
             key={film.title}
             film={film}
             onTitleClickHandler={this._onTitleClickHandler}
             onPosterClickHandler={this._onTitleClickHandler}
-            onCardHover={(currentFilm) => {
-              this.setState({
-                activeCard: currentFilm,
-              });
-            }}/>;
+          />;
         })}
       </div>
     );
@@ -74,7 +75,7 @@ class App extends PureComponent {
   _renderFilmPage() {
     const {filmGenre} = this.props;
 
-    return <FilmPage
+    return <FilmPageWrapped
       {...this.props}
       sortedFilms={this._getFilmsByGenre(filmGenre)}
     />;
