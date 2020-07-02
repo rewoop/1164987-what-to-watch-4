@@ -10,62 +10,6 @@ const filmsInfo = [
     link: `movie-page.html`,
     src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  },
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
   }
 ];
 
@@ -76,6 +20,15 @@ const Settings = {
   ACTIVE_GENRE_FILTER: `Action`,
   GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.genre)))),
   IS_MORE_FILMS: true
+};
+
+const setFilmsList = (films) => {
+  if (films.length < 10) {
+    for (let i = 0; films.length < 10; i++) {
+      films.push(films[0]);
+    }
+  }
+  return films;
 };
 
 Enzyme.configure({
@@ -117,7 +70,7 @@ describe(`Should Main work right`, () => {
           genre={Settings.FILM_GENRE}
           genres={Settings.GENRES_LIST}
           releaseDate={Settings.RELEASE_DATE}
-          films={filmsInfo}
+          films={setFilmsList(filmsInfo)}
           onTitleClickHandler={() => {}}
           onPosterClickHandler={onPosterClickHandler}
           onGenreClickHandler={() => {}}

@@ -15,7 +15,8 @@ it(`Should FilmCard render correctly`, () => {
       film={filmInfo}
       onTitleClickHandler={() => {}}
       onPosterClickHandler={() => {}}
-      onCardHover={() => {}}
+      isPlaying={false}
+      setPlayingFilm={() => {}}
     />, {
       createNodeMock: () => {
         return {};

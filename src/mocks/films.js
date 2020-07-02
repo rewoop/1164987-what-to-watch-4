@@ -54,5 +54,12 @@ export default [
     link: `movie-page.html`,
     src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     genre: `Romance`
+  },
+  {
+    title: `Shutter Island`,
+    image: `img/shutter-island.jpg`,
+    link: `movie-page.html`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: `Sci-Fi`
   }
 ];

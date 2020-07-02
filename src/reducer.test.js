@@ -111,6 +111,13 @@ const films = [
     link: `movie-page.html`,
     src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     genre: `Romance`
+  },
+  {
+    title: `Shutter Island`,
+    image: `img/shutter-island.jpg`,
+    link: `movie-page.html`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: `Sci-Fi`
   }
 ];
 
@@ -119,7 +126,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     genre: `All genres`,
     genresList: getGenresList(films),
     film,
-    films: films.slice(0, 8),
+    films,
     filmsByGenre: null,
     isMoreFilms: true,
     showedFilmsCount: 8,
@@ -136,7 +143,7 @@ it(`Reducer should set current filter by a given value`, () => {
   })).toEqual({
     genre: `Action`,
     films,
-    isMoreFilms: false,
+    isMoreFilms: true,
     showedFilmsCount: 8,
   });
 
@@ -149,7 +156,7 @@ it(`Reducer should set current filter by a given value`, () => {
   })).toEqual({
     genre: `Comedy`,
     films,
-    isMoreFilms: false,
+    isMoreFilms: true,
     showedFilmsCount: 8,
   });
 });
@@ -201,7 +208,7 @@ it(`Reducer should show more films by a press the button`, () => {
     genre: `All genres`,
     films,
     filmsByGenre: films,
-    isMoreFilms: false,
+    isMoreFilms: true,
     showedFilmsCount: 16,
   });
 

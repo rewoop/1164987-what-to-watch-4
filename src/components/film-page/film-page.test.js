@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmPage from "./film-page.jsx";
+import FilmPageOverview from "../film-page-overview/film-page-overview";
 
 const sortedFilmsMock = () => {
   return (
@@ -53,6 +54,17 @@ const Settings = {
   ],
 };
 
+const renderActiveTab = () => {
+  return <FilmPageOverview
+    ratingScore={Settings.RATING.SCORE}
+    ratingLevel={Settings.RATING.LEVEL}
+    ratingCount={Settings.RATING.COUNT}
+    filmDescription={Settings.FILM_DESCRIPTION}
+    filmDirector={Settings.FILM_DIRECTOR}
+    filmStarring={Settings.FILM_STARRING}
+  />;
+};
+
 it(`Should FilmPage render correctly`, () => {
   const tree = renderer
     .create(<FilmPage
@@ -70,6 +82,9 @@ it(`Should FilmPage render correctly`, () => {
       runTime={Settings.RUN_TIME}
       reviews={Settings.REVIEWS}
       sortedFilms={sortedFilmsMock()}
+      activeTab={`overview`}
+      renderActiveTab={renderActiveTab}
+      setActiveTab={() => {}}
     />, {
       createNodeMock: () => {
         return {};
