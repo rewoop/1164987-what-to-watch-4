@@ -23,10 +23,8 @@ const Settings = {
 };
 
 const setFilmsList = (films) => {
-  if (films.length < 10) {
-    for (let i = 0; films.length < 10; i++) {
-      films.push(films[0]);
-    }
+  for (let i = 0; films.length < 10; i++) {
+    films.push(films[0]);
   }
   return films;
 };
