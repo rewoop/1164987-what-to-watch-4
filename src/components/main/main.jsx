@@ -5,7 +5,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
-  const {title, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = props;
+  const {title, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler} = props;
 
   return (
     <React.Fragment>
@@ -46,15 +46,19 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick={() => onPlayButtonClickHandler(Object.assign({id: 2}, props))}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -123,6 +127,7 @@ Main.propTypes = {
   onPosterClickHandler: PropTypes.func.isRequired,
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
+  onPlayButtonClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
 };
