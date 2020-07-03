@@ -60,17 +60,18 @@ class App extends PureComponent {
     if (activePage.id === 1) {
       return this._renderFilmPage();
     } else if (activePage.id === 2) {
-      return this._renderFullVideoPlayer();
+      return this._renderFullVideoPlayer(activePage.film);
     } else {
       return this._renderMain();
     }
   }
 
   _renderMain() {
-    const {filmTitle, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
+    const {filmTitle, filmSrc, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
 
     return (
       <Main title={filmTitle}
+        src={filmSrc}
         genre={filmGenre}
         genres={genresList}
         releaseDate={filmReleaseDate}
@@ -96,8 +97,10 @@ class App extends PureComponent {
     />;
   }
 
-  _renderFullVideoPlayer() {
-    return <FullVideoPlayer />;
+  _renderFullVideoPlayer(film) {
+    return <FullVideoPlayer
+      film={film}
+    />;
   }
 
   render() {
@@ -120,6 +123,7 @@ class App extends PureComponent {
 App.propTypes = {
   activeGenreFilter: PropTypes.string.isRequired,
   filmTitle: PropTypes.string.isRequired,
+  filmSrc: PropTypes.string.isRequired,
   filmGenre: PropTypes.string.isRequired,
   filmReleaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
@@ -162,6 +166,7 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   activeGenreFilter: state.genre,
   filmTitle: state.film.FILM_TITLE,
+  filmSrc: state.film.FILM_SRC,
   filmGenre: state.film.FILM_GENRE,
   filmReleaseDate: state.film.RELEASE_DATE,
   films: state.films,

@@ -5,7 +5,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 
 const Main = (props) => {
-  const {title, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler} = props;
+  const {title, src, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler} = props;
 
   return (
     <React.Fragment>
@@ -49,7 +49,7 @@ const Main = (props) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler(Object.assign({id: 2}, props))}
+                  onClick={() => onPlayButtonClickHandler(Object.assign({id: 2}, {film: src}))}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
@@ -111,6 +111,7 @@ const Main = (props) => {
 Main.propTypes = {
   activeGenreFilter: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
