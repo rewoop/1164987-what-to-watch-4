@@ -9,9 +9,11 @@ import FilmCard from "../film-card/film-card.jsx";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
 import withVideo from "../../hocs/with-video/with-video";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FilmCardWrapped = withVideo(FilmCard);
+const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
 
 class App extends PureComponent {
   constructor() {
@@ -19,6 +21,7 @@ class App extends PureComponent {
 
     this._onTitleClickHandler = this._onTitleClickHandler.bind(this);
     this._onPlayButtonClickHandler = this._onPlayButtonClickHandler.bind(this);
+    this._onExitButtonClickHandler = this._onExitButtonClickHandler.bind(this);
 
     this.state = {
       activePage: {id: 0},
@@ -54,13 +57,19 @@ class App extends PureComponent {
     });
   }
 
+  _onExitButtonClickHandler(previousPageId) {
+    this.setState({
+      activePage: previousPageId
+    });
+  }
+
   _renderApp() {
     const {activePage} = this.state;
 
     if (activePage.id === 1) {
       return this._renderFilmPage();
     } else if (activePage.id === 2) {
-      return this._renderFullVideoPlayer(activePage.film);
+      return this._renderFullVideoPlayer(activePage);
     } else {
       return this._renderMain();
     }
@@ -94,12 +103,15 @@ class App extends PureComponent {
     return <FilmPageWrapped
       {...this.props}
       sortedFilms={this._getFilmsByGenre(filmGenre)}
+      onPlayButtonClickHandler={this._onPlayButtonClickHandler}
     />;
   }
 
-  _renderFullVideoPlayer(film) {
-    return <FullVideoPlayer
-      film={film}
+  _renderFullVideoPlayer(page) {
+    return <FullVideoPlayerWrapped
+      film={page.film}
+      id={page.previousPageId}
+      onExitButtonClickHandler={this._onExitButtonClickHandler}
     />;
   }
 

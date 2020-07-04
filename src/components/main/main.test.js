@@ -67,7 +67,8 @@ const Settings = {
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
   GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.genre)))),
-  IS_MORE_FILMS: true
+  IS_MORE_FILMS: true,
+  FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
 it(`Should Main render correctly`, () => {
@@ -85,6 +86,8 @@ it(`Should Main render correctly`, () => {
       isMoreFilms={Settings.IS_MORE_FILMS}
       activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
       showedFilmsCount={8}
+      src={Settings.FILM_SRC}
+      onPlayButtonClickHandler={() => {}}
     />, {
       createNodeMock: () => {
         return {};
