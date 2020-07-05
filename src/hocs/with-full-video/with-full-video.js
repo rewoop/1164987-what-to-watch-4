@@ -8,40 +8,29 @@ const withFullVideo = (Component) => {
 
       this._videoRef = createRef();
 
-      this._pauseVideo = this._pauseVideo.bind(this);
+      this._playbackToggleVideo = this._playbackToggleVideo.bind(this);
       this._setFullScreen = this._setFullScreen.bind(this);
 
       this.state = {
         isPlaying: true,
-        isPause: false,
         progress: 0,
         duration: 0,
-        pageId: 1
       };
     }
 
-    _pauseVideo() {
+    _playbackToggleVideo() {
       this.setState((prevState) => {
         return {isPlaying: !prevState.isPlaying};
       });
     }
 
     _formatDurationToTime(duration) {
-      let time = parseInt(duration, 10);
-      let hours = Math.floor(time / 3600);
-      let minutes = Math.floor((time - (hours * 3600)) / 60);
-      let seconds = time - (hours * 3600) - (minutes * 60);
+      const time = parseInt(duration, 10);
+      const hours = Math.floor(time / 3600).toString().padStart(2, `0`);
+      const minutes = Math.floor((time - (hours * 3600)) / 60).toString().padStart(2, `0`);
+      const seconds = time - (hours * 3600) - (minutes * 60).toString().padStart(2, `0`);
 
-      if (hours < 10) {
-        hours = `0` + hours;
-      }
-      if (minutes < 10) {
-        minutes = `0` + minutes;
-      }
-      if (seconds < 10) {
-        seconds = `0` + seconds;
-      }
-      return hours + `:` + minutes + `:` + seconds;
+      return `${hours}:${minutes}:${seconds}`;
     }
 
     _setFullScreen() {
@@ -50,12 +39,8 @@ const withFullVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {film, id} = this.props;
+      const {film} = this.props;
       const video = this._videoRef.current;
-
-      this.setState({
-        pageId: id
-      });
 
       video.src = film;
       video.play();
@@ -69,13 +54,11 @@ const withFullVideo = (Component) => {
       video.onplay = () => {
         this.setState({
           isPlaying: true,
-          isPause: false,
         });
       };
 
       video.onpause = () => this.setState({
         isPlaying: false,
-        isPause: true,
       });
 
       video.ontimeupdate = () => this.setState({
@@ -88,6 +71,7 @@ const withFullVideo = (Component) => {
       video.onplay = null;
       video.onpause = null;
       video.ontimeupdate = null;
+      video.onloadedmetadata = null;
       video.src = ``;
     }
 
@@ -104,12 +88,11 @@ const withFullVideo = (Component) => {
     render() {
       return <Component
         {...this.props}
-        pageId={this.state.pageId}
         progress={this.state.progress}
         duration={this.state.duration}
         isPlaying={this.state.isPlaying}
         formatDurationToTime={this._formatDurationToTime}
-        pauseVideo={this._pauseVideo}
+        playbackToggleVideo={this._playbackToggleVideo}
         setFullScreen={this._setFullScreen}
       >
         <video
@@ -123,7 +106,6 @@ const withFullVideo = (Component) => {
 
   WithFullVideo.propTypes = {
     film: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
   };
 
   return WithFullVideo;

@@ -24,9 +24,8 @@ const Settings = {
 };
 
 const PlayerSettings = {
-  id: 2,
-  film: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  previousPageId: 0
+  src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  title: `The Rock`,
 };
 
 const setFilmsList = (films) => {

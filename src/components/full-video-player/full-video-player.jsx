@@ -2,12 +2,12 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 const FullVideoPlayer = (props) => {
-  const {onExitButtonClickHandler, pageId, progress, duration, isPlaying, formatDurationToTime, pauseVideo, setFullScreen, children} = props;
+  const {title, onExitButtonClickHandler, progress, duration, isPlaying, formatDurationToTime, playbackToggleVideo, setFullScreen, children} = props;
 
   return <Fragment>
     <div className="player">
       {children}
-      <button type="button" className="player__exit" onClick={() => onExitButtonClickHandler({id: pageId})}>Exit</button>
+      <button type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -20,7 +20,7 @@ const FullVideoPlayer = (props) => {
 
         <div className="player__controls-row">
           <button type="button" className="player__play"
-            onClick={pauseVideo}>
+            onClick={playbackToggleVideo}>
 
             {isPlaying ?
               <Fragment>
@@ -39,7 +39,7 @@ const FullVideoPlayer = (props) => {
 
           </button>
 
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{title}</div>
 
           <button type="button" className="player__full-screen"
             onClick={setFullScreen}>
@@ -55,13 +55,13 @@ const FullVideoPlayer = (props) => {
 };
 
 FullVideoPlayer.propTypes = {
+  title: PropTypes.string.isRequired,
   onExitButtonClickHandler: PropTypes.func.isRequired,
-  pageId: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   formatDurationToTime: PropTypes.func.isRequired,
-  pauseVideo: PropTypes.func.isRequired,
+  playbackToggleVideo: PropTypes.func.isRequired,
   setFullScreen: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };

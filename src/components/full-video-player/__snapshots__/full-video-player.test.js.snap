@@ -65,7 +65,7 @@ exports[`Render FullVideoPlayer 1`] = `
       <div
         className="player__name"
       >
-        Transpotting
+        The Rock
       </div>
       <button
         className="player__full-screen"

@@ -24,7 +24,9 @@ class App extends PureComponent {
     this._onExitButtonClickHandler = this._onExitButtonClickHandler.bind(this);
 
     this.state = {
-      activePage: {id: 0},
+      activePage: {},
+      filmSource: {},
+      isVideoPlayer: false
     };
   }
 
@@ -53,26 +55,26 @@ class App extends PureComponent {
 
   _onPlayButtonClickHandler(filmForPlayer) {
     this.setState({
-      activePage: filmForPlayer
+      filmSource: filmForPlayer,
+      isVideoPlayer: true
     });
   }
 
-  _onExitButtonClickHandler(previousPageId) {
+  _onExitButtonClickHandler() {
     this.setState({
-      activePage: previousPageId
+      filmSource: {},
+      isVideoPlayer: false
     });
   }
 
   _renderApp() {
-    const {activePage} = this.state;
+    const {activePage, filmSource, isVideoPlayer} = this.state;
 
-    if (activePage.id === 1) {
-      return this._renderFilmPage();
-    } else if (activePage.id === 2) {
-      return this._renderFullVideoPlayer(activePage);
-    } else {
-      return this._renderMain();
+    if (isVideoPlayer) {
+      return this._renderFullVideoPlayer(filmSource);
     }
+
+    return Object.keys(activePage).length === 0 ? this._renderMain() : this._renderFilmPage();
   }
 
   _renderMain() {
@@ -107,10 +109,10 @@ class App extends PureComponent {
     />;
   }
 
-  _renderFullVideoPlayer(page) {
+  _renderFullVideoPlayer(film) {
     return <FullVideoPlayerWrapped
-      film={page.film}
-      id={page.previousPageId}
+      title={film.title}
+      film={film.src}
       onExitButtonClickHandler={this._onExitButtonClickHandler}
     />;
   }
