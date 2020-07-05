@@ -19,14 +19,18 @@ const Settings = {
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
   GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.genre)))),
-  IS_MORE_FILMS: true
+  IS_MORE_FILMS: true,
+  FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+};
+
+const PlayerSettings = {
+  src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  title: `The Rock`,
 };
 
 const setFilmsList = (films) => {
-  if (films.length < 10) {
-    for (let i = 0; films.length < 10; i++) {
-      films.push(films[0]);
-    }
+  for (let i = 0; films.length < 10; i++) {
+    films.push(films[0]);
   }
   return films;
 };
@@ -53,6 +57,8 @@ describe(`Should Main work right`, () => {
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
+          src={Settings.FILM_SRC}
+          onPlayButtonClickHandler={() => {}}
         />
     );
 
@@ -78,6 +84,8 @@ describe(`Should Main work right`, () => {
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
+          src={Settings.FILM_SRC}
+          onPlayButtonClickHandler={() => {}}
         />
     );
 
@@ -103,11 +111,41 @@ describe(`Should Main work right`, () => {
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
           onShowButtonClickHandler={onShowButtonClickHandler}
+          src={Settings.FILM_SRC}
+          onPlayButtonClickHandler={() => {}}
         />
     );
 
     const showBtn = main.find(`.catalog__button`);
     showBtn.simulate(`click`);
     expect(onShowButtonClickHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Should play button be clicked`, () => {
+    const onPlayButtonClickHandler = jest.fn();
+
+    const main = mount(
+        <Main
+          title={Settings.FILM_TITLE}
+          genre={Settings.FILM_GENRE}
+          genres={Settings.GENRES_LIST}
+          releaseDate={Settings.RELEASE_DATE}
+          films={filmsInfo}
+          onTitleClickHandler={() => {}}
+          onPosterClickHandler={() => {}}
+          onGenreClickHandler={() => {}}
+          isMoreFilms={Settings.IS_MORE_FILMS}
+          activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
+          showedFilmsCount={8}
+          onShowButtonClickHandler={() => {}}
+          src={Settings.FILM_SRC}
+          onPlayButtonClickHandler={onPlayButtonClickHandler}
+        />
+    );
+
+    const playBtn = main.find(`.btn--play`);
+    playBtn.simulate(`click`);
+    expect(onPlayButtonClickHandler).toHaveBeenCalledTimes(1);
+    expect(onPlayButtonClickHandler).toHaveBeenCalledWith(PlayerSettings);
   });
 });

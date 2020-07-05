@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 
 const FilmPage = (props) => {
-  const {filmTitle: title, filmGenre: genre, filmReleaseDate: releaseDate, backgroundFilmPoster, filmPoster, sortedFilms, activeTab, setActiveTab, renderActiveTab} = props;
+  const {filmTitle: title, filmGenre: genre, filmReleaseDate: releaseDate, filmSrc: src, backgroundFilmPoster, filmPoster, sortedFilms, activeTab, setActiveTab, renderActiveTab, onPlayButtonClickHandler} = props;
 
   return (
     <React.Fragment>
@@ -40,15 +40,18 @@ const FilmPage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick={() => onPlayButtonClickHandler({title, src})}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -106,6 +109,7 @@ const FilmPage = (props) => {
 FilmPage.propTypes = {
   filmTitle: PropTypes.string.isRequired,
   filmGenre: PropTypes.string.isRequired,
+  filmSrc: PropTypes.string.isRequired,
   filmReleaseDate: PropTypes.number.isRequired,
   backgroundFilmPoster: PropTypes.string.isRequired,
   filmPoster: PropTypes.string.isRequired,
@@ -113,6 +117,7 @@ FilmPage.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
+  onPlayButtonClickHandler: PropTypes.func.isRequired,
 };
 
 export default FilmPage;
