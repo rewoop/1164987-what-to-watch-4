@@ -12,3 +12,4 @@ export const Page = {
 
 export const ALL_GENRES = `All genres`;
 export const MAX_FILMS_LENGTH = 8;
+export const AXIOS_TIMEOUT = 5000;

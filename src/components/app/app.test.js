@@ -43,11 +43,10 @@ const Settings = {
 
 const films = [
   {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Action`
+    FILM_TITLE: `Fantastic Beasts`,
+    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    FILM_GENRE: `Comedy`
   }
 ];
 
@@ -77,9 +76,10 @@ it(`Render App`, () => {
             onShowButtonClickHandler={() => {}}
             isMoreFilms={Settings.IS_MORE_FILMS}
             activeGenreFilter={`All genres`}
-            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))} onGenreClickHandler={() => {}}
+            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.FILM_GENRE))))} onGenreClickHandler={() => {}}
             showedFilmsCount={8}
             filmSrc={Settings.FILM_SRC}
+            filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.FILM_GENRE === Settings.FILM_GENRE)}
           />
         </Provider>, {
           createNodeMock: () => {

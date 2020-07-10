@@ -116,9 +116,8 @@ Main.propTypes = {
   releaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
+        FILM_TITLE: PropTypes.string.isRequired,
+        FILM_IMAGE: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   genres: PropTypes.arrayOf(

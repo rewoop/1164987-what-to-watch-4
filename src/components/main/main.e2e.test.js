@@ -5,11 +5,10 @@ import Main from "./main";
 
 const filmsInfo = [
   {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
+    FILM_TITLE: `Fantastic Beasts`,
+    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    FILM_GENRE: `Comedy`
   }
 ];
 
@@ -18,7 +17,7 @@ const Settings = {
   FILM_GENRE: `Action`,
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
-  GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.genre)))),
+  GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.FILM_GENRE)))),
   IS_MORE_FILMS: true,
   FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };

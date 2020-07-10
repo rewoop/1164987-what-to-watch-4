@@ -1,16 +1,9 @@
-import {extend, getGenresList} from "./utils.js";
-import film from "./mocks/film.js";
-import films from "./mocks/films.js";
-import {ALL_GENRES, MAX_FILMS_LENGTH} from "./const.js";
+import {extend} from "../../utils.js";
+import {ALL_GENRES, MAX_FILMS_LENGTH} from "../../const.js";
 
 const initialState = {
   genre: ALL_GENRES,
-  genresList: getGenresList(films),
-  film,
-  films,
   showedFilmsCount: MAX_FILMS_LENGTH,
-  filmsByGenre: null,
-  isMoreFilms: true
 };
 
 const ActionType = {
@@ -20,12 +13,9 @@ const ActionType = {
 
 const ActionCreator = {
   setCurrentGenre: (genre) => {
-    const sortedFilms = genre === ALL_GENRES ? films : films.filter((currentFilm) => currentFilm.genre === genre);
     return {
       type: ActionType.SET_FILTER_BY_GENRE,
-      genre,
-      films: sortedFilms,
-      filmsByGenre: sortedFilms,
+      payload: genre
     };
   },
   setFilmsByShowMoreBtnClick: () => {
@@ -39,20 +29,15 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_FILTER_BY_GENRE:
       return extend(state, {
-        genre: action.genre,
-        films: action.films,
-        filmsByGenre: action.filmsByGenre,
-        isMoreFilms: action.films.length > MAX_FILMS_LENGTH,
+        genre: action.payload,
         showedFilmsCount: MAX_FILMS_LENGTH,
       });
     case ActionType.SHOW_MORE_FILMS:
       return extend(state, {
         showedFilmsCount: state.showedFilmsCount + MAX_FILMS_LENGTH,
-        isMoreFilms: (state.films.length - state.showedFilmsCount) > 0,
       });
-    default:
-      return state;
   }
+  return state;
 };
 
 

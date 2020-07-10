@@ -1,5 +1,6 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
+import {formatRatingScoreToLevel} from "../../utils.js";
 
 const MAX_FILM_STARRING = 4;
 
@@ -15,7 +16,7 @@ const FilmPageOverview = (props) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{ratingScore}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{ratingLevel}</span>
+          <span className="movie-rating__level">{formatRatingScoreToLevel(ratingLevel)}</span>
           <span className="movie-rating__count">{ratingCount}</span>
         </p>
       </div>
