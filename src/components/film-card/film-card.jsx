@@ -14,17 +14,17 @@ const FilmCard = (props) => {
       <div className="small-movie-card__image">
         <VideoPlayer
           isPlaying={isPlaying}
-          src={film.src}
-          poster={film.image}
+          src={film.FILM_VIDEO}
+          poster={film.FILM_IMAGE}
           muted
         />
-        <img src={film.image} alt={film.title} width="280" height="175"/>
+        <img src={film.FILM_IMAGE} alt={film.FILM_TITLE} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
         <a onClick={(evt) => {
           evt.preventDefault();
           onTitleClickHandler(film);
-        }} className="small-movie-card__link" href={film.link}>{film.title}</a>
+        }} className="small-movie-card__link" href="movie-page.html">{film.FILM_TITLE}</a>
       </h3>
     </article>
   );
@@ -32,10 +32,9 @@ const FilmCard = (props) => {
 
 FilmCard.propTypes = {
   film: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
+    FILM_TITLE: PropTypes.string.isRequired,
+    FILM_IMAGE: PropTypes.string.isRequired,
+    FILM_VIDEO: PropTypes.string.isRequired,
   }).isRequired,
   onTitleClickHandler: PropTypes.func.isRequired,
   onPosterClickHandler: PropTypes.func.isRequired,

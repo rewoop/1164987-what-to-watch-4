@@ -1,7 +1,9 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/list/list.js";
+import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
+import {getGenres} from "../../reducer/data/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
@@ -10,6 +12,7 @@ import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
 import withVideo from "../../hocs/with-video/with-video";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
+import {ALL_GENRES} from "../../const.js";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FilmCardWrapped = withVideo(FilmCard);
@@ -35,9 +38,9 @@ class App extends PureComponent {
 
     return (
       <div className="catalog__movies-list">
-        {films.filter((film) => film.genre === genre).map((film) => {
+        {films.filter((film) => film.FILM_GENRE === genre).map((film) => {
           return <FilmCardWrapped
-            key={film.title}
+            key={film.FILM_TITLE}
             film={film}
             onTitleClickHandler={this._onTitleClickHandler}
             onPosterClickHandler={this._onTitleClickHandler}
@@ -78,7 +81,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {filmTitle, filmSrc, filmGenre, filmReleaseDate, films, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
+    const {filmTitle, filmSrc, filmGenre, filmReleaseDate, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount} = this.props;
 
     return (
       <Main title={filmTitle}
@@ -86,7 +89,7 @@ class App extends PureComponent {
         genre={filmGenre}
         genres={genresList}
         releaseDate={filmReleaseDate}
-        films={films}
+        films={activeGenreFilter === ALL_GENRES ? films : filmsByGenre}
         onTitleClickHandler={this._onTitleClickHandler}
         onPosterClickHandler={this._onTitleClickHandler}
         onGenreClickHandler={onGenreClickHandler}
@@ -142,9 +145,18 @@ App.propTypes = {
   filmReleaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
+        FILM_GENRE: PropTypes.string.isRequired,
+        FILM_IMAGE: PropTypes.string.isRequired,
+        FILM_VIDEO: PropTypes.string.isRequired,
+        FILM_TITLE: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
+  filmsByGenre: PropTypes.arrayOf(
+      PropTypes.shape({
+        FILM_GENRE: PropTypes.string.isRequired,
+        FILM_IMAGE: PropTypes.string.isRequired,
+        FILM_VIDEO: PropTypes.string.isRequired,
+        FILM_TITLE: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   genresList: PropTypes.arrayOf(
@@ -177,27 +189,30 @@ App.propTypes = {
   showedFilmsCount: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeGenreFilter: state.genre,
-  filmTitle: state.film.FILM_TITLE,
-  filmSrc: state.film.FILM_SRC,
-  filmGenre: state.film.FILM_GENRE,
-  filmReleaseDate: state.film.RELEASE_DATE,
-  films: state.films,
-  genresList: state.genresList,
-  backgroundFilmPoster: state.film.BACKGROUND_POSTER,
-  filmPoster: state.film.FILM_POSTER,
-  ratingScore: state.film.RATING.SCORE,
-  ratingLevel: state.film.RATING.LEVEL,
-  ratingCount: state.film.RATING.COUNT,
-  filmDescription: state.film.FILM_DESCRIPTION,
-  filmDirector: state.film.FILM_DIRECTOR,
-  filmStarring: state.film.FILM_STARRING,
-  runTime: state.film.RUN_TIME,
-  reviews: state.film.REVIEWS,
-  isMoreFilms: state.isMoreFilms,
-  showedFilmsCount: state.showedFilmsCount,
-});
+const mapStateToProps = (state) => {
+  return {
+    activeGenreFilter: state.LIST.genre,
+    filmTitle: state.DATA.film.FILM_TITLE,
+    filmSrc: state.DATA.film.FILM_SRC,
+    filmGenre: state.DATA.film.FILM_GENRE,
+    filmReleaseDate: state.DATA.film.RELEASE_DATE,
+    films: state.DATA.films,
+    filmsByGenre: getFilmsByGenre(state),
+    genresList: getGenres(state),
+    backgroundFilmPoster: state.DATA.film.BACKGROUND_POSTER,
+    filmPoster: state.DATA.film.FILM_POSTER,
+    ratingScore: state.DATA.film.RATING.SCORE,
+    ratingLevel: state.DATA.film.RATING.LEVEL,
+    ratingCount: state.DATA.film.RATING.COUNT,
+    filmDescription: state.DATA.film.FILM_DESCRIPTION,
+    filmDirector: state.DATA.film.FILM_DIRECTOR,
+    filmStarring: state.DATA.film.FILM_STARRING,
+    runTime: state.DATA.film.RUN_TIME,
+    reviews: state.DATA.film.REVIEWS,
+    isMoreFilms: isMoreFilm(state),
+    showedFilmsCount: state.LIST.showedFilmsCount,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClickHandler(genre) {

@@ -12,7 +12,7 @@ const FilmsList = (props) => {
     <div className="catalog__movies-list">
       {films.map((film, i) => {
         return <FilmCardWrapped
-          key={`${i} - ${film.title}`}
+          key={`${i} - ${film.FILM_TITLE}`}
           film={film}
           onTitleClickHandler={onTitleClickHandler}
           onPosterClickHandler={onPosterClickHandler}
@@ -25,9 +25,8 @@ const FilmsList = (props) => {
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
+        FILM_TITLE: PropTypes.string.isRequired,
+        FILM_IMAGE: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   onTitleClickHandler: PropTypes.func.isRequired,

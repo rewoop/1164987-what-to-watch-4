@@ -3,10 +3,9 @@ import renderer from "react-test-renderer";
 import FilmCard from "./film-card.jsx";
 
 const filmInfo = {
-  title: `Fantastic Beasts`,
-  image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  link: `movie-page.html`,
-  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  FILM_TITLE: `Fantastic Beasts`,
+  FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 it(`Should FilmCard render correctly`, () => {
