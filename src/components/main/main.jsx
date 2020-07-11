@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import FilmsList from "../films-list/films-list.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const Main = (props) => {
-  const {title, src, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler} = props;
+  const {title, src, genre, releaseDate, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler, isSignIn, onSignInClickHandler} = props;
 
   return (
     <React.Fragment>
@@ -26,9 +27,13 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
+            {isSignIn === AuthorizationStatus.AUTH ?
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              </div>
+              :
+              <a onClick={onSignInClickHandler} style={{cursor: `pointer`}}>Sign In</a>
+            }
           </div>
         </header>
 
@@ -116,8 +121,8 @@ Main.propTypes = {
   releaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
-        FILM_TITLE: PropTypes.string.isRequired,
-        FILM_IMAGE: PropTypes.string.isRequired,
+        filmTitle: PropTypes.string.isRequired,
+        filmImage: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
   genres: PropTypes.arrayOf(
@@ -128,7 +133,9 @@ Main.propTypes = {
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
+  onSignInClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
+  isSignIn: PropTypes.string.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
 };
 

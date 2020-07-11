@@ -4,44 +4,44 @@ import FilmsList from "./films-list.jsx";
 
 const filmsInfo = [
   {
-    FILM_TITLE: `Fantastic Beasts`,
-    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
-    FILM_TITLE: `Bohemian Rhapsody`,
-    FILM_IMAGE: `img/bohemian-rhapsody.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    filmTitle: `Bohemian Rhapsody`,
+    filmImage: `img/bohemian-rhapsody.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
-    FILM_TITLE: `Macbeth`,
-    FILM_IMAGE: `img/macbeth.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+    filmTitle: `Macbeth`,
+    filmImage: `img/macbeth.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
-    FILM_TITLE: `Aviator`,
-    FILM_IMAGE: `img/aviator.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    filmTitle: `Aviator`,
+    filmImage: `img/aviator.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
-    FILM_TITLE: `We need to talk about Kevin`,
-    FILM_IMAGE: `img/we-need-to-talk-about-kevin.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+    filmTitle: `We need to talk about Kevin`,
+    filmImage: `img/we-need-to-talk-about-kevin.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
-    FILM_TITLE: `What We Do in the Shadows`,
-    FILM_IMAGE: `img/what-we-do-in-the-shadows.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    filmTitle: `What We Do in the Shadows`,
+    filmImage: `img/what-we-do-in-the-shadows.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
-    FILM_TITLE: `Revenant`,
-    FILM_IMAGE: `img/revenant.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+    filmTitle: `Revenant`,
+    filmImage: `img/revenant.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   {
-    FILM_TITLE: `Johnny English`,
-    FILM_IMAGE: `img/johnny-english.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    filmTitle: `Johnny English`,
+    filmImage: `img/johnny-english.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   }
 ];
 

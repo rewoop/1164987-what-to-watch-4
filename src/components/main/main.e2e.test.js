@@ -3,12 +3,14 @@ import Enzyme, {shallow, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 
+const noop = () => {};
+
 const filmsInfo = [
   {
-    FILM_TITLE: `Fantastic Beasts`,
-    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Comedy`
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Comedy`
   }
 ];
 
@@ -17,7 +19,7 @@ const Settings = {
   FILM_GENRE: `Action`,
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
-  GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.FILM_GENRE)))),
+  GENRES_LIST: [`All genres`].concat(Array.from(new Set(filmsInfo.map((film) => film.filmGenre)))),
   IS_MORE_FILMS: true,
   FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
@@ -50,14 +52,16 @@ describe(`Should Main work right`, () => {
           releaseDate={Settings.RELEASE_DATE}
           films={filmsInfo}
           onTitleClickHandler={onTitleClickHandler}
-          onPosterClickHandler={() => {}}
-          onGenreClickHandler={() => {}}
-          onShowButtonClickHandler={() => {}}
+          onPosterClickHandler={noop}
+          onGenreClickHandler={noop}
+          onShowButtonClickHandler={noop}
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
           src={Settings.FILM_SRC}
-          onPlayButtonClickHandler={() => {}}
+          onPlayButtonClickHandler={noop}
+          isSignIn={`NO_AUTH`}
+          onSignInClickHandler={noop}
         />
     );
 
@@ -76,15 +80,17 @@ describe(`Should Main work right`, () => {
           genres={Settings.GENRES_LIST}
           releaseDate={Settings.RELEASE_DATE}
           films={setFilmsList(filmsInfo)}
-          onTitleClickHandler={() => {}}
+          onTitleClickHandler={noop}
           onPosterClickHandler={onPosterClickHandler}
-          onGenreClickHandler={() => {}}
-          onShowButtonClickHandler={() => {}}
+          onGenreClickHandler={noop}
+          onShowButtonClickHandler={noop}
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
           src={Settings.FILM_SRC}
-          onPlayButtonClickHandler={() => {}}
+          onPlayButtonClickHandler={noop}
+          isSignIn={`NO_AUTH`}
+          onSignInClickHandler={noop}
         />
     );
 
@@ -103,15 +109,17 @@ describe(`Should Main work right`, () => {
           genres={Settings.GENRES_LIST}
           releaseDate={Settings.RELEASE_DATE}
           films={filmsInfo}
-          onTitleClickHandler={() => {}}
-          onPosterClickHandler={() => {}}
-          onGenreClickHandler={() => {}}
+          onTitleClickHandler={noop}
+          onPosterClickHandler={noop}
+          onGenreClickHandler={noop}
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
           onShowButtonClickHandler={onShowButtonClickHandler}
           src={Settings.FILM_SRC}
-          onPlayButtonClickHandler={() => {}}
+          onPlayButtonClickHandler={noop}
+          isSignIn={`NO_AUTH`}
+          onSignInClickHandler={noop}
         />
     );
 
@@ -130,15 +138,17 @@ describe(`Should Main work right`, () => {
           genres={Settings.GENRES_LIST}
           releaseDate={Settings.RELEASE_DATE}
           films={filmsInfo}
-          onTitleClickHandler={() => {}}
-          onPosterClickHandler={() => {}}
-          onGenreClickHandler={() => {}}
+          onTitleClickHandler={noop}
+          onPosterClickHandler={noop}
+          onGenreClickHandler={noop}
           isMoreFilms={Settings.IS_MORE_FILMS}
           activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
           showedFilmsCount={8}
-          onShowButtonClickHandler={() => {}}
+          onShowButtonClickHandler={noop}
           src={Settings.FILM_SRC}
           onPlayButtonClickHandler={onPlayButtonClickHandler}
+          isSignIn={`NO_AUTH`}
+          onSignInClickHandler={noop}
         />
     );
 
@@ -146,5 +156,34 @@ describe(`Should Main work right`, () => {
     playBtn.simulate(`click`);
     expect(onPlayButtonClickHandler).toHaveBeenCalledTimes(1);
     expect(onPlayButtonClickHandler).toHaveBeenCalledWith(PlayerSettings);
+  });
+
+  it(`Should sign in link be clicked`, () => {
+    const onSignInClickHandler = jest.fn();
+
+    const main = mount(
+        <Main
+          title={Settings.FILM_TITLE}
+          genre={Settings.FILM_GENRE}
+          genres={Settings.GENRES_LIST}
+          releaseDate={Settings.RELEASE_DATE}
+          films={filmsInfo}
+          onTitleClickHandler={noop}
+          onPosterClickHandler={noop}
+          onGenreClickHandler={noop}
+          isMoreFilms={Settings.IS_MORE_FILMS}
+          activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
+          showedFilmsCount={8}
+          onShowButtonClickHandler={noop}
+          src={Settings.FILM_SRC}
+          onPlayButtonClickHandler={noop}
+          isSignIn={`NO_AUTH`}
+          onSignInClickHandler={onSignInClickHandler}
+        />
+    );
+
+    const signInBtn = main.find(`.user-block a`);
+    signInBtn.simulate(`click`);
+    expect(onSignInClickHandler).toHaveBeenCalledTimes(1);
   });
 });

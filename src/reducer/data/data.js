@@ -4,7 +4,7 @@ import filmAdapter from "../../components/adapters/film-adapter.js";
 
 const initialState = {
   films: [],
-  film
+  promoFilm: film
 };
 
 const ActionType = {
@@ -56,7 +56,7 @@ const reducer = (state = initialState, action) => {
       });
     // case ActionType.LOAD_PROMO_FILM:
     //   return extend(state, {
-    //     film: action.payload,
+    //     promoFilm: action.payload,
     //   });
   }
 

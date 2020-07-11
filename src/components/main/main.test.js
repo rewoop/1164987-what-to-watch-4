@@ -2,54 +2,56 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main";
 
+const noop = () => {};
+
 const films = [
   {
-    FILM_TITLE: `Fantastic Beasts`,
-    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Comedy`
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Comedy`
   },
   {
-    FILM_TITLE: `Bohemian Rhapsody`,
-    FILM_IMAGE: `img/bohemian-rhapsody.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    FILM_GENRE: `Crime`
+    filmTitle: `Bohemian Rhapsody`,
+    filmImage: `img/bohemian-rhapsody.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    filmGenre: `Crime`
   },
   {
-    FILM_TITLE: `Macbeth`,
-    FILM_IMAGE: `img/macbeth.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Documentary`
+    filmTitle: `Macbeth`,
+    filmImage: `img/macbeth.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Documentary`
   },
   {
-    FILM_TITLE: `Aviator`,
-    FILM_IMAGE: `img/aviator.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    FILM_GENRE: `Drama`
+    filmTitle: `Aviator`,
+    filmImage: `img/aviator.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    filmGenre: `Drama`
   },
   {
-    FILM_TITLE: `We need to talk about Kevin`,
-    FILM_IMAGE: `img/we-need-to-talk-about-kevin.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Thriller`
+    filmTitle: `We need to talk about Kevin`,
+    filmImage: `img/we-need-to-talk-about-kevin.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Thriller`
   },
   {
-    FILM_TITLE: `What We Do in the Shadows`,
-    FILM_IMAGE: `img/what-we-do-in-the-shadows.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    FILM_GENRE: `Horror`
+    filmTitle: `What We Do in the Shadows`,
+    filmImage: `img/what-we-do-in-the-shadows.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    filmGenre: `Horror`
   },
   {
-    FILM_TITLE: `Revenant`,
-    FILM_IMAGE: `img/revenant.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Thriller`
+    filmTitle: `Revenant`,
+    filmImage: `img/revenant.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Thriller`
   },
   {
-    FILM_TITLE: `Johnny English`,
-    FILM_IMAGE: `img/johnny-english.jpg`,
-    FILM_VIDEO: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    FILM_GENRE: `Romance`
+    filmTitle: `Johnny English`,
+    filmImage: `img/johnny-english.jpg`,
+    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    filmGenre: `Romance`
   }
 ];
 
@@ -58,7 +60,7 @@ const Settings = {
   FILM_GENRE: `Action`,
   RELEASE_DATE: 1996,
   ACTIVE_GENRE_FILTER: `Action`,
-  GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.FILM_GENRE)))),
+  GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre)))),
   IS_MORE_FILMS: true,
   FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
@@ -71,15 +73,17 @@ it(`Should Main render correctly`, () => {
       genres={Settings.GENRES_LIST}
       releaseDate={Settings.RELEASE_DATE}
       films={films}
-      onTitleClickHandler={() => {}}
-      onPosterClickHandler={() => {}}
-      onGenreClickHandler={() => {}}
-      onShowButtonClickHandler={() => {}}
+      onTitleClickHandler={noop}
+      onPosterClickHandler={noop}
+      onGenreClickHandler={noop}
+      onShowButtonClickHandler={noop}
       isMoreFilms={Settings.IS_MORE_FILMS}
       activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
       showedFilmsCount={8}
       src={Settings.FILM_SRC}
-      onPlayButtonClickHandler={() => {}}
+      onPlayButtonClickHandler={noop}
+      isSignIn={`NO_AUTH`}
+      onSignInClickHandler={noop}
     />, {
       createNodeMock: () => {
         return {};

@@ -1,4 +1,4 @@
-import {ALL_GENRES} from "./const.js";
+import {ALL_GENRES, RatingLevel} from "./const.js";
 
 export const formatReviewDate = (dateString) => {
   const date = new Date(dateString);
@@ -12,17 +12,17 @@ export const extend = (a, b) => {
 };
 
 export const getGenresList = (films) => {
-  return [ALL_GENRES].concat(Array.from(new Set(films.map((film) => film.FILM_GENRE))));
+  return [ALL_GENRES].concat(Array.from(new Set(films.map((film) => film.filmGenre))));
 };
 
 export const formatRatingScoreToLevel = (score) => {
-  if (score >= 0 && score <= 3) {
+  if (score >= RatingLevel.MIN_BAD && score <= RatingLevel.MAX_BAD) {
     return `Bad`;
-  } else if (score > 3 && score <= 5) {
+  } else if (score > RatingLevel.MAX_BAD && score <= RatingLevel.MAX_NORMAL) {
     return `Normal`;
-  } else if (score > 5 && score <= 8) {
+  } else if (score > RatingLevel.MAX_NORMAL && score <= RatingLevel.MAX_GOOD) {
     return `Good`;
-  } else if (score > 8 && score < 10) {
+  } else if (score > RatingLevel.MAX_GOOD && score < RatingLevel.MAX_VERY_GOOD) {
     return `Very good`;
   } else {
     return `Awesome`;

@@ -5,9 +5,9 @@ import FilmCard from "./film-card.jsx";
 
 const filmInfo = {
   id: 1,
-  FILM_TITLE: `Fantastic Beasts`,
-  FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  filmTitle: `Fantastic Beasts`,
+  filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 Enzyme.configure({
