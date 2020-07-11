@@ -6,6 +6,8 @@ import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
+const noop = () => {};
+
 const Settings = {
   FILM_TITLE: `The Rock`,
   FILM_GENRE: `Thriller`,
@@ -43,10 +45,10 @@ const Settings = {
 
 const films = [
   {
-    FILM_TITLE: `Fantastic Beasts`,
-    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Comedy`
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Comedy`
   }
 ];
 
@@ -73,13 +75,15 @@ it(`Render App`, () => {
             filmStarring={Settings.FILM_STARRING}
             runTime={Settings.RUN_TIME}
             reviews={Settings.REVIEWS}
-            onShowButtonClickHandler={() => {}}
+            onShowButtonClickHandler={noop}
             isMoreFilms={Settings.IS_MORE_FILMS}
             activeGenreFilter={`All genres`}
-            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.FILM_GENRE))))} onGenreClickHandler={() => {}}
+            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))))} onGenreClickHandler={() => {}}
             showedFilmsCount={8}
             filmSrc={Settings.FILM_SRC}
-            filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.FILM_GENRE === Settings.FILM_GENRE)}
+            filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.filmGenre === Settings.FILM_GENRE)}
+            authorizationStatus={`NO_AUTH`}
+            login={noop}
           />
         </Provider>, {
           createNodeMock: () => {
