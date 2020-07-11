@@ -81,7 +81,9 @@ class App extends PureComponent {
   }
 
   _onSignInClickHandler() {
-    // console.log(`lala`);
+    this.setState({
+      isSignIn: true,
+    });
   }
 
   _renderApp() {
@@ -142,7 +144,12 @@ class App extends PureComponent {
 
   _renderSignInPage() {
     const {login} = this.props;
-    return <SignIn onSubmit={login}/>;
+    return <SignIn onSubmit={(authData) => {
+      this.setState({
+        isSignIn: false,
+      });
+      login(authData);
+    }}/>;
   }
 
   render() {
