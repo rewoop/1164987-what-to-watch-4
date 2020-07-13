@@ -5,10 +5,12 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isError: false
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  IS_ERROR_AUTHORIZATION: `IS_ERROR_AUTHORIZATION`,
 };
 
 const ActionCreator = {
@@ -18,6 +20,12 @@ const ActionCreator = {
       payload: status,
     };
   },
+  requireValidAuthorization: (isError) => {
+    return {
+      type: ActionType.IS_ERROR_AUTHORIZATION,
+      payload: isError,
+    };
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +33,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRED_AUTHORIZATION:
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
+      });
+    case ActionType.IS_ERROR_AUTHORIZATION:
+      return Object.assign({}, state, {
+        isError: action.payload,
       });
   }
 
@@ -48,9 +60,11 @@ const Operation = {
       password: authData.password,
     })
       .then(() => {
+        dispatch(ActionCreator.requireValidAuthorization(false));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
+        dispatch(ActionCreator.requireValidAuthorization(true));
         throw err;
       });
   },

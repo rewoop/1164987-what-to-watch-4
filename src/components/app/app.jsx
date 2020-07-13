@@ -3,8 +3,8 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
-import {getGenres} from "../../reducer/data/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getGenres, getPromoFilm} from "../../reducer/data/selectors.js";
+import {getAuthorizationStatus, getErrorAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
@@ -13,7 +13,7 @@ import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
 import withVideo from "../../hocs/with-video/with-video";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
-import SignIn from "../sign-in/sign-in.js";
+import SignIn from "../sign-in/sign-in.jsx";
 import {ALL_GENRES} from "../../const.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 
@@ -88,12 +88,13 @@ class App extends PureComponent {
 
   _renderApp() {
     const {activePage, filmSource, isVideoPlayer, isSignIn} = this.state;
+    const {errorAuthorizationStatus} = this.props;
 
     if (isVideoPlayer) {
       return this._renderFullVideoPlayer(filmSource);
     }
 
-    if (isSignIn) {
+    if (isSignIn || errorAuthorizationStatus) {
       return this._renderSignInPage();
     }
 
@@ -143,13 +144,16 @@ class App extends PureComponent {
   }
 
   _renderSignInPage() {
-    const {login} = this.props;
-    return <SignIn onSubmit={(authData) => {
-      this.setState({
-        isSignIn: false,
-      });
-      login(authData);
-    }}/>;
+    const {login, errorAuthorizationStatus} = this.props;
+    return <SignIn
+      onSubmit={(authData) => {
+        this.setState({
+          isSignIn: false,
+        });
+        login(authData);
+      }}
+      error={errorAuthorizationStatus}
+    />;
   }
 
   render() {
@@ -223,32 +227,34 @@ App.propTypes = {
   isMoreFilms: PropTypes.bool.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  errorAuthorizationStatus: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     activeGenreFilter: state.LIST.genre,
-    filmTitle: state.DATA.promoFilm.FILM_TITLE,
-    filmSrc: state.DATA.promoFilm.FILM_SRC,
-    filmGenre: state.DATA.promoFilm.FILM_GENRE,
-    filmReleaseDate: state.DATA.promoFilm.RELEASE_DATE,
+    filmTitle: getPromoFilm(state).FILM_TITLE,
+    filmSrc: getPromoFilm(state).FILM_SRC,
+    filmGenre: getPromoFilm(state).FILM_GENRE,
+    filmReleaseDate: getPromoFilm(state).RELEASE_DATE,
     films: state.DATA.films,
     filmsByGenre: getFilmsByGenre(state),
     genresList: getGenres(state),
-    backgroundFilmPoster: state.DATA.promoFilm.BACKGROUND_POSTER,
-    filmPoster: state.DATA.promoFilm.FILM_POSTER,
-    ratingScore: state.DATA.promoFilm.RATING.SCORE,
-    ratingLevel: state.DATA.promoFilm.RATING.LEVEL,
-    ratingCount: state.DATA.promoFilm.RATING.COUNT,
-    filmDescription: state.DATA.promoFilm.FILM_DESCRIPTION,
-    filmDirector: state.DATA.promoFilm.FILM_DIRECTOR,
-    filmStarring: state.DATA.promoFilm.FILM_STARRING,
-    runTime: state.DATA.promoFilm.RUN_TIME,
-    reviews: state.DATA.promoFilm.REVIEWS,
+    backgroundFilmPoster: getPromoFilm(state).BACKGROUND_POSTER,
+    filmPoster: getPromoFilm(state).FILM_POSTER,
+    ratingScore: getPromoFilm(state).RATING.SCORE,
+    ratingLevel: getPromoFilm(state).RATING.LEVEL,
+    ratingCount: getPromoFilm(state).RATING.COUNT,
+    filmDescription: getPromoFilm(state).FILM_DESCRIPTION,
+    filmDirector: getPromoFilm(state).FILM_DIRECTOR,
+    filmStarring: getPromoFilm(state).FILM_STARRING,
+    runTime: getPromoFilm(state).RUN_TIME,
+    reviews: getPromoFilm(state).REVIEWS,
     isMoreFilms: isMoreFilm(state),
     showedFilmsCount: state.LIST.showedFilmsCount,
     authorizationStatus: getAuthorizationStatus(state),
+    errorAuthorizationStatus: getErrorAuthorizationStatus(state),
   };
 };
 

@@ -84,6 +84,7 @@ it(`Render App`, () => {
             filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.filmGenre === Settings.FILM_GENRE)}
             authorizationStatus={`NO_AUTH`}
             login={noop}
+            errorAuthorizationStatus={false}
           />
         </Provider>, {
           createNodeMock: () => {
