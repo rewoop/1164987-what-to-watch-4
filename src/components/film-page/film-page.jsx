@@ -4,14 +4,14 @@ import Tabs from "../tabs/tabs.jsx";
 
 const FilmPage = (props) => {
   const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab} = props;
-  const {filmTitle: title, filmGenre: genre, releaseDate, filmVideo: src, backgroundPoster, filmPoster} = film;
+  const {filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={backgroundPoster} alt={title}/>
+            <img src={backgroundPoster} alt={filmTitle}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -34,9 +34,9 @@ const FilmPage = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">{filmTitle}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__genre">{filmGenre}</span>
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
@@ -44,7 +44,7 @@ const FilmPage = (props) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler({title, src})}>
+                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
@@ -65,7 +65,7 @@ const FilmPage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={filmPoster} alt={title} width="218" height="327"/>
+              <img src={filmPoster} alt={filmTitle} width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">

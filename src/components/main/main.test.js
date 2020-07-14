@@ -4,6 +4,10 @@ import Main from "./main";
 
 const noop = () => {};
 
+const getGenresList = (films) => {
+  return [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))));
+};
+
 const films = [
   {
     filmTitle: `Fantastic Beasts`,
@@ -56,34 +60,31 @@ const films = [
 ];
 
 const Settings = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Action`,
-  RELEASE_DATE: 1996,
-  ACTIVE_GENRE_FILTER: `Action`,
-  GENRES_LIST: [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre)))),
-  IS_MORE_FILMS: true,
-  FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  filmTitle: `The Rock`,
+  filmGenre: `Thriller`,
+  filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  releaseDate: 1996,
+  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
+  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
 };
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(<Main
-      title={Settings.FILM_TITLE}
-      genre={Settings.FILM_GENRE}
-      genres={Settings.GENRES_LIST}
-      releaseDate={Settings.RELEASE_DATE}
+      promoFilm={Settings}
       films={films}
       onTitleClickHandler={noop}
       onPosterClickHandler={noop}
       onGenreClickHandler={noop}
       onShowButtonClickHandler={noop}
-      isMoreFilms={Settings.IS_MORE_FILMS}
-      activeGenreFilter={Settings.ACTIVE_GENRE_FILTER}
+      isMoreFilms={true}
+      activeGenreFilter={`All genres`}
       showedFilmsCount={8}
-      src={Settings.FILM_SRC}
       onPlayButtonClickHandler={noop}
       isSignIn={`NO_AUTH`}
       onSignInClickHandler={noop}
+      genres={getGenresList(films)}
+      loadingDataStatus={false}
     />, {
       createNodeMock: () => {
         return {};

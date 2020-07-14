@@ -5,52 +5,28 @@ import filmAdapter from "../../components/adapters/film-adapter.js";
 
 const api = createAPI(() => {});
 
-const film = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Thriller`,
-  FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  RELEASE_DATE: 1996,
-  RUN_TIME: `1h 39m`,
-  BACKGROUND_POSTER: `img/bg-the-grand-budapest-hotel.jpg`,
-  FILM_POSTER: `img/the-grand-budapest-hotel-poster.jpg`,
-  RATING: {
-    SCORE: `9.0`,
-    LEVEL: `Very good`,
-    COUNT: `1337 ratings`
-  },
-  FILM_DESCRIPTION: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
+const promoFilm = {
+  id: 1,
+  filmTitle: `The Rock`,
+  filmGenre: `Thriller`,
+  filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  releaseDate: 1996,
+  filmRunTime: 356,
+  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
+  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
+  ratingScore: 9,
+  ratingLevel: 9,
+  ratingCount: `1337 ratings`,
+  filmDescription: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
   Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
-  FILM_DIRECTOR: `Wes Andreson`,
-  FILM_STARRING: [
+  filmDirector: `Wes Andreson`,
+  filmStarring: [
     `Bill Murray`,
     `Edward Norton`,
     `Jude Law`,
     `Willem Dafoe`,
     `Tom Cruz`
-  ],
-  REVIEWS: [
-    {
-      id: `0`,
-      author: `Kate Muir`,
-      text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-      date: `December 24, 2016`,
-      rating: `8,9`,
-    },
-    {
-      id: `1`,
-      author: `Bill Goodykoontz`,
-      text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
-      date: `November 18, 2015`,
-      rating: `8,0`,
-    },
-    {
-      id: `2`,
-      author: `Amanda Greever`,
-      text: `I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.`,
-      date: `November 18, 2015`,
-      rating: `8,0`,
-    },
-  ],
+  ]
 };
 
 const films = [
@@ -63,10 +39,25 @@ const films = [
   },
 ];
 
+const filmComments = [
+  {
+    id: 1,
+    user: {
+      id: 2,
+      name: `Valera`,
+    },
+    comment: `lalala`,
+    date: `12 July 1996`,
+    rating: 5,
+  }
+];
+
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     films: [],
-    promoFilm: film,
+    promoFilm: {},
+    filmComments: [],
+    isLoading: false
   });
 });
 
@@ -78,6 +69,28 @@ it(`Reducer should update films by load films`, () => {
     payload: films,
   })).toEqual({
     films,
+  });
+});
+
+it(`Reducer should update promo film by load promoFilm`, () => {
+  expect(reducer({
+    promoFilm: {},
+  }, {
+    type: ActionType.LOAD_PROMO_FILM,
+    payload: promoFilm,
+  })).toEqual({
+    promoFilm,
+  });
+});
+
+it(`Reducer should update film comments by load filmComments`, () => {
+  expect(reducer({
+    filmComments: {},
+  }, {
+    type: ActionType.LOAD_FILM_COMMENTS,
+    payload: filmComments,
+  })).toEqual({
+    filmComments,
   });
 });
 
@@ -93,10 +106,48 @@ describe(`Operation work correctly`, () => {
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
           payload: [filmAdapter({fake: true})],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const promoFilmLoader = Operation.loadPromoFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, [{fake: true}]);
+
+    return promoFilmLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO_FILM,
+          payload: filmAdapter({fake: true}),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/id`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.loadFilmComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, [{fake: true}]);
+
+    return commentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FILM_COMMENTS,
+          payload: [{fake: true}],
         });
       });
   });
