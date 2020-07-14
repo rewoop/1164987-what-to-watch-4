@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 
 const FilmPage = (props) => {
-  const {filmTitle: title, filmGenre: genre, filmReleaseDate: releaseDate, filmSrc: src, backgroundFilmPoster, filmPoster, sortedFilms, activeTab, setActiveTab, renderActiveTab, onPlayButtonClickHandler} = props;
+  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab} = props;
+  const {filmTitle: title, filmGenre: genre, releaseDate, filmVideo: src, backgroundPoster, filmPoster} = film;
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={backgroundFilmPoster} alt={title}/>
+            <img src={backgroundPoster} alt={title}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -104,16 +105,19 @@ const FilmPage = (props) => {
 };
 
 FilmPage.propTypes = {
-  filmTitle: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmSrc: PropTypes.string.isRequired,
-  filmReleaseDate: PropTypes.number.isRequired,
-  backgroundFilmPoster: PropTypes.string.isRequired,
-  filmPoster: PropTypes.string.isRequired,
-  sortedFilms: PropTypes.element.isRequired,
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    filmTitle: PropTypes.string.isRequired,
+    filmGenre: PropTypes.string.isRequired,
+    filmVideo: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    backgroundPoster: PropTypes.string.isRequired,
+    filmPoster: PropTypes.string.isRequired,
+  }),
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
+  sortedFilms: PropTypes.element.isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
 };
 

@@ -4,6 +4,7 @@ import {Tab} from "../../const";
 import FilmPageOverview from "../../components/film-page-overview/film-page-overview.jsx";
 import FilmPageDetails from "../../components/film-page-details/film-page-details.jsx";
 import FilmPageReviews from "../../components/film-page-reviews/film-page-reviews.jsx";
+import {formatRunTimeDate} from "../../utils";
 
 const withActiveTab = (Component) => {
   class WithActiveTab extends PureComponent {
@@ -31,24 +32,25 @@ const withActiveTab = (Component) => {
       switch (this.state.activeTab) {
         case Tab.OVERVIEW:
           return <FilmPageOverview
-            ratingScore={this.props.ratingScore}
-            ratingLevel={this.props.ratingLevel}
-            ratingCount={this.props.ratingCount}
-            filmDescription={this.props.filmDescription}
-            filmDirector={this.props.filmDirector}
-            filmStarring={this.props.filmStarring}
+            ratingScore={this.props.film.ratingScore}
+            ratingLevel={this.props.film.ratingLevel}
+            ratingCount={this.props.film.ratingCount}
+            filmDescription={this.props.film.filmDescription}
+            filmDirector={this.props.film.filmDirector}
+            filmStarring={this.props.film.filmStarring}
           />;
         case Tab.DETAILS:
           return <FilmPageDetails
-            genre={this.props.filmGenre}
-            releaseDate={this.props.filmReleaseDate}
-            filmDirector={this.props.filmDirector}
-            filmStarring={this.props.filmStarring}
-            runTime={this.props.runTime}
+            genre={this.props.film.filmGenre}
+            releaseDate={this.props.film.releaseDate}
+            filmDirector={this.props.film.filmDirector}
+            filmStarring={this.props.film.filmStarring}
+            runTime={formatRunTimeDate(this.props.film.filmRunTime)}
           />;
         case Tab.REVIEWS:
+          this.props.getCommentByFilmId(this.props.film.id);
           return <FilmPageReviews
-            reviews={this.props.reviews}
+            reviews={this.props.comments}
           />;
         default:
           return ``;
@@ -68,31 +70,38 @@ const withActiveTab = (Component) => {
   }
 
   WithActiveTab.propTypes = {
-    filmTitle: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-    filmReleaseDate: PropTypes.number.isRequired,
-    backgroundFilmPoster: PropTypes.string.isRequired,
-    filmPoster: PropTypes.string.isRequired,
-    ratingScore: PropTypes.string.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.string.isRequired,
-    filmDescription: PropTypes.string.isRequired,
-    filmDirector: PropTypes.string.isRequired,
-    filmStarring: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ).isRequired,
-    runTime: PropTypes.string.isRequired,
-    reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          author: PropTypes.string.isRequired,
-          text: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-          rating: PropTypes.string.isRequired,
-        }
-        ).isRequired
-    ).isRequired,
+    film: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.shape({
+        filmTitle: PropTypes.string.isRequired,
+        filmGenre: PropTypes.string.isRequired,
+        releaseDate: PropTypes.number.isRequired,
+        backgroundPoster: PropTypes.string.isRequired,
+        filmPoster: PropTypes.string.isRequired,
+        ratingScore: PropTypes.number.isRequired,
+        ratingLevel: PropTypes.number.isRequired,
+        ratingCount: PropTypes.string.isRequired,
+        filmDescription: PropTypes.string.isRequired,
+        filmDirector: PropTypes.string.isRequired,
+        filmStarring: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ).isRequired,
+        filmRunTime: PropTypes.number.isRequired,
+      })
+    ]).isRequired,
     sortedFilms: PropTypes.element.isRequired,
+    getCommentByFilmId: PropTypes.func.isRequired,
+    comments: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.arrayOf(
+          PropTypes.shape({
+            filmGenre: PropTypes.string,
+            filmImage: PropTypes.string,
+            filmVideo: PropTypes.string,
+            filmTitle: PropTypes.string,
+          })
+      )
+    ]).isRequired,
   };
 
   return WithActiveTab;

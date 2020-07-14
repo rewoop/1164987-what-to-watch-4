@@ -8,3 +8,15 @@ export const getGenres = (state) => {
 export const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
 };
+
+export const getLoadingDataStatus = (state) => {
+  return state[NameSpace.DATA].isLoading;
+};
+
+export const getFilms = (state) => {
+  return state[NameSpace.DATA].films;
+};
+
+export const getFilmComments = (state) => {
+  return state[NameSpace.DATA].filmComments;
+};

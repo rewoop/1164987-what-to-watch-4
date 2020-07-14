@@ -1,10 +1,10 @@
 import {ALL_GENRES, RatingLevel} from "./const.js";
 
-export const formatReviewDate = (dateString) => {
+export const formatReviewDate = (dateString, isForUser) => {
   const date = new Date(dateString);
-  const dateTimeFormat = new Intl.DateTimeFormat(`en`, {year: `numeric`, month: `2-digit`, day: `2-digit`});
+  const dateTimeFormat = new Intl.DateTimeFormat(`en`, {year: `numeric`, month: `${isForUser ? `long` : `2-digit`}`, day: `2-digit`});
   const [{value: month},, {value: day},, {value: year}] = dateTimeFormat.formatToParts(date);
-  return `${year}-${month}-${day}`;
+  return isForUser ? `${month} ${day}, ${year}` : `${year}-${month}-${day}`;
 };
 
 export const extend = (a, b) => {
@@ -27,4 +27,16 @@ export const formatRatingScoreToLevel = (score) => {
   } else {
     return `Awesome`;
   }
+};
+
+export const formatRunTimeDate = (runtime) => {
+  let hours = Math.floor(runtime / 60);
+  let minutes = Math.floor(((runtime / 60) - hours) * 100);
+
+  if (minutes >= 60) {
+    minutes = minutes - 60;
+    hours += 1;
+  }
+
+  return `${hours}h ${minutes}m`;
 };

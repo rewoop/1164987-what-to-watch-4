@@ -3,7 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
-import {getGenres, getPromoFilm} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getLoadingDataStatus, getFilmComments} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus, getErrorAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
@@ -16,6 +16,8 @@ import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
 import SignIn from "../sign-in/sign-in.jsx";
 import {ALL_GENRES} from "../../const.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {formatRunTimeDate} from "../../utils";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FilmCardWrapped = withVideo(FilmCard);
@@ -102,14 +104,12 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {filmTitle, filmSrc, filmGenre, filmReleaseDate, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus} = this.props;
+    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, loadingDataStatus} = this.props;
 
     return (
-      <Main title={filmTitle}
-        src={filmSrc}
-        genre={filmGenre}
+      <Main
+        promoFilm={promoFilm}
         genres={genresList}
-        releaseDate={filmReleaseDate}
         films={activeGenreFilter === ALL_GENRES ? films : filmsByGenre}
         onTitleClickHandler={this._onTitleClickHandler}
         onPosterClickHandler={this._onTitleClickHandler}
@@ -121,24 +121,28 @@ class App extends PureComponent {
         onPlayButtonClickHandler={this._onPlayButtonClickHandler}
         isSignIn={authorizationStatus}
         onSignInClickHandler={this._onSignInClickHandler}
+        loadingDataStatus={loadingDataStatus}
       />
     );
   }
 
   _renderFilmPage() {
     const {activePage} = this.state;
+    const {filmComments, getCommentByFilmId} = this.props;
 
     return <FilmPageWrapped
-      {...this.props}
+      film={activePage}
       sortedFilms={this._getFilmsByGenre(activePage.filmGenre)}
       onPlayButtonClickHandler={this._onPlayButtonClickHandler}
+      comments={filmComments}
+      getCommentByFilmId={getCommentByFilmId}
     />;
   }
 
   _renderFullVideoPlayer(film) {
     return <FullVideoPlayerWrapped
-      title={film.title}
-      film={film.src}
+      title={film.filmTitle}
+      film={film.filmVideo}
       onExitButtonClickHandler={this._onExitButtonClickHandler}
     />;
   }
@@ -177,11 +181,38 @@ class App extends PureComponent {
 
 
 App.propTypes = {
+  promoFilm: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.shape({
+      filmTitle: PropTypes.string.isRequired,
+      filmVideo: PropTypes.string.isRequired,
+      filmGenre: PropTypes.string.isRequired,
+      releaseDate: PropTypes.number.isRequired,
+      backgroundPoster: PropTypes.string.isRequired,
+      filmPoster: PropTypes.string.isRequired,
+      ratingScore: PropTypes.number.isRequired,
+      ratingLevel: PropTypes.number.isRequired,
+      ratingCount: PropTypes.string.isRequired,
+      filmDescription: PropTypes.string.isRequired,
+      filmDirector: PropTypes.string.isRequired,
+      filmStarring: PropTypes.arrayOf(
+          PropTypes.string.isRequired
+      ).isRequired,
+      runTime: PropTypes.string.isRequired,
+    })
+  ]).isRequired,
+  filmComments: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.arrayOf(
+        PropTypes.shape({
+          filmGenre: PropTypes.string,
+          filmImage: PropTypes.string,
+          filmVideo: PropTypes.string,
+          filmTitle: PropTypes.string,
+        })
+    )
+  ]).isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
-  filmTitle: PropTypes.string.isRequired,
-  filmSrc: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmReleaseDate: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
         filmGenre: PropTypes.string.isRequired,
@@ -201,60 +232,31 @@ App.propTypes = {
   genresList: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
-  backgroundFilmPoster: PropTypes.string.isRequired,
-  filmPoster: PropTypes.string.isRequired,
-  ratingScore: PropTypes.string.isRequired,
-  ratingLevel: PropTypes.string.isRequired,
-  ratingCount: PropTypes.string.isRequired,
-  filmDescription: PropTypes.string.isRequired,
-  filmDirector: PropTypes.string.isRequired,
-  filmStarring: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
-  runTime: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-      }
-      ).isRequired
-  ).isRequired,
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   errorAuthorizationStatus: PropTypes.bool.isRequired,
+  loadingDataStatus: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
+  getCommentByFilmId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
+    promoFilm: getPromoFilm(state),
+    filmComments: getFilmComments(state),
     activeGenreFilter: state.LIST.genre,
-    filmTitle: getPromoFilm(state).FILM_TITLE,
-    filmSrc: getPromoFilm(state).FILM_SRC,
-    filmGenre: getPromoFilm(state).FILM_GENRE,
-    filmReleaseDate: getPromoFilm(state).RELEASE_DATE,
     films: state.DATA.films,
     filmsByGenre: getFilmsByGenre(state),
     genresList: getGenres(state),
-    backgroundFilmPoster: getPromoFilm(state).BACKGROUND_POSTER,
-    filmPoster: getPromoFilm(state).FILM_POSTER,
-    ratingScore: getPromoFilm(state).RATING.SCORE,
-    ratingLevel: getPromoFilm(state).RATING.LEVEL,
-    ratingCount: getPromoFilm(state).RATING.COUNT,
-    filmDescription: getPromoFilm(state).FILM_DESCRIPTION,
-    filmDirector: getPromoFilm(state).FILM_DIRECTOR,
-    filmStarring: getPromoFilm(state).FILM_STARRING,
-    runTime: getPromoFilm(state).RUN_TIME,
-    reviews: getPromoFilm(state).REVIEWS,
+    runTime: formatRunTimeDate(getPromoFilm(state).filmRunTime),
     isMoreFilms: isMoreFilm(state),
     showedFilmsCount: state.LIST.showedFilmsCount,
     authorizationStatus: getAuthorizationStatus(state),
     errorAuthorizationStatus: getErrorAuthorizationStatus(state),
+    loadingDataStatus: getLoadingDataStatus(state),
   };
 };
 
@@ -267,6 +269,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowButtonClickHandler() {
     dispatch(ActionCreator.setFilmsByShowMoreBtnClick());
+  },
+  getCommentByFilmId(filmId) {
+    dispatch(DataOperation.loadFilmComments(filmId));
   }
 });
 
