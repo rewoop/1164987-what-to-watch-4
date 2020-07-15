@@ -3,11 +3,14 @@ import renderer from "react-test-renderer";
 import FilmPageReview from "./film-page-review";
 
 const Settings = {
-  id: `0`,
-  author: `Kate Muir`,
-  text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-  date: `December 24, 2016`,
-  rating: `8,9`,
+  id: 1,
+  user: {
+    id: 2,
+    name: `Valera`,
+  },
+  comment: `lalala`,
+  date: `12 July 1996`,
+  rating: 5,
 };
 
 it(`Should FilmPageReview render correctly`, () => {

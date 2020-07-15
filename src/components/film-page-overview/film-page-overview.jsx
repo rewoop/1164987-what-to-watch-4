@@ -31,8 +31,8 @@ const FilmPageOverview = (props) => {
 };
 
 FilmPageOverview.propTypes = {
-  ratingScore: PropTypes.string.isRequired,
-  ratingLevel: PropTypes.string.isRequired,
+  ratingScore: PropTypes.number.isRequired,
+  ratingLevel: PropTypes.number.isRequired,
   ratingCount: PropTypes.string.isRequired,
   filmDescription: PropTypes.string.isRequired,
   filmDirector: PropTypes.string.isRequired,

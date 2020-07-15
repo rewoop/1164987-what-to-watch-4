@@ -1,25 +1,23 @@
 const filmAdapter = (film) => {
   return {
-    ID: film.id,
-    FILM_TITLE: film.name,
-    BACKGROUND_COLOR: film.background_color,
-    FILM_IMAGE: film.preview_image,
-    RELEASE_DATE: film.released,
-    FILM_GENRE: film.genre,
-    BACKGROUND_POSTER: film.background_image,
-    FILM_POSTER: film.poster_image,
-    RATING: {
-      SCORE: film.rating,
-      LEVEL: film.rating,
-      COUNT: `${film.scores_count} ratings`,
-    },
-    FILM_DIRECTOR: film.director,
-    FILM_STARRING: film.starring,
-    FILM_DESCRIPTION: film.description,
-    FILM_PREVIEW: film.preview_video_link,
-    FILM_VIDEO: film.video_link,
-    RUN_TIME: film.run_time,
-    IS_FAVORITE: film.isFavorite
+    id: film.id,
+    filmTitle: film.name,
+    backgroundColor: film.background_color,
+    filmImage: film.preview_image,
+    releaseDate: film.released,
+    filmGenre: film.genre,
+    backgroundPoster: film.background_image,
+    filmPoster: film.poster_image,
+    ratingScore: film.rating,
+    ratingLevel: film.rating,
+    ratingCount: `${film.scores_count} ratings`,
+    filmDirector: film.director,
+    filmStarring: film.starring,
+    filmDescription: film.description,
+    filmPreview: film.preview_video_link,
+    filmVideo: film.video_link,
+    filmRunTime: film.run_time,
+    isFavoriteFilm: film.isFavorite
   };
 };
 

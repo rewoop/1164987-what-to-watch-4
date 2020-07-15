@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 
 const FilmPage = (props) => {
-  const {filmTitle: title, filmGenre: genre, filmReleaseDate: releaseDate, filmSrc: src, backgroundFilmPoster, filmPoster, sortedFilms, activeTab, setActiveTab, renderActiveTab, onPlayButtonClickHandler} = props;
+  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab} = props;
+  const {filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={backgroundFilmPoster} alt={title}/>
+            <img src={backgroundPoster} alt={filmTitle}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -33,9 +34,9 @@ const FilmPage = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">{filmTitle}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__genre">{filmGenre}</span>
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
@@ -43,7 +44,7 @@ const FilmPage = (props) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler({title, src})}>
+                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
@@ -64,7 +65,7 @@ const FilmPage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={filmPoster} alt={title} width="218" height="327"/>
+              <img src={filmPoster} alt={filmTitle} width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
@@ -82,11 +83,8 @@ const FilmPage = (props) => {
       </section>
 
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
 
-          {sortedFilms}
-        </section>
+        {sortedFilms}
 
         <footer className="page-footer">
           <div className="logo">
@@ -107,16 +105,19 @@ const FilmPage = (props) => {
 };
 
 FilmPage.propTypes = {
-  filmTitle: PropTypes.string.isRequired,
-  filmGenre: PropTypes.string.isRequired,
-  filmSrc: PropTypes.string.isRequired,
-  filmReleaseDate: PropTypes.number.isRequired,
-  backgroundFilmPoster: PropTypes.string.isRequired,
-  filmPoster: PropTypes.string.isRequired,
-  sortedFilms: PropTypes.element.isRequired,
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    filmTitle: PropTypes.string.isRequired,
+    filmGenre: PropTypes.string.isRequired,
+    filmVideo: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    backgroundPoster: PropTypes.string.isRequired,
+    filmPoster: PropTypes.string.isRequired,
+  }),
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
+  sortedFilms: PropTypes.element.isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
 };
 

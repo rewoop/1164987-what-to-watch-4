@@ -1,10 +1,31 @@
+import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
+import {getFilms} from "../data/selectors";
 import {ALL_GENRES} from "../../const.js";
 
-export const getFilmsByGenre = (state) => {
-  return state[NameSpace.LIST].genre === ALL_GENRES ? state[NameSpace.DATA].films : state[NameSpace.DATA].films.filter((currentFilm) => currentFilm.FILM_GENRE === state[NameSpace.LIST].genre);
+const getCurrentGenre = (state) => {
+  return state[NameSpace.LIST].genre;
 };
 
-export const isMoreFilm = (state) => {
-  return (state[NameSpace.DATA].films.length - state[NameSpace.LIST].showedFilmsCount) > 0;
+const getShowedFilmsCount = (state) => {
+  return state[NameSpace.LIST].showedFilmsCount;
 };
+
+export const getFilmsByGenre = createSelector(
+    getFilms,
+    getCurrentGenre,
+    (films, currentGenre) => {
+      if (currentGenre === ALL_GENRES) {
+        return films;
+      }
+      return films.filter((currentFilm) => currentFilm.filmGenre === currentGenre);
+    }
+);
+
+export const isMoreFilm = createSelector(
+    getFilms,
+    getShowedFilmsCount,
+    (films, showedFilmsCount) => {
+      return (films.length - showedFilmsCount) > 0;
+    }
+);

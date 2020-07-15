@@ -6,47 +6,51 @@ import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
+const noop = () => {};
+
 const Settings = {
-  FILM_TITLE: `The Rock`,
-  FILM_GENRE: `Thriller`,
-  FILM_SRC: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  RELEASE_DATE: 1996,
-  RUN_TIME: `1h 39m`,
-  BACKGROUND_POSTER: `img/bg-the-grand-budapest-hotel.jpg`,
-  FILM_POSTER: `img/the-grand-budapest-hotel-poster.jpg`,
-  RATING: {
-    SCORE: `9.0`,
-    LEVEL: `Very good`,
-    COUNT: `1337 ratings`
-  },
-  FILM_DESCRIPTION: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
+  id: 1,
+  filmTitle: `The Rock`,
+  filmGenre: `Thriller`,
+  filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  releaseDate: 1996,
+  filmRunTime: 356,
+  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
+  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
+  ratingScore: 9,
+  ratingLevel: 9,
+  ratingCount: `1337 ratings`,
+  filmDescription: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
   Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
-  FILM_DIRECTOR: `Wes Andreson`,
-  FILM_STARRING: [
+  filmDirector: `Wes Andreson`,
+  filmStarring: [
     `Bill Murray`,
     `Edward Norton`,
     `Jude Law`,
     `Willem Dafoe`,
     `Tom Cruz`
   ],
-  REVIEWS: [
-    {
-      id: `0`,
-      author: `Kate Muir`,
-      text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-      date: `December 24, 2016`,
-      rating: `8,9`,
-    }
-  ],
-  IS_MORE_FILMS: true
 };
 
 const films = [
   {
-    FILM_TITLE: `Fantastic Beasts`,
-    FILM_IMAGE: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    FILM_VIDEO: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    FILM_GENRE: `Comedy`
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Comedy`
+  }
+];
+
+const comments = [
+  {
+    id: 0,
+    user: {
+      id: 1,
+      name: `Kate Muir`,
+    },
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `December 24, 2016`,
+    rating: 9,
   }
 ];
 
@@ -59,27 +63,21 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            filmTitle={Settings.FILM_TITLE}
-            filmGenre={Settings.FILM_GENRE}
-            filmReleaseDate={Settings.RELEASE_DATE}
+            promoFilm={Settings}
             films={films}
-            backgroundFilmPoster={Settings.BACKGROUND_POSTER}
-            filmPoster={Settings.FILM_POSTER}
-            ratingScore={Settings.RATING.SCORE}
-            ratingLevel={Settings.RATING.LEVEL}
-            ratingCount={Settings.RATING.COUNT}
-            filmDescription={Settings.FILM_DESCRIPTION}
-            filmDirector={Settings.FILM_DIRECTOR}
-            filmStarring={Settings.FILM_STARRING}
-            runTime={Settings.RUN_TIME}
-            reviews={Settings.REVIEWS}
-            onShowButtonClickHandler={() => {}}
-            isMoreFilms={Settings.IS_MORE_FILMS}
+            onShowButtonClickHandler={noop}
+            isMoreFilms={true}
             activeGenreFilter={`All genres`}
-            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.FILM_GENRE))))} onGenreClickHandler={() => {}}
+            genresList={[`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))))}
+            onGenreClickHandler={noop}
             showedFilmsCount={8}
-            filmSrc={Settings.FILM_SRC}
-            filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.FILM_GENRE === Settings.FILM_GENRE)}
+            filmsByGenre={Settings.FILM_GENRE === `All genres` ? films : films.filter((currentFilm) => currentFilm.filmGenre === Settings.FILM_GENRE)}
+            authorizationStatus={`NO_AUTH`}
+            login={noop}
+            errorAuthorizationStatus={false}
+            filmComments={comments}
+            getCommentByFilmId={noop}
+            loadingDataStatus={false}
           />
         </Provider>, {
           createNodeMock: () => {

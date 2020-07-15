@@ -32,16 +32,22 @@ const FilmPageReviews = (props) => {
 };
 
 FilmPageReviews.propTypes = {
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
-      }
-      ).isRequired
-  ).isRequired,
+  reviews: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          user: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+          }),
+          comment: PropTypes.string.isRequired,
+          date: PropTypes.string.isRequired,
+          rating: PropTypes.number.isRequired,
+        }
+        ).isRequired
+    ).isRequired
+  ]).isRequired,
 };
 
 export default FilmPageReviews;

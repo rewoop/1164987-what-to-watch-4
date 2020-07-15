@@ -199,7 +199,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              9.0
+              9
             </div>
             <p
               className="movie-rating__meta"
@@ -207,7 +207,7 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Awesome
+                Very good
               </span>
               <span
                 className="movie-rating__count"
@@ -247,44 +247,35 @@ Array [
   <div
     className="page-content"
   >
-    <section
-      className="catalog catalog--like-this"
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <h2
-        className="catalog__title"
+      <div
+        className="small-movie-card__image"
       >
-        More like this
-      </h2>
-      <article
-        className="small-movie-card catalog__movies-card"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        <video />
+        <img
+          alt="The Rock film poster"
+          height="175"
+          src="img/the-grand-budapest-hotel-poster.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="#"
+          onClick={[Function]}
         >
-          <video />
-          <img
-            alt="The Rock film poster"
-            height="175"
-            src="img/the-grand-budapest-hotel-poster.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="#"
-            onClick={[Function]}
-          >
-            The Rock
-          </a>
-        </h3>
-      </article>
-    </section>
+          The Rock
+        </a>
+      </h3>
+    </article>
     <footer
       className="page-footer"
     >
