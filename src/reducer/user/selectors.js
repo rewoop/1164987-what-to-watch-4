@@ -5,5 +5,5 @@ export const getAuthorizationStatus = (state) => {
 };
 
 export const getErrorAuthorizationStatus = (state) => {
-  return state[NameSpace.USER].isError;
+  return state[NameSpace.USER].isValidAuthorization;
 };

@@ -9,8 +9,12 @@ export const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
 };
 
-export const getErrorDataStatus = (state) => {
+export const getLoadingDataStatus = (state) => {
   return state[NameSpace.DATA].isLoading;
+};
+
+export const getErrorLoadingDataStatus = (state) => {
+  return state[NameSpace.DATA].isError;
 };
 
 export const getFilms = (state) => {

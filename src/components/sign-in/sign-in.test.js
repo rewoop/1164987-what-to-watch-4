@@ -8,7 +8,7 @@ it(`SignIn component render correctly`, () => {
   const tree = renderer.create(
       <SignIn
         onSubmit={noop}
-        error={false}
+        isValid={true}
       />
   ).toJSON();
 

@@ -18,7 +18,7 @@ it(`Should form be submited`, () => {
   const signIn = mount(
       <SignIn
         onSubmit={onSubmitHandler}
-        error={false}
+        isValid={true}
       />
   );
 

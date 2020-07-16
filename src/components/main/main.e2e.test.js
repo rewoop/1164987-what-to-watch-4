@@ -62,7 +62,7 @@ describe(`Should Main work right`, () => {
           isSignIn={`NO_AUTH`}
           onSignInClickHandler={noop}
           genres={getGenresList(filmsInfo)}
-          errorDataStatus={false}
+          isErrorLoadingFilms={false}
         />
     );
 
@@ -89,7 +89,7 @@ describe(`Should Main work right`, () => {
           isSignIn={`NO_AUTH`}
           onSignInClickHandler={noop}
           genres={getGenresList(filmsInfo)}
-          errorDataStatus={false}
+          isErrorLoadingFilms={false}
         />
     );
 
@@ -116,7 +116,7 @@ describe(`Should Main work right`, () => {
           isSignIn={`NO_AUTH`}
           onSignInClickHandler={noop}
           genres={getGenresList(filmsInfo)}
-          errorDataStatus={false}
+          isErrorLoadingFilms={false}
         />
     );
 
@@ -143,7 +143,7 @@ describe(`Should Main work right`, () => {
           isSignIn={`NO_AUTH`}
           onSignInClickHandler={noop}
           genres={getGenresList(filmsInfo)}
-          errorDataStatus={false}
+          isErrorLoadingFilms={false}
         />
     );
 
@@ -171,7 +171,7 @@ describe(`Should Main work right`, () => {
           isSignIn={`NO_AUTH`}
           onSignInClickHandler={onSignInClickHandler}
           genres={getGenresList(filmsInfo)}
-          errorDataStatus={false}
+          isErrorLoadingFilms={false}
         />
     );
 

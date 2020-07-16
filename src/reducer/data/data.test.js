@@ -57,7 +57,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
     films: [],
     promoFilm: {},
     filmComments: [],
-    isLoading: false
+    isLoading: false,
+    isError: false
   });
 });
 
@@ -106,8 +107,8 @@ describe(`Operation work correctly`, () => {
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(4);
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.LOAD_FILMS,
           payload: [filmAdapter({fake: true})],
         });

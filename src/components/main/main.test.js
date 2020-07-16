@@ -42,7 +42,7 @@ it(`Should Main render correctly`, () => {
       isSignIn={`NO_AUTH`}
       onSignInClickHandler={noop}
       genres={getGenresList(films)}
-      errorDataStatus={false}
+      isErrorLoadingFilms={false}
     />, {
       createNodeMock: () => {
         return {};

@@ -5,7 +5,7 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isError: false
+  isValidAuthorization: true
 };
 
 const ActionType = {
@@ -20,10 +20,10 @@ const ActionCreator = {
       payload: status,
     };
   },
-  requireValidAuthorization: (isError) => {
+  requireValidAuthorization: (isValid) => {
     return {
       type: ActionType.IS_ERROR_AUTHORIZATION,
-      payload: isError,
+      payload: isValid,
     };
   }
 };
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.IS_ERROR_AUTHORIZATION:
       return Object.assign({}, state, {
-        isError: action.payload,
+        isValidAuthorization: action.payload,
       });
   }
 
@@ -55,17 +55,16 @@ const Operation = {
   },
 
   login: (authData) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.requireValidAuthorization(true));
     return api.post(`/login`, {
       email: authData.login,
       password: authData.password,
     })
       .then(() => {
-        dispatch(ActionCreator.requireValidAuthorization(false));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
-      .catch((err) => {
-        dispatch(ActionCreator.requireValidAuthorization(true));
-        throw err;
+      .catch(() => {
+        dispatch(ActionCreator.requireValidAuthorization(false));
       });
   },
 };

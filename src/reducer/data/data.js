@@ -5,14 +5,16 @@ const initialState = {
   films: [],
   promoFilm: {},
   filmComments: [],
-  isLoading: false
+  isLoading: false,
+  isError: false
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_FILM_COMMENTS: `LOAD_FILM_COMMENTS`,
-  IS_LOADING_DATA: `IS_LOADING_DATA`
+  IS_LOADING_DATA: `IS_LOADING_DATA`,
+  IS_ERROR_DATA: `IS_ERROR_DATA`
 };
 
 const ActionCreator = {
@@ -39,19 +41,27 @@ const ActionCreator = {
       type: ActionType.IS_LOADING_DATA,
       payload: isLoading
     };
+  },
+  errorLoadingData: (isError) => {
+    return {
+      type: ActionType.IS_ERROR_DATA,
+      payload: isError
+    };
   }
 };
 
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadingData(true));
+    dispatch(ActionCreator.errorLoadingData(false));
     return api.get(`/films`)
       .then((response) => {
         dispatch(ActionCreator.loadFilms(response.data.map((unRowFilm) => filmAdapter(unRowFilm))));
         dispatch(ActionCreator.loadingData(false));
       })
-      .catch((err) => {
-        dispatch(ActionCreator.loadingData(true));
-        throw err;
+      .catch(() => {
+        dispatch(ActionCreator.loadingData(false));
+        dispatch(ActionCreator.errorLoadingData(true));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {
@@ -91,6 +101,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FILM_COMMENTS:
       return extend(state, {
         filmComments: action.payload,
+      });
+    case ActionType.IS_ERROR_DATA:
+      return extend(state, {
+        isError: action.payload,
       });
   }
 

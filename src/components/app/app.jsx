@@ -3,7 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
-import {getGenres, getPromoFilm, getErrorDataStatus, getFilmComments} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getLoadingDataStatus, getFilmComments, getErrorLoadingDataStatus} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus, getErrorAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
@@ -16,6 +16,7 @@ import {ALL_GENRES} from "../../const.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {formatRunTimeDate} from "../../utils";
+import Loading from "../loading/loading.jsx";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
@@ -72,13 +73,13 @@ class App extends PureComponent {
 
   _renderApp() {
     const {activePage, filmSource, isVideoPlayer, isSignIn} = this.state;
-    const {errorAuthorizationStatus} = this.props;
+    const {isValidAuthorization} = this.props;
 
     if (isVideoPlayer) {
       return this._renderFullVideoPlayer(filmSource);
     }
 
-    if (isSignIn || errorAuthorizationStatus) {
+    if (isSignIn || !isValidAuthorization) {
       return this._renderSignInPage();
     }
 
@@ -86,7 +87,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, errorDataStatus} = this.props;
+    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, isErrorLoadingFilms} = this.props;
 
     return (
       <Main
@@ -103,7 +104,7 @@ class App extends PureComponent {
         onPlayButtonClickHandler={this._onPlayButtonClickHandler}
         isSignIn={authorizationStatus}
         onSignInClickHandler={this._onSignInClickHandler}
-        errorDataStatus={errorDataStatus}
+        isErrorLoadingFilms={isErrorLoadingFilms}
       />
     );
   }
@@ -132,19 +133,26 @@ class App extends PureComponent {
   }
 
   _renderSignInPage() {
-    const {login, errorAuthorizationStatus} = this.props;
+    const {login, isValidAuthorization} = this.props;
     return <SignIn
       onSubmit={(authData) => {
-        this.setState({
-          isSignIn: false,
+        login(authData).then(() => {
+          this.setState({
+            isSignIn: false,
+          });
         });
-        login(authData);
       }}
-      error={errorAuthorizationStatus}
+      isValid={isValidAuthorization}
     />;
   }
 
   render() {
+    const {isLoadingFilms} = this.props;
+
+    if (isLoadingFilms) {
+      return <Loading />;
+    }
+
     return (
       <BrowserRouter>
         <Switch>
@@ -221,8 +229,9 @@ App.propTypes = {
   isMoreFilms: PropTypes.bool.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  errorAuthorizationStatus: PropTypes.bool.isRequired,
-  errorDataStatus: PropTypes.bool.isRequired,
+  isValidAuthorization: PropTypes.bool.isRequired,
+  isLoadingFilms: PropTypes.bool.isRequired,
+  isErrorLoadingFilms: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   getCommentByFilmId: PropTypes.func.isRequired,
 };
@@ -239,14 +248,15 @@ const mapStateToProps = (state) => {
     isMoreFilms: isMoreFilm(state),
     showedFilmsCount: state.LIST.showedFilmsCount,
     authorizationStatus: getAuthorizationStatus(state),
-    errorAuthorizationStatus: getErrorAuthorizationStatus(state),
-    errorDataStatus: getErrorDataStatus(state),
+    isValidAuthorization: getErrorAuthorizationStatus(state),
+    isLoadingFilms: getLoadingDataStatus(state),
+    isErrorLoadingFilms: getErrorLoadingDataStatus(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
-    dispatch(UserOperation.login(authData));
+    return dispatch(UserOperation.login(authData));
   },
   onGenreClickHandler(genre) {
     dispatch(ActionCreator.setCurrentGenre(genre));
