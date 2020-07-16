@@ -77,7 +77,7 @@ it(`Render App`, () => {
             errorAuthorizationStatus={false}
             filmComments={comments}
             getCommentByFilmId={noop}
-            loadingDataStatus={false}
+            errorDataStatus={false}
           />
         </Provider>, {
           createNodeMock: () => {

@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
+import FilmCard from "../film-card/film-card.jsx";
+import withVideo from "../../hocs/with-video/with-video";
+
+const FilmCardWrapped = withVideo(FilmCard);
 
 const FilmPage = (props) => {
-  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab} = props;
-  const {filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
+  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab, onTitleClickHandler, onPosterClickHandler} = props;
+  const {id, filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
+
+  const filteredFilms = sortedFilms.filter((currentFilm) => currentFilm.id !== id);
 
   return (
     <React.Fragment>
@@ -84,7 +90,22 @@ const FilmPage = (props) => {
 
       <div className="page-content">
 
-        {sortedFilms}
+        {filteredFilms.length > 0 ? (
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <div className="catalog__movies-list">
+              {filteredFilms.map((currentFilm) => {
+                return <FilmCardWrapped
+                  key={currentFilm.filmTitle}
+                  film={currentFilm}
+                  onTitleClickHandler={onTitleClickHandler}
+                  onPosterClickHandler={onPosterClickHandler}
+                />;
+              })}
+            </div>
+          </section>
+        ) : ``
+        }
 
         <footer className="page-footer">
           <div className="logo">
@@ -117,8 +138,10 @@ FilmPage.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
-  sortedFilms: PropTypes.element.isRequired,
+  sortedFilms: PropTypes.array.isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
+  onTitleClickHandler: PropTypes.func.isRequired,
+  onPosterClickHandler: PropTypes.func.isRequired,
 };
 
 export default FilmPage;

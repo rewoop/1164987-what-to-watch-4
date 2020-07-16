@@ -3,14 +3,12 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
-import {getGenres, getPromoFilm, getLoadingDataStatus, getFilmComments} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getErrorDataStatus, getFilmComments} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus, getErrorAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
-import FilmCard from "../film-card/film-card.jsx";
 import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
-import withVideo from "../../hocs/with-video/with-video";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
 import SignIn from "../sign-in/sign-in.jsx";
@@ -20,7 +18,6 @@ import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {formatRunTimeDate} from "../../utils";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
-const FilmCardWrapped = withVideo(FilmCard);
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
 
 class App extends PureComponent {
@@ -40,26 +37,11 @@ class App extends PureComponent {
     };
   }
 
-  _getFilmsByGenre(genre) {
+  _getFilmsByGenre() {
     const {films} = this.props;
     const {activePage} = this.state;
-    const filteredFilms = films.filter((film) => film.filmGenre === genre && activePage.id !== film.id);
 
-    return filteredFilms.length > 0 ? (
-      <section className="catalog catalog--like-this">
-        <h2 className="catalog__title">More like this</h2>
-        <div className="catalog__movies-list">
-          {filteredFilms.map((film) => {
-            return <FilmCardWrapped
-              key={film.filmTitle}
-              film={film}
-              onTitleClickHandler={this._onTitleClickHandler}
-              onPosterClickHandler={this._onTitleClickHandler}
-            />;
-          })}
-        </div>
-      </section>
-    ) : <div />;
+    return films.filter((film) => film.filmGenre === activePage.filmGenre);
   }
 
   _onTitleClickHandler(film) {
@@ -104,7 +86,7 @@ class App extends PureComponent {
   }
 
   _renderMain() {
-    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, loadingDataStatus} = this.props;
+    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, errorDataStatus} = this.props;
 
     return (
       <Main
@@ -121,7 +103,7 @@ class App extends PureComponent {
         onPlayButtonClickHandler={this._onPlayButtonClickHandler}
         isSignIn={authorizationStatus}
         onSignInClickHandler={this._onSignInClickHandler}
-        loadingDataStatus={loadingDataStatus}
+        errorDataStatus={errorDataStatus}
       />
     );
   }
@@ -132,8 +114,10 @@ class App extends PureComponent {
 
     return <FilmPageWrapped
       film={activePage}
-      sortedFilms={this._getFilmsByGenre(activePage.filmGenre)}
+      sortedFilms={this._getFilmsByGenre()}
       onPlayButtonClickHandler={this._onPlayButtonClickHandler}
+      onTitleClickHandler={this._onTitleClickHandler}
+      onPosterClickHandler={this._onTitleClickHandler}
       comments={filmComments}
       getCommentByFilmId={getCommentByFilmId}
     />;
@@ -238,7 +222,7 @@ App.propTypes = {
   showedFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   errorAuthorizationStatus: PropTypes.bool.isRequired,
-  loadingDataStatus: PropTypes.bool.isRequired,
+  errorDataStatus: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   getCommentByFilmId: PropTypes.func.isRequired,
 };
@@ -256,7 +240,7 @@ const mapStateToProps = (state) => {
     showedFilmsCount: state.LIST.showedFilmsCount,
     authorizationStatus: getAuthorizationStatus(state),
     errorAuthorizationStatus: getErrorAuthorizationStatus(state),
-    loadingDataStatus: getLoadingDataStatus(state),
+    errorDataStatus: getErrorDataStatus(state),
   };
 };
 

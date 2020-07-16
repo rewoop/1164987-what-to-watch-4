@@ -89,7 +89,7 @@ const withActiveTab = (Component) => {
         filmRunTime: PropTypes.number.isRequired,
       })
     ]).isRequired,
-    sortedFilms: PropTypes.element.isRequired,
+    sortedFilms: PropTypes.array.isRequired,
     getCommentByFilmId: PropTypes.func.isRequired,
     comments: PropTypes.oneOfType([
       PropTypes.array,

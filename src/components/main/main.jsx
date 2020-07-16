@@ -6,11 +6,27 @@ import ShowMore from "../show-more/show-more.jsx";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const Main = (props) => {
-  const {promoFilm, films, genres, onTitleClickHandler, onPosterClickHandler, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, onPlayButtonClickHandler, isSignIn, onSignInClickHandler, loadingDataStatus} = props;
+  const {
+    promoFilm,
+    films,
+    genres,
+    onTitleClickHandler,
+    onPosterClickHandler,
+    onGenreClickHandler,
+    onShowButtonClickHandler,
+    activeGenreFilter,
+    isMoreFilms,
+    showedFilmsCount,
+    onPlayButtonClickHandler,
+    isSignIn,
+    onSignInClickHandler,
+    errorDataStatus
+  } = props;
+
   const {filmTitle, filmVideo, filmGenre, releaseDate, filmPoster, backgroundPoster} = promoFilm;
 
   return (
-    loadingDataStatus ? <h1>EXTERNAL SERVER ERROR</h1> :
+    errorDataStatus ? <h1>EXTERNAL SERVER ERROR</h1> :
       <React.Fragment>
         <section className="movie-card">
           <div className="movie-card__bg">
@@ -143,7 +159,7 @@ Main.propTypes = {
   onPlayButtonClickHandler: PropTypes.func.isRequired,
   onSignInClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
-  loadingDataStatus: PropTypes.bool.isRequired,
+  errorDataStatus: PropTypes.bool.isRequired,
   isSignIn: PropTypes.string.isRequired,
   showedFilmsCount: PropTypes.number.isRequired,
 };
