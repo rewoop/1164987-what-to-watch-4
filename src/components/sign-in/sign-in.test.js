@@ -14,3 +14,14 @@ it(`SignIn component render correctly`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it(`SignIn component render correctly`, () => {
+  const tree = renderer.create(
+      <SignIn
+        onSubmit={noop}
+        isValid={false}
+      />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

@@ -65,12 +65,16 @@ const Operation = {
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadingData(true));
+    dispatch(ActionCreator.errorLoadingData(false));
     return api.get(`/films/promo`)
       .then((response) => {
         dispatch(ActionCreator.loadPromoFilm(filmAdapter(response.data)));
+        dispatch(ActionCreator.loadingData(false));
       })
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        dispatch(ActionCreator.loadingData(false));
+        dispatch(ActionCreator.errorLoadingData(true));
       });
   },
   loadFilmComments: (filmId) => (dispatch, getState, api) => {

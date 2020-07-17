@@ -1,5 +1,9 @@
 import axios from "axios";
 import {AXIOS_TIMEOUT} from "./const.js";
+import Swal from "sweetalert2";
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const Error = {
   SUCCESS: 200,
@@ -22,7 +26,18 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
+
+      throw err;
     }
+
+    MySwal.fire({
+      icon: `error`,
+      title: `Oops...`,
+      text: err,
+      position: `top`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
 
     throw err;
   };

@@ -4,7 +4,6 @@ import FilmsList from "../films-list/films-list.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import ErrorLoading from "../error-loading/error-loading.jsx";
 
 const Main = (props) => {
   const {
@@ -43,8 +42,6 @@ const Main = (props) => {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-
-          {isErrorLoadingFilms ? <ErrorLoading/> : ``}
 
           <div className="user-block">
             {isSignIn === AuthorizationStatus.AUTH ?
