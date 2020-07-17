@@ -1,12 +1,23 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import {css} from "@emotion/core";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
-const Loading = (props) => {
-  const {} = props;
+const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 
-  return (<h1>Loading...</h1>);
+const Loading = () => {
+  return (
+    <div className="sweet-loading">
+      <PacmanLoader
+        css={override}
+        size={100}
+        color={`#150202`}
+        loading={true}
+      />
+    </div>
+  );
 };
-
-// Loading.propTypes = {};
 
 export default Loading;
