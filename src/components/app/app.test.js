@@ -80,6 +80,7 @@ it(`Render App`, () => {
             isErrorLoadingFilms={false}
             isLoadingFilms={false}
             isValidAuthorization={false}
+            postFilmComment={noop}
           />
         </Provider>, {
           createNodeMock: () => {

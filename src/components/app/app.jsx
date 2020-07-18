@@ -17,6 +17,7 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {formatRunTimeDate} from "../../utils";
 import Loading from "../loading/loading.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
@@ -29,12 +30,14 @@ class App extends PureComponent {
     this._onPlayButtonClickHandler = this._onPlayButtonClickHandler.bind(this);
     this._onExitButtonClickHandler = this._onExitButtonClickHandler.bind(this);
     this._onSignInClickHandler = this._onSignInClickHandler.bind(this);
+    this._onAddReviewClickHandler = this._onAddReviewClickHandler.bind(this);
 
     this.state = {
       activePage: {},
       filmSource: {},
       isVideoPlayer: false,
-      isSignIn: false
+      isSignIn: false,
+      isAddReview: false
     };
   }
 
@@ -71,8 +74,16 @@ class App extends PureComponent {
     });
   }
 
+  _onAddReviewClickHandler(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      isAddReview: true,
+    });
+  }
+
   _renderApp() {
-    const {activePage, filmSource, isVideoPlayer, isSignIn} = this.state;
+    const {activePage, filmSource, isVideoPlayer, isSignIn, isAddReview} = this.state;
     const {isValidAuthorization} = this.props;
 
     if (isVideoPlayer) {
@@ -83,11 +94,25 @@ class App extends PureComponent {
       return this._renderSignInPage();
     }
 
+    if (isAddReview && isValidAuthorization) {
+      return this._renderAddReviewPage();
+    }
+
     return Object.keys(activePage).length === 0 ? this._renderMain() : this._renderFilmPage();
   }
 
   _renderMain() {
-    const {promoFilm, films, filmsByGenre, genresList, onGenreClickHandler, onShowButtonClickHandler, activeGenreFilter, isMoreFilms, showedFilmsCount, authorizationStatus, isErrorLoadingFilms} = this.props;
+    const {promoFilm,
+      films,
+      filmsByGenre,
+      genresList,
+      onGenreClickHandler,
+      onShowButtonClickHandler,
+      activeGenreFilter,
+      isMoreFilms,
+      showedFilmsCount,
+      authorizationStatus,
+      isErrorLoadingFilms} = this.props;
 
     return (
       <Main
@@ -111,7 +136,7 @@ class App extends PureComponent {
 
   _renderFilmPage() {
     const {activePage} = this.state;
-    const {filmComments, getCommentByFilmId} = this.props;
+    const {filmComments, getCommentByFilmId, authorizationStatus} = this.props;
 
     return <FilmPageWrapped
       film={activePage}
@@ -119,8 +144,11 @@ class App extends PureComponent {
       onPlayButtonClickHandler={this._onPlayButtonClickHandler}
       onTitleClickHandler={this._onTitleClickHandler}
       onPosterClickHandler={this._onTitleClickHandler}
+      onAddReviewClickHandler={this._onAddReviewClickHandler}
       comments={filmComments}
       getCommentByFilmId={getCommentByFilmId}
+      onSignInClickHandler={this._onSignInClickHandler}
+      isSignIn={authorizationStatus}
     />;
   }
 
@@ -146,6 +174,22 @@ class App extends PureComponent {
     />;
   }
 
+  _renderAddReviewPage() {
+    const {activePage} = this.state;
+    const {postFilmComment} = this.props;
+
+    return <AddReview
+      film={activePage}
+      onSubmit={(reviewData) => {
+        postFilmComment(activePage.id, reviewData).then(() => {
+          this.setState({
+            isAddReview: false,
+          });
+        });
+      }}
+    />;
+  }
+
   render() {
     const {isLoadingFilms} = this.props;
 
@@ -164,6 +208,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-auth">
             {this._renderSignInPage()}
+          </Route>
+          <Route exact path="/dev-review">
+            {this._renderAddReviewPage()}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -233,6 +280,7 @@ App.propTypes = {
   isLoadingFilms: PropTypes.bool.isRequired,
   isErrorLoadingFilms: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
+  postFilmComment: PropTypes.func.isRequired,
   getCommentByFilmId: PropTypes.func.isRequired,
 };
 
@@ -266,6 +314,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getCommentByFilmId(filmId) {
     dispatch(DataOperation.loadFilmComments(filmId));
+  },
+  postFilmComment(filmId, comment) {
+    return dispatch(DataOperation.postFilmComment(filmId, comment));
   }
 });
 

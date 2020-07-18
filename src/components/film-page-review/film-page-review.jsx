@@ -9,7 +9,7 @@ const FilmPageReview = (props) => {
     <Fragment>
       <div className="review" key={review.id}>
         <blockquote className="review__quote">
-          <p className="review__text">{review.comment}</p>
+          <p className="review__text" style={{overflow: `hidden`, textOverflow: `ellipsis`}}>{review.comment}</p>
           <footer className="review__details">
             <cite className="review__author">{review.user.name}</cite>
             <time className="review__date" dateTime={formatReviewDate(review.date, false)}>{formatReviewDate(review.date, true)}</time>

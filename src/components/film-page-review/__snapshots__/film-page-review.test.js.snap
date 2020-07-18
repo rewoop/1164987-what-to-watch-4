@@ -9,6 +9,12 @@ exports[`Should FilmPageReview render correctly 1`] = `
   >
     <p
       className="review__text"
+      style={
+        Object {
+          "overflow": "hidden",
+          "textOverflow": "ellipsis",
+        }
+      }
     >
       lalala
     </p>

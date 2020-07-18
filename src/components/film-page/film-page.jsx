@@ -3,11 +3,23 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmCard from "../film-card/film-card.jsx";
 import withVideo from "../../hocs/with-video/with-video";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const FilmCardWrapped = withVideo(FilmCard);
 
 const FilmPage = (props) => {
-  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab, onTitleClickHandler, onPosterClickHandler} = props;
+  const {film,
+    sortedFilms,
+    onPlayButtonClickHandler,
+    activeTab,
+    setActiveTab,
+    renderActiveTab,
+    onTitleClickHandler,
+    onPosterClickHandler,
+    onAddReviewClickHandler,
+    onSignInClickHandler,
+    isSignIn} = props;
+
   const {id, filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
 
   const filteredFilms = sortedFilms.filter((currentFilm) => currentFilm.id !== id);
@@ -32,9 +44,13 @@ const FilmPage = (props) => {
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
+              {isSignIn === AuthorizationStatus.AUTH ?
+                <div className="user-block__avatar">
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                </div>
+                :
+                <a onClick={onSignInClickHandler} style={{cursor: `pointer`}}>Sign In</a>
+              }
             </div>
           </header>
 
@@ -62,7 +78,9 @@ const FilmPage = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {isSignIn === AuthorizationStatus.AUTH ?
+                  <a href="add-review.html" className="btn movie-card__button" onClick={(evt) => onAddReviewClickHandler(evt)}>Add review</a>
+                  : ``}
               </div>
             </div>
           </div>
@@ -142,6 +160,9 @@ FilmPage.propTypes = {
   onPlayButtonClickHandler: PropTypes.func.isRequired,
   onTitleClickHandler: PropTypes.func.isRequired,
   onPosterClickHandler: PropTypes.func.isRequired,
+  onAddReviewClickHandler: PropTypes.func.isRequired,
+  onSignInClickHandler: PropTypes.func.isRequired,
+  isSignIn: PropTypes.string.isRequired,
 };
 
 export default FilmPage;

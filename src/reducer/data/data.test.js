@@ -126,8 +126,8 @@ describe(`Operation work correctly`, () => {
 
     return promoFilmLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(4);
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.LOAD_PROMO_FILM,
           payload: filmAdapter({fake: true}),
         });

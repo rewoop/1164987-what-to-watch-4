@@ -75,6 +75,9 @@ it(`Should FilmPage render correctly`, () => {
       onPlayButtonClickHandler={noop}
       onPosterClickHandler={noop}
       onTitleClickHandler={noop}
+      onAddReviewClickHandler={noop}
+      onSignInClickHandler={noop}
+      isSignIn={`NO_AUTH`}
     />, {
       createNodeMock: () => {
         return {};

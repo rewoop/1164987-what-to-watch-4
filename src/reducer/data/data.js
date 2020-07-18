@@ -86,6 +86,19 @@ const Operation = {
         throw err;
       });
   },
+  postFilmComment: (filmId, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.errorLoadingData(false));
+    return api.post(`/comments/${filmId}`, {
+      rating: comment.rating,
+      comment: comment.comment,
+    })
+      .then(() => {
+        dispatch(ActionCreator.errorLoadingData(false));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.errorLoadingData(true));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
