@@ -100,18 +100,7 @@ exports[`AddReview component render correctly 1`] = `
       />
     </div>
   </div>
-  <div
-    style={
-      Object {
-        "color": "red",
-        "left": "46%",
-        "position": "absolute",
-        "top": "27%",
-      }
-    }
-  >
-    Сhoose a rating
-  </div>
+  
   <div
     className="add-review"
   >
@@ -222,10 +211,10 @@ exports[`AddReview component render correctly 1`] = `
         >
           <button
             className="add-review__btn"
-            disabled={true}
+            disabled={false}
             style={
               Object {
-                "cursor": "default",
+                "cursor": "pointer",
               }
             }
             type="submit"

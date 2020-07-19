@@ -18,9 +18,11 @@ import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {formatRunTimeDate} from "../../utils";
 import Loading from "../loading/loading.jsx";
 import AddReview from "../add-review/add-review.jsx";
+import withReview from "../../hocs/with-review/with-review.js";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
+const AddReviewWrapped = withReview(AddReview);
 
 class App extends PureComponent {
   constructor() {
@@ -179,7 +181,7 @@ class App extends PureComponent {
     const {activePage, isDisabledAddReviewForm} = this.state;
     const {postFilmComment} = this.props;
 
-    return <AddReview
+    return <AddReviewWrapped
       film={activePage}
       isDisable={isDisabledAddReviewForm}
       onSubmit={(reviewData) => {

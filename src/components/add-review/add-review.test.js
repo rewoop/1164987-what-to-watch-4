@@ -10,12 +10,20 @@ const film = {
   filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
 };
 
+const Settings = {
+  rating: 5,
+  comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`
+};
+
 it(`AddReview component render correctly`, () => {
   const tree = renderer.create(
       <AddReview
-        onSubmit={noop}
         film={film}
         isDisable={false}
+        rating={Settings.rating}
+        comment={Settings.comment}
+        onSubmitHandler={noop}
+        onChangeHandler={noop}
       />
   ).toJSON();
 
