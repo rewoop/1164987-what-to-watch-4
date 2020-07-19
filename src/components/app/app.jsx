@@ -37,7 +37,8 @@ class App extends PureComponent {
       filmSource: {},
       isVideoPlayer: false,
       isSignIn: false,
-      isAddReview: false
+      isAddReview: false,
+      isDisabledAddReviewForm: false,
     };
   }
 
@@ -175,15 +176,24 @@ class App extends PureComponent {
   }
 
   _renderAddReviewPage() {
-    const {activePage} = this.state;
+    const {activePage, isDisabledAddReviewForm} = this.state;
     const {postFilmComment} = this.props;
 
     return <AddReview
       film={activePage}
+      isDisable={isDisabledAddReviewForm}
       onSubmit={(reviewData) => {
+        this.setState({
+          isDisabledAddReviewForm: true,
+        });
         postFilmComment(activePage.id, reviewData).then(() => {
           this.setState({
             isAddReview: false,
+            isDisabledAddReviewForm: false,
+          });
+        }).catch(() => {
+          this.setState({
+            isDisabledAddReviewForm: false,
           });
         });
       }}

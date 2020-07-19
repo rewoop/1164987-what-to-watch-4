@@ -1,44 +1,44 @@
-import React, {PureComponent, createRef} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.ratings = {
-      ratingRefOne: createRef(),
-      ratingRefTwo: createRef(),
-      ratingRefThree: createRef(),
-      ratingRefFour: createRef(),
-      ratingRefFive: createRef(),
+    this.state = {
+      rating: 0,
+      comment: ``
     };
-    this.commentRef = createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  _getCurrentRating() {
-    for (let ref in this.ratings) {
-      if (this.ratings[ref].current.checked) {
-        return this.ratings[ref].current.value;
-      }
-    }
-    return this.ratings.ratingRefFive.current.value;
+  handleChange(evt) {
+    const target = evt.target;
+    const value = target.name === `rating` ? parseInt(target.value, 10) : target.value;
+    const name = target.name === `rating` ? `rating` : `comment`;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit(evt) {
     const {onSubmit} = this.props;
+    const {rating, comment} = this.state;
 
     evt.preventDefault();
 
     onSubmit({
-      rating: parseInt(this._getCurrentRating(), 10),
-      comment: this.commentRef.current.value,
+      rating,
+      comment
     });
   }
 
   render() {
-    const {film} = this.props;
+    const {rating} = this.state;
+    const {film, isDisable} = this.props;
     const {filmTitle, backgroundPoster, filmPoster} = film;
 
     return (
@@ -83,23 +83,39 @@ class AddReview extends PureComponent {
           </div>
         </div>
 
+        {rating === 0 ?
+          <div
+            style={{
+              position: `absolute`,
+              color: `red`,
+              top: 27 + `%`,
+              left: 46 + `%`}}
+          >
+          Сhoose a rating
+          </div> : ``}
+
         <div className="add-review">
           <form action="#" className="add-review__form" onSubmit={this.handleSubmit}>
             <div className="rating">
               <div className="rating__stars">
-                <input className="rating__input" id="star-1" type="radio" name="rating" value="1" ref={this.ratings.ratingRefOne}/>
+                <input className="rating__input" id="star-1" type="radio" name="rating" value="1"
+                  disabled={isDisable} onChange={this.handleChange}/>
                 <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" ref={this.ratings.ratingRefTwo}/>
+                <input className="rating__input" id="star-2" type="radio" name="rating" value="2"
+                  disabled={isDisable} onChange={this.handleChange}/>
                 <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" ref={this.ratings.ratingRefThree}/>
+                <input className="rating__input" id="star-3" type="radio" name="rating" value="3"
+                  disabled={isDisable} onChange={this.handleChange}/>
                 <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" ref={this.ratings.ratingRefFour}/>
+                <input className="rating__input" id="star-4" type="radio" name="rating" value="4"
+                  disabled={isDisable} onChange={this.handleChange}/>
                 <label className="rating__label" htmlFor="star-4">Rating 4</label>
 
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" ref={this.ratings.ratingRefFive}/>
+                <input className="rating__input" id="star-5" type="radio" name="rating" value="5"
+                  disabled={isDisable} onChange={this.handleChange}/>
                 <label className="rating__label" htmlFor="star-5">Rating 5</label>
               </div>
             </div>
@@ -109,9 +125,13 @@ class AddReview extends PureComponent {
                 minLength={50}
                 maxLength={400}
                 required={true}
-                ref={this.commentRef}/>
+                disabled={isDisable}
+                onChange={this.handleChange}/>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
+                <button className="add-review__btn" type="submit"
+                  disabled={isDisable || rating === 0}
+                  style={{cursor: `${isDisable || rating === 0 ? `default` : `pointer`}`,
+                  }}>Post</button>
               </div>
 
             </div>
@@ -132,6 +152,7 @@ AddReview.propTypes = {
     PropTypes.node
   ]).isRequired,
   onSubmit: PropTypes.func.isRequired,
+  isDisable: PropTypes.bool.isRequired,
 };
 
 export default AddReview;

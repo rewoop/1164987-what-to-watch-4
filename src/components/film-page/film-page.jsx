@@ -156,7 +156,13 @@ FilmPage.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
-  sortedFilms: PropTypes.array.isRequired,
+  sortedFilms: PropTypes.arrayOf(
+      PropTypes.shape({
+        filmTitle: PropTypes.string.isRequired,
+        filmVideo: PropTypes.string.isRequired,
+        filmGenre: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
   onTitleClickHandler: PropTypes.func.isRequired,
   onPosterClickHandler: PropTypes.func.isRequired,

@@ -101,6 +101,18 @@ exports[`AddReview component render correctly 1`] = `
     </div>
   </div>
   <div
+    style={
+      Object {
+        "color": "red",
+        "left": "46%",
+        "position": "absolute",
+        "top": "27%",
+      }
+    }
+  >
+    Сhoose a rating
+  </div>
+  <div
     className="add-review"
   >
     <form
@@ -116,8 +128,10 @@ exports[`AddReview component render correctly 1`] = `
         >
           <input
             className="rating__input"
+            disabled={false}
             id="star-1"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value="1"
           />
@@ -129,8 +143,10 @@ exports[`AddReview component render correctly 1`] = `
           </label>
           <input
             className="rating__input"
+            disabled={false}
             id="star-2"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value="2"
           />
@@ -142,8 +158,10 @@ exports[`AddReview component render correctly 1`] = `
           </label>
           <input
             className="rating__input"
+            disabled={false}
             id="star-3"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value="3"
           />
@@ -155,8 +173,10 @@ exports[`AddReview component render correctly 1`] = `
           </label>
           <input
             className="rating__input"
+            disabled={false}
             id="star-4"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value="4"
           />
@@ -168,8 +188,10 @@ exports[`AddReview component render correctly 1`] = `
           </label>
           <input
             className="rating__input"
+            disabled={false}
             id="star-5"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value="5"
           />
@@ -186,10 +208,12 @@ exports[`AddReview component render correctly 1`] = `
       >
         <textarea
           className="add-review__textarea"
+          disabled={false}
           id="review-text"
           maxLength={400}
           minLength={50}
           name="review-text"
+          onChange={[Function]}
           placeholder="Review text"
           required={true}
         />
@@ -198,6 +222,12 @@ exports[`AddReview component render correctly 1`] = `
         >
           <button
             className="add-review__btn"
+            disabled={true}
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
             type="submit"
           >
             Post

@@ -15,6 +15,7 @@ it(`AddReview component render correctly`, () => {
       <AddReview
         onSubmit={noop}
         film={film}
+        isDisable={false}
       />
   ).toJSON();
 
