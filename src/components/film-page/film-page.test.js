@@ -5,23 +5,15 @@ import FilmPageOverview from "../film-page-overview/film-page-overview";
 
 const noop = () => {};
 
-const sortedFilmsMock = () => {
-  return (
-    <article
-      className="small-movie-card catalog__movies-card"
-      onClick={() => {}}
-      onMouseEnter={() => {}}
-      onMouseLeave={() => {}}>
-      <div className="small-movie-card__image">
-        <video/>
-        <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Rock film poster" width="280" height="175"/>
-      </div>
-      <h3 className="small-movie-card__title">
-        <a onClick={() => {}} className="small-movie-card__link" href="#">The Rock</a>
-      </h3>
-    </article>
-  );
-};
+const films = [
+  {
+    filmTitle: `Fantastic Beasts`,
+    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    filmGenre: `Comedy`
+  }
+];
+
 
 const Settings = {
   id: 1,
@@ -76,11 +68,16 @@ it(`Should FilmPage render correctly`, () => {
       film={Settings}
       comments={Settings.reviews}
       getCommentByFilmId={noop}
-      sortedFilms={sortedFilmsMock()}
+      sortedFilms={films}
       activeTab={`overview`}
       renderActiveTab={renderActiveTab}
       setActiveTab={noop}
       onPlayButtonClickHandler={noop}
+      onPosterClickHandler={noop}
+      onTitleClickHandler={noop}
+      onAddReviewClickHandler={noop}
+      onSignInClickHandler={noop}
+      isSignIn={`NO_AUTH`}
     />, {
       createNodeMock: () => {
         return {};

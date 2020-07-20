@@ -15,6 +15,12 @@ exports[`Should FilmPageReviews render correctly 1`] = `
       >
         <p
           className="review__text"
+          style={
+            Object {
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+            }
+          }
         >
           Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
         </p>
@@ -48,6 +54,12 @@ exports[`Should FilmPageReviews render correctly 1`] = `
       >
         <p
           className="review__text"
+          style={
+            Object {
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+            }
+          }
         >
           Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.
         </p>
@@ -85,6 +97,12 @@ exports[`Should FilmPageReviews render correctly 1`] = `
       >
         <p
           className="review__text"
+          style={
+            Object {
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+            }
+          }
         >
           I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.
         </p>

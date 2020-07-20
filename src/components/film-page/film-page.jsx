@@ -1,10 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
+import FilmCard from "../film-card/film-card.jsx";
+import withVideo from "../../hocs/with-video/with-video";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+
+const FilmCardWrapped = withVideo(FilmCard);
 
 const FilmPage = (props) => {
-  const {film, sortedFilms, onPlayButtonClickHandler, activeTab, setActiveTab, renderActiveTab} = props;
-  const {filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
+  const {film,
+    sortedFilms,
+    onPlayButtonClickHandler,
+    activeTab,
+    setActiveTab,
+    renderActiveTab,
+    onTitleClickHandler,
+    onPosterClickHandler,
+    onAddReviewClickHandler,
+    onSignInClickHandler,
+    isSignIn} = props;
+
+  const {id, filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
+
+  const filteredFilms = sortedFilms.filter((currentFilm) => currentFilm.id !== id);
 
   return (
     <React.Fragment>
@@ -26,9 +44,13 @@ const FilmPage = (props) => {
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
+              {isSignIn === AuthorizationStatus.AUTH ?
+                <div className="user-block__avatar">
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                </div>
+                :
+                <a onClick={onSignInClickHandler} style={{cursor: `pointer`}}>Sign In</a>
+              }
             </div>
           </header>
 
@@ -56,7 +78,9 @@ const FilmPage = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {isSignIn === AuthorizationStatus.AUTH ?
+                  <a href="add-review.html" className="btn movie-card__button" onClick={(evt) => onAddReviewClickHandler(evt)}>Add review</a>
+                  : ``}
               </div>
             </div>
           </div>
@@ -84,7 +108,22 @@ const FilmPage = (props) => {
 
       <div className="page-content">
 
-        {sortedFilms}
+        {filteredFilms.length > 0 ? (
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <div className="catalog__movies-list">
+              {filteredFilms.map((currentFilm) => {
+                return <FilmCardWrapped
+                  key={currentFilm.filmTitle}
+                  film={currentFilm}
+                  onTitleClickHandler={onTitleClickHandler}
+                  onPosterClickHandler={onPosterClickHandler}
+                />;
+              })}
+            </div>
+          </section>
+        ) : ``
+        }
 
         <footer className="page-footer">
           <div className="logo">
@@ -117,8 +156,19 @@ FilmPage.propTypes = {
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
-  sortedFilms: PropTypes.element.isRequired,
+  sortedFilms: PropTypes.arrayOf(
+      PropTypes.shape({
+        filmTitle: PropTypes.string.isRequired,
+        filmVideo: PropTypes.string.isRequired,
+        filmGenre: PropTypes.string.isRequired,
+      }).isRequired
+  ).isRequired,
   onPlayButtonClickHandler: PropTypes.func.isRequired,
+  onTitleClickHandler: PropTypes.func.isRequired,
+  onPosterClickHandler: PropTypes.func.isRequired,
+  onAddReviewClickHandler: PropTypes.func.isRequired,
+  onSignInClickHandler: PropTypes.func.isRequired,
+  isSignIn: PropTypes.string.isRequired,
 };
 
 export default FilmPage;

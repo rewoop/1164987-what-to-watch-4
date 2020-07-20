@@ -89,7 +89,24 @@ const withActiveTab = (Component) => {
         filmRunTime: PropTypes.number.isRequired,
       })
     ]).isRequired,
-    sortedFilms: PropTypes.element.isRequired,
+    sortedFilms: PropTypes.arrayOf(
+        PropTypes.shape({
+          filmTitle: PropTypes.string.isRequired,
+          filmVideo: PropTypes.string.isRequired,
+          filmGenre: PropTypes.string.isRequired,
+          releaseDate: PropTypes.number.isRequired,
+          backgroundPoster: PropTypes.string.isRequired,
+          filmPoster: PropTypes.string.isRequired,
+          ratingScore: PropTypes.number.isRequired,
+          ratingLevel: PropTypes.number.isRequired,
+          ratingCount: PropTypes.string.isRequired,
+          filmDescription: PropTypes.string.isRequired,
+          filmDirector: PropTypes.string.isRequired,
+          filmStarring: PropTypes.arrayOf(
+              PropTypes.string.isRequired
+          ).isRequired,
+        }).isRequired
+    ).isRequired,
     getCommentByFilmId: PropTypes.func.isRequired,
     comments: PropTypes.oneOfType([
       PropTypes.array,

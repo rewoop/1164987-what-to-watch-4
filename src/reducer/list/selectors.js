@@ -14,12 +14,7 @@ const getShowedFilmsCount = (state) => {
 export const getFilmsByGenre = createSelector(
     getFilms,
     getCurrentGenre,
-    (films, currentGenre) => {
-      if (currentGenre === ALL_GENRES) {
-        return films;
-      }
-      return films.filter((currentFilm) => currentFilm.filmGenre === currentGenre);
-    }
+    (films, currentGenre) => currentGenre === ALL_GENRES ? films : films.filter((currentFilm) => currentFilm.filmGenre === currentGenre)
 );
 
 export const isMoreFilm = createSelector(

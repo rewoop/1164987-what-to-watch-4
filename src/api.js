@@ -1,10 +1,13 @@
 import axios from "axios";
 import {AXIOS_TIMEOUT} from "./const.js";
+import Swal from "sweetalert2";
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const Error = {
   SUCCESS: 200,
-  UNAUTHORIZED: 401,
-  BAD_REQUEST: 400
+  UNAUTHORIZED: 401
 };
 
 export const createAPI = (onUnauthorized) => {
@@ -21,17 +24,20 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === Error.UNAUTHORIZED || response.status === Error.BAD_REQUEST) {
+    if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
 
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
       throw err;
     }
-    if (response.status !== Error.SUCCESS) {
 
-      throw err;
-    }
+    MySwal.fire({
+      icon: `error`,
+      title: `Oops...`,
+      text: err,
+      position: `top`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
 
     throw err;
   };

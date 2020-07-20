@@ -8,8 +8,8 @@ Enzyme.configure({
 });
 
 const Settings = {
-  login: ``,
-  password: ``,
+  login: `vasya.petrov@yandex.ru`,
+  password: `12345qwerty`,
 };
 
 it(`Should form be submited`, () => {
@@ -18,9 +18,13 @@ it(`Should form be submited`, () => {
   const signIn = mount(
       <SignIn
         onSubmit={onSubmitHandler}
-        error={false}
+        isValid={true}
       />
   );
+
+  const {loginRef, passwordRef} = signIn.instance();
+  loginRef.current.value = Settings.login;
+  passwordRef.current.value = Settings.password;
 
   const form = signIn.find(`.sign-in__form`);
   form.simulate(`submit`);

@@ -14,48 +14,6 @@ const films = [
     filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     filmGenre: `Comedy`
-  },
-  {
-    filmTitle: `Bohemian Rhapsody`,
-    filmImage: `img/bohemian-rhapsody.jpg`,
-    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    filmGenre: `Crime`
-  },
-  {
-    filmTitle: `Macbeth`,
-    filmImage: `img/macbeth.jpg`,
-    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    filmGenre: `Documentary`
-  },
-  {
-    filmTitle: `Aviator`,
-    filmImage: `img/aviator.jpg`,
-    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    filmGenre: `Drama`
-  },
-  {
-    filmTitle: `We need to talk about Kevin`,
-    filmImage: `img/we-need-to-talk-about-kevin.jpg`,
-    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    filmGenre: `Thriller`
-  },
-  {
-    filmTitle: `What We Do in the Shadows`,
-    filmImage: `img/what-we-do-in-the-shadows.jpg`,
-    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    filmGenre: `Horror`
-  },
-  {
-    filmTitle: `Revenant`,
-    filmImage: `img/revenant.jpg`,
-    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    filmGenre: `Thriller`
-  },
-  {
-    filmTitle: `Johnny English`,
-    filmImage: `img/johnny-english.jpg`,
-    filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    filmGenre: `Romance`
   }
 ];
 
@@ -84,7 +42,7 @@ it(`Should Main render correctly`, () => {
       isSignIn={`NO_AUTH`}
       onSignInClickHandler={noop}
       genres={getGenresList(films)}
-      loadingDataStatus={false}
+      isErrorLoadingFilms={false}
     />, {
       createNodeMock: () => {
         return {};

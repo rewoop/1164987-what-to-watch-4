@@ -36,14 +36,19 @@
     "node": "10"
   },
   "dependencies": {
+    "@emotion/core": "10.0.28",
     "axios": "0.19.2",
+    "history": "5.0.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.0",
     "react-router-dom": "5.2.0",
+    "react-spinners": "0.9.0",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "sweetalert2": "9.17.0",
+    "sweetalert2-react-content": "3.0.3"
   }
 }

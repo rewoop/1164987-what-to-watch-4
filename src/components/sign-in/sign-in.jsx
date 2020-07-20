@@ -23,7 +23,7 @@ class SignIn extends PureComponent {
   }
 
   render() {
-    const {error} = this.props;
+    const {isValid} = this.props;
 
     return (
       <div className="user-page">
@@ -41,12 +41,12 @@ class SignIn extends PureComponent {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
-            {error ?
+            {isValid ? `` :
               <div className="sign-in__message">
                 <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
-              </div> : ``}
+              </div> }
             <div className="sign-in__fields">
-              <div className={error ? `sign-in__field sign-in__field--error` : `sign-in__field`}>
+              <div className={isValid ? `sign-in__field` : `sign-in__field sign-in__field--error`}>
                 <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
                   id="user-email" ref={this.loginRef} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -83,7 +83,7 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
 };
 
 export default SignIn;

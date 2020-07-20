@@ -51,16 +51,16 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
+            Sign In
+          </a>
         </div>
       </header>
       <div
@@ -126,12 +126,7 @@ Array [
                 My list
               </span>
             </button>
-            <a
-              className="btn movie-card__button"
-              href="add-review.html"
-            >
-              Add review
-            </a>
+            
           </div>
         </div>
       </div>
@@ -247,35 +242,51 @@ Array [
   <div
     className="page-content"
   >
-    <article
-      className="small-movie-card catalog__movies-card"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+    <section
+      className="catalog catalog--like-this"
     >
+      <h2
+        className="catalog__title"
+      >
+        More like this
+      </h2>
       <div
-        className="small-movie-card__image"
+        className="catalog__movies-list"
       >
-        <video />
-        <img
-          alt="The Rock film poster"
-          height="175"
-          src="img/the-grand-budapest-hotel-poster.jpg"
-          width="280"
-        />
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
-        <a
-          className="small-movie-card__link"
-          href="#"
+        <article
+          className="small-movie-card catalog__movies-card"
           onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          The Rock
-        </a>
-      </h3>
-    </article>
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              className="player__video"
+              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            />
+            <img
+              alt="Fantastic Beasts"
+              height="175"
+              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              Fantastic Beasts
+            </a>
+          </h3>
+        </article>
+      </div>
+    </section>
     <footer
       className="page-footer"
     >

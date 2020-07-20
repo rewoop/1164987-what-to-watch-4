@@ -8,7 +8,18 @@ it(`SignIn component render correctly`, () => {
   const tree = renderer.create(
       <SignIn
         onSubmit={noop}
-        error={false}
+        isValid={true}
+      />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`SignIn component render correctly`, () => {
+  const tree = renderer.create(
+      <SignIn
+        onSubmit={noop}
+        isValid={false}
       />
   ).toJSON();
 

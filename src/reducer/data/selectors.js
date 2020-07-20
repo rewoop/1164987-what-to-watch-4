@@ -13,6 +13,10 @@ export const getLoadingDataStatus = (state) => {
   return state[NameSpace.DATA].isLoading;
 };
 
+export const getErrorLoadingDataStatus = (state) => {
+  return state[NameSpace.DATA].isError;
+};
+
 export const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
