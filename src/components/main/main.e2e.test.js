@@ -97,7 +97,7 @@ describe(`Should Main work right`, () => {
         </Router>
     );
 
-    const filmPosters = main.find(`.small-movie-card`);
+    const filmPosters = main.find(`.small-movie-card > a`);
     filmPosters.forEach((filmPoster) => filmPoster.simulate(`click`));
     expect(onPosterClickHandler).toHaveBeenCalledTimes(filmPosters.length);
   });

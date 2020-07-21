@@ -188,24 +188,28 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film"
+            onClick={[Function]}
           >
-            <video
-              className="player__video"
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            />
-            <img
-              alt="Fantastic Beasts"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                className="player__video"
+                poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              />
+              <img
+                alt="Fantastic Beasts"
+                height="175"
+                src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+                width="280"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >

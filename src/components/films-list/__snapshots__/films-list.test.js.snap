@@ -6,24 +6,28 @@ exports[`Should FilmsList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-      />
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        />
+        <img
+          alt="Fantastic Beasts"
+          height="175"
+          src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -38,24 +42,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/bohemian-rhapsody.jpg"
-      />
-      <img
-        alt="Bohemian Rhapsody"
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/bohemian-rhapsody.jpg"
+        />
+        <img
+          alt="Bohemian Rhapsody"
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -70,24 +78,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/macbeth.jpg"
-      />
-      <img
-        alt="Macbeth"
-        height="175"
-        src="img/macbeth.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/macbeth.jpg"
+        />
+        <img
+          alt="Macbeth"
+          height="175"
+          src="img/macbeth.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -102,24 +114,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/aviator.jpg"
-      />
-      <img
-        alt="Aviator"
-        height="175"
-        src="img/aviator.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/aviator.jpg"
+        />
+        <img
+          alt="Aviator"
+          height="175"
+          src="img/aviator.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -134,24 +150,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/we-need-to-talk-about-kevin.jpg"
-      />
-      <img
-        alt="We need to talk about Kevin"
-        height="175"
-        src="img/we-need-to-talk-about-kevin.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/we-need-to-talk-about-kevin.jpg"
+        />
+        <img
+          alt="We need to talk about Kevin"
+          height="175"
+          src="img/we-need-to-talk-about-kevin.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -166,24 +186,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/what-we-do-in-the-shadows.jpg"
-      />
-      <img
-        alt="What We Do in the Shadows"
-        height="175"
-        src="img/what-we-do-in-the-shadows.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/what-we-do-in-the-shadows.jpg"
+        />
+        <img
+          alt="What We Do in the Shadows"
+          height="175"
+          src="img/what-we-do-in-the-shadows.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -198,24 +222,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/revenant.jpg"
-      />
-      <img
-        alt="Revenant"
-        height="175"
-        src="img/revenant.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/revenant.jpg"
+        />
+        <img
+          alt="Revenant"
+          height="175"
+          src="img/revenant.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
@@ -230,24 +258,28 @@ exports[`Should FilmsList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/film"
+      onClick={[Function]}
     >
-      <video
-        className="player__video"
-        poster="img/johnny-english.jpg"
-      />
-      <img
-        alt="Johnny English"
-        height="175"
-        src="img/johnny-english.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+          poster="img/johnny-english.jpg"
+        />
+        <img
+          alt="Johnny English"
+          height="175"
+          src="img/johnny-english.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >

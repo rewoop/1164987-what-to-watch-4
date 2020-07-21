@@ -38,7 +38,6 @@ class App extends PureComponent {
     this.state = {
       activePage: {},
       filmSource: {},
-      isVideoPlayer: false,
       isAddReview: false,
       isDisabledAddReviewForm: false,
     };
@@ -59,15 +58,13 @@ class App extends PureComponent {
 
   _onPlayButtonClickHandler(filmForPlayer) {
     this.setState({
-      filmSource: filmForPlayer,
-      isVideoPlayer: true
+      filmSource: filmForPlayer
     });
   }
 
   _onExitButtonClickHandler() {
     this.setState({
-      filmSource: {},
-      isVideoPlayer: false
+      filmSource: {}
     });
   }
 
@@ -80,16 +77,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {activePage, filmSource, isVideoPlayer, isAddReview} = this.state;
-    const {isValidAuthorization} = this.props;
-
-    if (isVideoPlayer) {
-      return this._renderFullVideoPlayer(filmSource);
-    }
-
-    if (isAddReview && isValidAuthorization) {
-      return this._renderAddReviewPage();
-    }
+    const {activePage} = this.state;
 
     return Object.keys(activePage).length === 0 ? this._renderMain() : this._renderFilmPage();
   }
@@ -143,10 +131,12 @@ class App extends PureComponent {
     />;
   }
 
-  _renderFullVideoPlayer(film) {
+  _renderFullVideoPlayer() {
+    const {filmSource} = this.state;
+
     return <FullVideoPlayerWrapped
-      title={film.filmTitle}
-      film={film.filmVideo}
+      title={filmSource.filmTitle}
+      film={filmSource.filmVideo}
       onExitButtonClickHandler={this._onExitButtonClickHandler}
     />;
   }
@@ -209,6 +199,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path={AppRoute.FILM_REVIEW}>
             {this._renderAddReviewPage()}
+          </Route>
+          <Route exact path={AppRoute.VIDEO_PLAYER}>
+            {this._renderFullVideoPlayer()}
           </Route>
         </Switch>
       </Router>

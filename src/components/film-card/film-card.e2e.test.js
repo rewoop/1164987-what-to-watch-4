@@ -60,8 +60,8 @@ describe(`Should film card work right`, () => {
         </Router>
     );
 
-    const card = filmCard.find(`.small-movie-card`);
-    card.simulate(`click`);
+    const card = filmCard.find(`.small-movie-card a`);
+    card.at(0).simulate(`click`);
 
     expect(onPosterClickHandler).toHaveBeenCalledTimes(1);
     expect(onPosterClickHandler).toHaveBeenCalledWith(filmInfo);
