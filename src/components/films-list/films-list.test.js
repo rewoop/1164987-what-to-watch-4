@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmsList from "./films-list.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const filmsInfo = [
   {
@@ -47,15 +49,18 @@ const filmsInfo = [
 
 it(`Should FilmsList render correctly`, () => {
   const tree = renderer
-    .create(<FilmsList
-      films={filmsInfo}
-      onTitleClickHandler={() => {}}
-      onPosterClickHandler={() => {}}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router history={history}>
+          <FilmsList
+            films={filmsInfo}
+            onTitleClickHandler={() => {}}
+            onPosterClickHandler={() => {}}
+          />
+        </Router>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

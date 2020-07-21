@@ -29,7 +29,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -52,10 +53,13 @@ Array [
           className="user-block"
         >
           <a
+            href="/login"
             onClick={[Function]}
             style={
               Object {
+                "color": "inherit",
                 "cursor": "pointer",
+                "textDecoration": "none",
               }
             }
           >
@@ -91,8 +95,9 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/player"
               onClick={[Function]}
               type="button"
             >
@@ -108,7 +113,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               type="button"
@@ -278,7 +283,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film"
               onClick={[Function]}
             >
               Fantastic Beasts
@@ -295,7 +300,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

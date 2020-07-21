@@ -28,7 +28,8 @@ exports[`AddReview component render correctly 1`] = `
       >
         <a
           className="logo__link"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -58,7 +59,8 @@ exports[`AddReview component render correctly 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/film"
+              onClick={[Function]}
             >
               The Rock
             </a>
@@ -68,6 +70,8 @@ exports[`AddReview component render correctly 1`] = `
           >
             <a
               className="breadcrumbs__link"
+              href="/review"
+              onClick={[Function]}
             >
               Add review
             </a>

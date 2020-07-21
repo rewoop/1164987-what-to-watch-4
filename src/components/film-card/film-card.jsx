@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const FilmCard = (props) => {
   const {film, onTitleClickHandler, onPosterClickHandler, isPlaying, setPlayingFilm} = props;
@@ -21,10 +23,10 @@ const FilmCard = (props) => {
         <img src={film.filmImage} alt={film.filmTitle} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a onClick={(evt) => {
+        <Link to={AppRoute.FILM_PAGE} onClick={(evt) => {
           evt.preventDefault();
           onTitleClickHandler(film);
-        }} className="small-movie-card__link" href="movie-page.html">{film.filmTitle}</a>
+        }} className="small-movie-card__link">{film.filmTitle}</Link>
       </h3>
     </article>
   );

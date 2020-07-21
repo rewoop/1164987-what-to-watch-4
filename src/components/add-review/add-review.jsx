@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {ReviewLength} from "../../const.js";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const AddReview = (props) => {
   const {film, isDisable, rating, comment, onSubmitHandler, onChangeHandler} = props;
@@ -18,20 +20,20 @@ const AddReview = (props) => {
 
         <header className="page-header">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to={AppRoute.ROOT} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">{filmTitle}</a>
+                <Link to={AppRoute.FILM_PAGE} className="breadcrumbs__link">{filmTitle}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to={AppRoute.FILM_REVIEW} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

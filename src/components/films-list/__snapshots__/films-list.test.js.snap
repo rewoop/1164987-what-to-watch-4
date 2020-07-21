@@ -29,7 +29,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Fantastic Beasts
@@ -61,7 +61,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Bohemian Rhapsody
@@ -93,7 +93,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Macbeth
@@ -125,7 +125,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Aviator
@@ -157,7 +157,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         We need to talk about Kevin
@@ -189,7 +189,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         What We Do in the Shadows
@@ -221,7 +221,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Revenant
@@ -253,7 +253,7 @@ exports[`Should FilmsList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/film"
         onClick={[Function]}
       >
         Johnny English

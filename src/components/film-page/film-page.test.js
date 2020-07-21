@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FilmPage from "./film-page.jsx";
 import FilmPageOverview from "../film-page-overview/film-page-overview";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const noop = () => {};
 
@@ -64,25 +66,27 @@ const renderActiveTab = () => {
 
 it(`Should FilmPage render correctly`, () => {
   const tree = renderer
-    .create(<FilmPage
-      film={Settings}
-      comments={Settings.reviews}
-      getCommentByFilmId={noop}
-      sortedFilms={films}
-      activeTab={`overview`}
-      renderActiveTab={renderActiveTab}
-      setActiveTab={noop}
-      onPlayButtonClickHandler={noop}
-      onPosterClickHandler={noop}
-      onTitleClickHandler={noop}
-      onAddReviewClickHandler={noop}
-      onSignInClickHandler={noop}
-      isSignIn={`NO_AUTH`}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router history={history}>
+          <FilmPage
+            film={Settings}
+            comments={Settings.reviews}
+            getCommentByFilmId={noop}
+            sortedFilms={films}
+            activeTab={`overview`}
+            renderActiveTab={renderActiveTab}
+            setActiveTab={noop}
+            onPlayButtonClickHandler={noop}
+            onPosterClickHandler={noop}
+            onTitleClickHandler={noop}
+            onAddReviewClickHandler={noop}
+            isSignIn={`NO_AUTH`}
+          />
+        </Router>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
