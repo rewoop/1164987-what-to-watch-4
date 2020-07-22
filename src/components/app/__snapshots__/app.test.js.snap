@@ -1,145 +1,266 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render App 1`] = `
-<div
-  className="user-page"
->
-  <header
-    className="page-header user-page__head"
+Array [
+  <section
+    className="movie-card"
   >
     <div
-      className="logo"
+      className="movie-card__bg"
     >
-      <a
-        className="logo__link"
-        href="main.html"
-      >
-        <span
-          className="logo__letter logo__letter--1"
-        >
-          W
-        </span>
-        <span
-          className="logo__letter logo__letter--2"
-        >
-          T
-        </span>
-        <span
-          className="logo__letter logo__letter--3"
-        >
-          W
-        </span>
-      </a>
+      <img
+        alt="The Rock"
+        src="img/bg-the-grand-budapest-hotel.jpg"
+      />
     </div>
     <h1
-      className="page-title user-page__title"
+      className="visually-hidden"
     >
-      Sign in
+      WTW
     </h1>
-  </header>
-  <div
-    className="sign-in user-page__content"
-  >
-    <form
-      action="#"
-      className="sign-in__form"
-      onSubmit={[Function]}
+    <header
+      className="page-header movie-card__head"
     >
       <div
-        className="sign-in__message"
+        className="logo"
+      >
+        <a
+          className="logo__link"
+          href="/"
+          onClick={[Function]}
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="user-block"
+      >
+        <a
+          href="/login"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "cursor": "pointer",
+              "textDecoration": "none",
+            }
+          }
+        >
+          Sign In
+        </a>
+      </div>
+    </header>
+    <div
+      className="movie-card__wrap"
+    >
+      <div
+        className="movie-card__info"
+      >
+        <div
+          className="movie-card__poster"
+        >
+          <img
+            alt="The Rock"
+            height="327"
+            src="img/the-grand-budapest-hotel-poster.jpg"
+            width="218"
+          />
+        </div>
+        <div
+          className="movie-card__desc"
+        >
+          <h2
+            className="movie-card__title"
+          >
+            The Rock
+          </h2>
+          <p
+            className="movie-card__meta"
+          >
+            <span
+              className="movie-card__genre"
+            >
+              Thriller
+            </span>
+            <span
+              className="movie-card__year"
+            >
+              1996
+            </span>
+          </p>
+          <div
+            className="movie-card__buttons"
+          >
+            <a
+              className="btn btn--play movie-card__button"
+              href="/player"
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                height="19"
+                viewBox="0 0 19 19"
+                width="19"
+              >
+                <use
+                  xlinkHref="#play-s"
+                />
+              </svg>
+              <span>
+                Play
+              </span>
+            </a>
+            <button
+              className="btn btn--list movie-card__button"
+              type="button"
+            >
+              <svg
+                height="20"
+                viewBox="0 0 19 20"
+                width="19"
+              >
+                <use
+                  xlinkHref="#add"
+                />
+              </svg>
+              <span>
+                My list
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>,
+  <div
+    className="page-content"
+  >
+    <section
+      className="catalog"
+    >
+      <h2
+        className="catalog__title visually-hidden"
+      >
+        Catalog
+      </h2>
+      <ul
+        className="catalog__genres-list"
+      >
+        <li
+          className="catalog__genres-item catalog__genres-item--active"
+          onClick={[Function]}
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+          >
+            All genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item"
+          onClick={[Function]}
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+          >
+            Comedy
+          </a>
+        </li>
+      </ul>
+      <div
+        className="catalog__movies-list"
+      >
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <a
+            href="/film"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                className="player__video"
+                poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              />
+              <img
+                alt="Fantastic Beasts"
+                height="175"
+                src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+                width="280"
+              />
+            </div>
+          </a>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/film"
+              onClick={[Function]}
+            >
+              Fantastic Beasts
+            </a>
+          </h3>
+        </article>
+      </div>
+      
+    </section>
+    <footer
+      className="page-footer"
+    >
+      <div
+        className="logo"
+      >
+        <a
+          className="logo__link logo__link--light"
+          href="/"
+          onClick={[Function]}
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="copyright"
       >
         <p>
-          We can’t recognize this email 
-          <br />
-           and password combination. Please try again.
+          © 2019 What to watch Ltd.
         </p>
       </div>
-      <div
-        className="sign-in__fields"
-      >
-        <div
-          className="sign-in__field sign-in__field--error"
-        >
-          <input
-            className="sign-in__input"
-            id="user-email"
-            name="user-email"
-            placeholder="Email address"
-            required={true}
-            type="email"
-          />
-          <label
-            className="sign-in__label visually-hidden"
-            htmlFor="user-email"
-          >
-            Email address
-          </label>
-        </div>
-        <div
-          className="sign-in__field"
-        >
-          <input
-            className="sign-in__input"
-            id="user-password"
-            name="user-password"
-            placeholder="Password"
-            required={true}
-            type="password"
-          />
-          <label
-            className="sign-in__label visually-hidden"
-            htmlFor="user-password"
-          >
-            Password
-          </label>
-        </div>
-      </div>
-      <div
-        className="sign-in__submit"
-      >
-        <button
-          className="sign-in__btn"
-          type="submit"
-        >
-          Sign in
-        </button>
-      </div>
-    </form>
-  </div>
-  <footer
-    className="page-footer"
-  >
-    <div
-      className="logo"
-    >
-      <a
-        className="logo__link logo__link--light"
-        href="main.html"
-      >
-        <span
-          className="logo__letter logo__letter--1"
-        >
-          W
-        </span>
-        <span
-          className="logo__letter logo__letter--2"
-        >
-          T
-        </span>
-        <span
-          className="logo__letter logo__letter--3"
-        >
-          W
-        </span>
-      </a>
-    </div>
-    <div
-      className="copyright"
-    >
-      <p>
-        © 2019 What to watch Ltd.
-      </p>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>,
+]
 `;

@@ -4,6 +4,10 @@ import Tabs from "../tabs/tabs.jsx";
 import FilmCard from "../film-card/film-card.jsx";
 import withVideo from "../../hocs/with-video/with-video";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const FilmCardWrapped = withVideo(FilmCard);
 
@@ -17,7 +21,6 @@ const FilmPage = (props) => {
     onTitleClickHandler,
     onPosterClickHandler,
     onAddReviewClickHandler,
-    onSignInClickHandler,
     isSignIn} = props;
 
   const {id, filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
@@ -32,27 +35,7 @@ const FilmPage = (props) => {
             <img src={backgroundPoster} alt={filmTitle}/>
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              {isSignIn === AuthorizationStatus.AUTH ?
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-                :
-                <a onClick={onSignInClickHandler} style={{cursor: `pointer`}}>Sign In</a>
-              }
-            </div>
-          </header>
+          <Header isSignIn={isSignIn}/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -63,24 +46,32 @@ const FilmPage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button
+                <Link to={AppRoute.VIDEO_PLAYER}
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}>
+                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
+
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                 </button>
+
                 {isSignIn === AuthorizationStatus.AUTH ?
-                  <a href="add-review.html" className="btn movie-card__button" onClick={(evt) => onAddReviewClickHandler(evt)}>Add review</a>
+                  <Link to={AppRoute.FILM_REVIEW}
+                    className="btn movie-card__button"
+                    onClick={onAddReviewClickHandler}>
+                    Add review
+                  </Link>
                   : ``}
+
               </div>
             </div>
           </div>
@@ -125,19 +116,7 @@ const FilmPage = (props) => {
         ) : ``
         }
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </React.Fragment>
   );
@@ -167,7 +146,6 @@ FilmPage.propTypes = {
   onTitleClickHandler: PropTypes.func.isRequired,
   onPosterClickHandler: PropTypes.func.isRequired,
   onAddReviewClickHandler: PropTypes.func.isRequired,
-  onSignInClickHandler: PropTypes.func.isRequired,
   isSignIn: PropTypes.string.isRequired,
 };
 

@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const noop = () => {};
 
@@ -28,26 +30,28 @@ const Settings = {
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      promoFilm={Settings}
-      films={films}
-      onTitleClickHandler={noop}
-      onPosterClickHandler={noop}
-      onGenreClickHandler={noop}
-      onShowButtonClickHandler={noop}
-      isMoreFilms={true}
-      activeGenreFilter={`All genres`}
-      showedFilmsCount={8}
-      onPlayButtonClickHandler={noop}
-      isSignIn={`NO_AUTH`}
-      onSignInClickHandler={noop}
-      genres={getGenresList(films)}
-      isErrorLoadingFilms={false}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router history={history}>
+          <Main
+            promoFilm={Settings}
+            films={films}
+            onTitleClickHandler={noop}
+            onPosterClickHandler={noop}
+            onGenreClickHandler={noop}
+            onShowButtonClickHandler={noop}
+            isMoreFilms={true}
+            activeGenreFilter={`All genres`}
+            showedFilmsCount={8}
+            onPlayButtonClickHandler={noop}
+            isSignIn={`NO_AUTH`}
+            genres={getGenresList(films)}
+            isErrorLoadingFilms={false}
+          />
+        </Router>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FullVideoPlayer from "./full-video-player.jsx";
 
+jest.mock(`react-router-dom`);
+
 const Settings = {
   TITLE: `The Rock`,
   PROGRESS: 0,

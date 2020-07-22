@@ -105,7 +105,7 @@ const withFullVideo = (Component) => {
   }
 
   WithFullVideo.propTypes = {
-    film: PropTypes.string.isRequired,
+    film: PropTypes.string,
   };
 
   return WithFullVideo;

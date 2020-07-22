@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import AddReview from "./add-review.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const noop = () => {};
 
@@ -17,14 +19,16 @@ const Settings = {
 
 it(`AddReview component render correctly`, () => {
   const tree = renderer.create(
-      <AddReview
-        film={film}
-        isDisable={false}
-        rating={Settings.rating}
-        comment={Settings.comment}
-        onSubmitHandler={noop}
-        onChangeHandler={noop}
-      />
+      <Router history={history}>
+        <AddReview
+          film={film}
+          isDisable={false}
+          rating={Settings.rating}
+          comment={Settings.comment}
+          onSubmitHandler={noop}
+          onChangeHandler={noop}
+        />
+      </Router>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

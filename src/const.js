@@ -1,3 +1,7 @@
+export const ALL_GENRES = `All genres`;
+export const MAX_FILMS_LENGTH = 8;
+export const AXIOS_TIMEOUT = 5000;
+
 export const Tab = {
   OVERVIEW: `overview`,
   DETAILS: `details`,
@@ -23,6 +27,11 @@ export const ReviewLength = {
   MAX: 400
 };
 
-export const ALL_GENRES = `All genres`;
-export const MAX_FILMS_LENGTH = 8;
-export const AXIOS_TIMEOUT = 5000;
+export const AppRoute = {
+  LOGIN: `/login`,
+  FILM_PAGE: `/film`,
+  FILM_REVIEW: `/review`,
+  VIDEO_PLAYER: `/player`,
+  // MY_LIST: `/mylist`,
+  ROOT: `/`,
+};

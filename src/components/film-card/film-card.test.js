@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmCard from "./film-card.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const filmInfo = {
   filmTitle: `Fantastic Beasts`,
@@ -10,17 +12,21 @@ const filmInfo = {
 
 it(`Should FilmCard render correctly`, () => {
   const tree = renderer
-    .create(<FilmCard
-      film={filmInfo}
-      onTitleClickHandler={() => {}}
-      onPosterClickHandler={() => {}}
-      isPlaying={false}
-      setPlayingFilm={() => {}}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router history={history}>
+          <FilmCard
+            film={filmInfo}
+            onTitleClickHandler={() => {}}
+            onPosterClickHandler={() => {}}
+            isPlaying={false}
+            setPlayingFilm={() => {}}
+          />
+        </Router>
+        , {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

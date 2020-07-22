@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
@@ -19,6 +19,8 @@ import {formatRunTimeDate} from "../../utils";
 import Loading from "../loading/loading.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import withReview from "../../hocs/with-review/with-review.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 const FilmPageWrapped = withActiveTab(FilmPage);
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
@@ -31,14 +33,11 @@ class App extends PureComponent {
     this._onTitleClickHandler = this._onTitleClickHandler.bind(this);
     this._onPlayButtonClickHandler = this._onPlayButtonClickHandler.bind(this);
     this._onExitButtonClickHandler = this._onExitButtonClickHandler.bind(this);
-    this._onSignInClickHandler = this._onSignInClickHandler.bind(this);
     this._onAddReviewClickHandler = this._onAddReviewClickHandler.bind(this);
 
     this.state = {
       activePage: {},
       filmSource: {},
-      isVideoPlayer: false,
-      isSignIn: false,
       isAddReview: false,
       isDisabledAddReviewForm: false,
     };
@@ -59,21 +58,13 @@ class App extends PureComponent {
 
   _onPlayButtonClickHandler(filmForPlayer) {
     this.setState({
-      filmSource: filmForPlayer,
-      isVideoPlayer: true
+      filmSource: filmForPlayer
     });
   }
 
   _onExitButtonClickHandler() {
     this.setState({
-      filmSource: {},
-      isVideoPlayer: false
-    });
-  }
-
-  _onSignInClickHandler() {
-    this.setState({
-      isSignIn: true,
+      filmSource: {}
     });
   }
 
@@ -86,20 +77,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {activePage, filmSource, isVideoPlayer, isSignIn, isAddReview} = this.state;
-    const {isValidAuthorization} = this.props;
-
-    if (isVideoPlayer) {
-      return this._renderFullVideoPlayer(filmSource);
-    }
-
-    if (isSignIn || !isValidAuthorization) {
-      return this._renderSignInPage();
-    }
-
-    if (isAddReview && isValidAuthorization) {
-      return this._renderAddReviewPage();
-    }
+    const {activePage} = this.state;
 
     return Object.keys(activePage).length === 0 ? this._renderMain() : this._renderFilmPage();
   }
@@ -131,7 +109,6 @@ class App extends PureComponent {
         showedFilmsCount={showedFilmsCount}
         onPlayButtonClickHandler={this._onPlayButtonClickHandler}
         isSignIn={authorizationStatus}
-        onSignInClickHandler={this._onSignInClickHandler}
         isErrorLoadingFilms={isErrorLoadingFilms}
       />
     );
@@ -150,15 +127,16 @@ class App extends PureComponent {
       onAddReviewClickHandler={this._onAddReviewClickHandler}
       comments={filmComments}
       getCommentByFilmId={getCommentByFilmId}
-      onSignInClickHandler={this._onSignInClickHandler}
       isSignIn={authorizationStatus}
     />;
   }
 
-  _renderFullVideoPlayer(film) {
+  _renderFullVideoPlayer() {
+    const {filmSource} = this.state;
+
     return <FullVideoPlayerWrapped
-      title={film.filmTitle}
-      film={film.filmVideo}
+      title={filmSource.filmTitle}
+      film={filmSource.filmVideo}
       onExitButtonClickHandler={this._onExitButtonClickHandler}
     />;
   }
@@ -168,9 +146,7 @@ class App extends PureComponent {
     return <SignIn
       onSubmit={(authData) => {
         login(authData).then(() => {
-          this.setState({
-            isSignIn: false,
-          });
+          history.push(AppRoute.ROOT);
         });
       }}
       isValid={isValidAuthorization}
@@ -210,22 +186,25 @@ class App extends PureComponent {
     }
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-film">
+          <Route exact path={AppRoute.FILM_PAGE}>
             {this._renderFilmPage()}
           </Route>
-          <Route exact path="/dev-auth">
+          <Route exact path={AppRoute.LOGIN}>
             {this._renderSignInPage()}
           </Route>
-          <Route exact path="/dev-review">
+          <Route exact path={AppRoute.FILM_REVIEW}>
             {this._renderAddReviewPage()}
           </Route>
+          <Route exact path={AppRoute.VIDEO_PLAYER}>
+            {this._renderFullVideoPlayer()}
+          </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

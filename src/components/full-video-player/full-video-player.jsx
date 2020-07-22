@@ -1,5 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const FullVideoPlayer = (props) => {
   const {title, onExitButtonClickHandler, progress, duration, isPlaying, formatDurationToTime, playbackToggleVideo, setFullScreen, children} = props;
@@ -7,7 +9,7 @@ const FullVideoPlayer = (props) => {
   return <Fragment>
     <div className="player">
       {children}
-      <button type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</button>
+      <Link to={AppRoute.ROOT} type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
