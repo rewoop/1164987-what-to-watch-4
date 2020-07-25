@@ -107,7 +107,7 @@ Array [
           >
             <a
               className="btn btn--play movie-card__button"
-              href="/player"
+              href="/film/undefined/player"
               onClick={[Function]}
               type="button"
             >
@@ -126,6 +126,7 @@ Array [
             </a>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -192,7 +193,7 @@ Array [
           onMouseLeave={[Function]}
         >
           <a
-            href="/film"
+            href="/film/666"
             onClick={[Function]}
           >
             <div
@@ -215,7 +216,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/film"
+              href="/film/666"
               onClick={[Function]}
             >
               Fantastic Beasts

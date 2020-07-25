@@ -34,6 +34,7 @@ const Settings = {
 
 const films = [
   {
+    id: 666,
     filmTitle: `Fantastic Beasts`,
     filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -81,6 +82,10 @@ it(`Render App`, () => {
             isLoadingFilms={false}
             isValidAuthorization={false}
             postFilmComment={noop}
+            favoriteFilms={films}
+            isDisableReviewForm={false}
+            isLoadingPromoFilm={false}
+            onMyListClickHandler={noop}
           />
         </Provider>, {
           createNodeMock: () => {

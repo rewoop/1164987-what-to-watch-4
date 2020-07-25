@@ -12,6 +12,7 @@ const getGenresList = (films) => {
 
 const films = [
   {
+    id: 666,
     filmTitle: `Fantastic Beasts`,
     filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -35,17 +36,15 @@ it(`Should Main render correctly`, () => {
           <Main
             promoFilm={Settings}
             films={films}
-            onTitleClickHandler={noop}
-            onPosterClickHandler={noop}
             onGenreClickHandler={noop}
             onShowButtonClickHandler={noop}
             isMoreFilms={true}
             activeGenreFilter={`All genres`}
             showedFilmsCount={8}
-            onPlayButtonClickHandler={noop}
             isSignIn={`NO_AUTH`}
             genres={getGenresList(films)}
             isErrorLoadingFilms={false}
+            onMyListClickHandler={noop}
           />
         </Router>, {
           createNodeMock: () => {

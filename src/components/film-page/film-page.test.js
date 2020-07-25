@@ -9,6 +9,7 @@ const noop = () => {};
 
 const films = [
   {
+    id: 666,
     filmTitle: `Fantastic Beasts`,
     filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -22,6 +23,7 @@ const Settings = {
   filmTitle: `The Rock`,
   filmGenre: `Thriller`,
   filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  isFavoriteFilm: true,
   releaseDate: 1996,
   filmRunTime: 356,
   backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -76,11 +78,8 @@ it(`Should FilmPage render correctly`, () => {
             activeTab={`overview`}
             renderActiveTab={renderActiveTab}
             setActiveTab={noop}
-            onPlayButtonClickHandler={noop}
-            onPosterClickHandler={noop}
-            onTitleClickHandler={noop}
-            onAddReviewClickHandler={noop}
             isSignIn={`NO_AUTH`}
+            onMyListClickHandler={noop}
           />
         </Router>, {
           createNodeMock: () => {

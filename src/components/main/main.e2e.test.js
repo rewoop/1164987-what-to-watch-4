@@ -13,6 +13,7 @@ const getGenresList = (films) => {
 
 const filmsInfo = [
   {
+    id: 666,
     filmTitle: `Fantastic Beasts`,
     filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
@@ -21,24 +22,21 @@ const filmsInfo = [
 ];
 
 const Settings = {
+  id: 666,
   filmTitle: `The Rock`,
   filmGenre: `Thriller`,
   filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   releaseDate: 1996,
   backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
   filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
+  isFavoriteFilm: true
 };
 
-const PlayerSettings = {
-  filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  filmTitle: `The Rock`,
-};
-
-const setFilmsList = (films) => {
-  for (let i = 0; films.length < 10; i++) {
-    films.push(films[0]);
+const setFilmsList = () => {
+  for (let i = 0; filmsInfo.length < 10; i++) {
+    filmsInfo.push(filmsInfo[0]);
   }
-  return films;
+  return filmsInfo;
 };
 
 Enzyme.configure({
@@ -46,62 +44,6 @@ Enzyme.configure({
 });
 
 describe(`Should Main work right`, () => {
-  it(`Should film title be clicked`, () => {
-    const onTitleClickHandler = jest.fn();
-
-    const main = mount(
-        <Router history={history}>
-          <Main
-            promoFilm={Settings}
-            films={filmsInfo}
-            onTitleClickHandler={onTitleClickHandler}
-            onPosterClickHandler={noop}
-            onGenreClickHandler={noop}
-            onShowButtonClickHandler={noop}
-            isMoreFilms={true}
-            activeGenreFilter={`All genres`}
-            showedFilmsCount={8}
-            onPlayButtonClickHandler={noop}
-            isSignIn={`NO_AUTH`}
-            genres={getGenresList(filmsInfo)}
-            isErrorLoadingFilms={false}
-          />
-        </Router>
-    );
-
-    const filmTitles = main.find(`.small-movie-card__link`);
-    filmTitles.forEach((filmTitle) => filmTitle.simulate(`click`));
-    expect(onTitleClickHandler).toHaveBeenCalledTimes(filmTitles.length);
-  });
-
-  it(`Should film poster be clicked`, () => {
-    const onPosterClickHandler = jest.fn();
-
-    const main = mount(
-        <Router history={history}>
-          <Main
-            promoFilm={Settings}
-            films={setFilmsList(filmsInfo)}
-            onTitleClickHandler={noop}
-            onPosterClickHandler={onPosterClickHandler}
-            onGenreClickHandler={noop}
-            onShowButtonClickHandler={noop}
-            isMoreFilms={true}
-            activeGenreFilter={`All genres`}
-            showedFilmsCount={8}
-            onPlayButtonClickHandler={noop}
-            isSignIn={`NO_AUTH`}
-            genres={getGenresList(filmsInfo)}
-            isErrorLoadingFilms={false}
-          />
-        </Router>
-    );
-
-    const filmPosters = main.find(`.small-movie-card > a`);
-    filmPosters.forEach((filmPoster) => filmPoster.simulate(`click`));
-    expect(onPosterClickHandler).toHaveBeenCalledTimes(filmPosters.length);
-  });
-
   it(`Should show button be clicked`, () => {
     const onShowButtonClickHandler = jest.fn();
 
@@ -109,18 +51,16 @@ describe(`Should Main work right`, () => {
         <Router history={history}>
           <Main
             promoFilm={Settings}
-            films={filmsInfo}
-            onTitleClickHandler={noop}
-            onPosterClickHandler={noop}
+            films={setFilmsList()}
             onGenreClickHandler={noop}
             isMoreFilms={true}
             activeGenreFilter={`All genres`}
             showedFilmsCount={8}
             onShowButtonClickHandler={onShowButtonClickHandler}
-            onPlayButtonClickHandler={noop}
             isSignIn={`NO_AUTH`}
             genres={getGenresList(filmsInfo)}
             isErrorLoadingFilms={false}
+            onMyListClickHandler={noop}
           />
         </Router>
     );
@@ -130,32 +70,30 @@ describe(`Should Main work right`, () => {
     expect(onShowButtonClickHandler).toHaveBeenCalledTimes(1);
   });
 
-  it(`Should play button be clicked`, () => {
-    const onPlayButtonClickHandler = jest.fn();
+  it(`Should myList button be clicked`, () => {
+    const onMyListClickHandler = jest.fn();
 
     const main = mount(
         <Router history={history}>
           <Main
             promoFilm={Settings}
             films={filmsInfo}
-            onTitleClickHandler={noop}
-            onPosterClickHandler={noop}
             onGenreClickHandler={noop}
             isMoreFilms={true}
             activeGenreFilter={`All genres`}
             showedFilmsCount={8}
             onShowButtonClickHandler={noop}
-            onPlayButtonClickHandler={onPlayButtonClickHandler}
             isSignIn={`NO_AUTH`}
             genres={getGenresList(filmsInfo)}
             isErrorLoadingFilms={false}
+            onMyListClickHandler={onMyListClickHandler}
           />
         </Router>
     );
 
-    const playBtn = main.find(`.btn--play`);
-    playBtn.forEach((btn) => btn.simulate(`click`));
-    expect(onPlayButtonClickHandler).toHaveBeenCalledTimes(3);
-    expect(onPlayButtonClickHandler).toHaveBeenCalledWith(PlayerSettings);
+    const myList = main.find(`.btn--list`);
+    myList.forEach((btn) => btn.simulate(`click`));
+    expect(onMyListClickHandler).toHaveBeenCalledTimes(1);
+    expect(onMyListClickHandler).toHaveBeenCalledWith(Settings.id, !Settings.isFavoriteFilm);
   });
 });

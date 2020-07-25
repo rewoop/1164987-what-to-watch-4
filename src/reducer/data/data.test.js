@@ -57,8 +57,11 @@ it(`Reducer without additional parameters should return initial state`, () => {
     films: [],
     promoFilm: {},
     filmComments: [],
-    isLoading: false,
-    isError: false
+    favoriteFilms: [],
+    isLoadingFilms: false,
+    isLoadingPromoFilm: false,
+    isError: false,
+    isDisableForm: false,
   });
 });
 
@@ -92,6 +95,17 @@ it(`Reducer should update film comments by load filmComments`, () => {
     payload: filmComments,
   })).toEqual({
     filmComments,
+  });
+});
+
+it(`Reducer should update favorite films by load favoriteFilms`, () => {
+  expect(reducer({
+    favoriteFilms: [],
+  }, {
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: films,
+  })).toEqual({
+    favoriteFilms: films,
   });
 });
 
@@ -149,6 +163,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILM_COMMENTS,
           payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /mylist`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteFilmsLoader = Operation.loadFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+
+    return favoriteFilmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_FAVORITE_FILMS,
+          payload: [filmAdapter({fake: true})],
         });
       });
   });

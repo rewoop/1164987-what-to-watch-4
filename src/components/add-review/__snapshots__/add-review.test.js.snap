@@ -78,8 +78,9 @@ exports[`AddReview component render correctly 1`] = `
           </li>
         </ul>
       </nav>
-      <div
-        className="user-block"
+      <a
+        href="/mylist"
+        onClick={[Function]}
       >
         <div
           className="user-block__avatar"
@@ -87,11 +88,11 @@ exports[`AddReview component render correctly 1`] = `
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="/img/avatar.jpg"
             width="63"
           />
         </div>
-      </div>
+      </a>
     </header>
     <div
       className="movie-card__poster movie-card__poster--small"

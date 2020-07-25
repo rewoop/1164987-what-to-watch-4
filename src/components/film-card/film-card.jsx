@@ -5,28 +5,28 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 
 const FilmCard = (props) => {
-  const {film, onTitleClickHandler, onPosterClickHandler, isPlaying, setPlayingFilm} = props;
+  const {film, isPlaying, setPlayingFilm} = props;
+  const {id, filmTitle, filmImage, filmVideo} = film;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => setPlayingFilm(true)}
       onMouseLeave={() => setPlayingFilm(false)}>
-      <Link to={AppRoute.FILM_PAGE} onClick={() => onPosterClickHandler(film)}>
+      <Link to={`${AppRoute.FILM_PAGE}/${id}`}>
         <div className="small-movie-card__image">
           <VideoPlayer
             isPlaying={isPlaying}
-            src={film.filmVideo}
-            poster={film.filmImage}
+            src={filmVideo}
+            poster={filmImage}
             muted
           />
-          <img src={film.filmImage} alt={film.filmTitle} width="280" height="175"/>
+          <img src={filmImage} alt={filmTitle} width="280" height="175"/>
         </div>
       </Link>
       <h3 className="small-movie-card__title">
-        <Link to={AppRoute.FILM_PAGE}
-          onClick={() => onTitleClickHandler(film)}
-          className="small-movie-card__link">{film.filmTitle}
+        <Link to={`${AppRoute.FILM_PAGE}/${id}`}
+          className="small-movie-card__link">{filmTitle}
         </Link>
       </h3>
     </article>
@@ -35,12 +35,11 @@ const FilmCard = (props) => {
 
 FilmCard.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     filmTitle: PropTypes.string.isRequired,
     filmImage: PropTypes.string.isRequired,
     filmVideo: PropTypes.string.isRequired,
   }).isRequired,
-  onTitleClickHandler: PropTypes.func.isRequired,
-  onPosterClickHandler: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   setPlayingFilm: PropTypes.func.isRequired,
 };

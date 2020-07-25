@@ -13,19 +13,17 @@ const Main = (props) => {
     promoFilm,
     films,
     genres,
-    onTitleClickHandler,
-    onPosterClickHandler,
     onGenreClickHandler,
     onShowButtonClickHandler,
     activeGenreFilter,
     isMoreFilms,
     showedFilmsCount,
-    onPlayButtonClickHandler,
     isSignIn,
-    isErrorLoadingFilms
+    isErrorLoadingFilms,
+    onMyListClickHandler
   } = props;
 
-  const {filmTitle, filmVideo, filmGenre, releaseDate, filmPoster, backgroundPoster} = promoFilm;
+  const {id, filmTitle, filmGenre, releaseDate, filmPoster, backgroundPoster, isFavoriteFilm} = promoFilm;
 
   return (
     <React.Fragment>
@@ -50,20 +48,25 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <Link to={AppRoute.VIDEO_PLAYER}
+                <Link to={`${AppRoute.FILM_PAGE}/${id}${AppRoute.VIDEO_PLAYER}`}
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
+                <button className="btn btn--list movie-card__button" type="button"
+                  onClick={() => onMyListClickHandler(id, !isFavoriteFilm)}>
+                  {isFavoriteFilm ?
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"/>
+                    </svg> :
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"/>
+                    </svg>
+                  }
                   <span>My list</span>
                 </button>
               </div>
@@ -84,8 +87,6 @@ const Main = (props) => {
 
           <FilmsList
             films={films.slice(0, showedFilmsCount)}
-            onTitleClickHandler={onTitleClickHandler}
-            onPosterClickHandler={onPosterClickHandler}
           />
 
           {isMoreFilms && (films.length - showedFilmsCount) > 0 ?
@@ -104,12 +105,14 @@ Main.propTypes = {
   promoFilm: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       filmTitle: PropTypes.string.isRequired,
       filmVideo: PropTypes.string.isRequired,
       filmGenre: PropTypes.string.isRequired,
       releaseDate: PropTypes.number.isRequired,
       backgroundPoster: PropTypes.string.isRequired,
       filmPoster: PropTypes.string.isRequired,
+      isFavoriteFilm: PropTypes.bool.isRequired,
     })
   ]).isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
@@ -122,11 +125,9 @@ Main.propTypes = {
   genres: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
-  onTitleClickHandler: PropTypes.func.isRequired,
-  onPosterClickHandler: PropTypes.func.isRequired,
   onGenreClickHandler: PropTypes.func.isRequired,
   onShowButtonClickHandler: PropTypes.func.isRequired,
-  onPlayButtonClickHandler: PropTypes.func.isRequired,
+  onMyListClickHandler: PropTypes.func.isRequired,
   isMoreFilms: PropTypes.bool.isRequired,
   isErrorLoadingFilms: PropTypes.bool.isRequired,
   isSignIn: PropTypes.string.isRequired,
