@@ -80,6 +80,7 @@ it(`Should FilmPage render correctly`, () => {
             setActiveTab={noop}
             isSignIn={`NO_AUTH`}
             onMyListClickHandler={noop}
+            isFavoriteStatus={true}
           />
         </Router>, {
           createNodeMock: () => {

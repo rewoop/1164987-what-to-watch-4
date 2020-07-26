@@ -50,7 +50,7 @@ describe(`Should Main work right`, () => {
     const main = mount(
         <Router history={history}>
           <Main
-            promoFilm={Settings}
+            film={Settings}
             films={setFilmsList()}
             onGenreClickHandler={noop}
             isMoreFilms={true}
@@ -61,6 +61,7 @@ describe(`Should Main work right`, () => {
             genres={getGenresList(filmsInfo)}
             isErrorLoadingFilms={false}
             onMyListClickHandler={noop}
+            isFavoriteStatus={true}
           />
         </Router>
     );
@@ -68,32 +69,5 @@ describe(`Should Main work right`, () => {
     const showBtn = main.find(`.catalog__button`);
     showBtn.simulate(`click`);
     expect(onShowButtonClickHandler).toHaveBeenCalledTimes(1);
-  });
-
-  it(`Should myList button be clicked`, () => {
-    const onMyListClickHandler = jest.fn();
-
-    const main = mount(
-        <Router history={history}>
-          <Main
-            promoFilm={Settings}
-            films={filmsInfo}
-            onGenreClickHandler={noop}
-            isMoreFilms={true}
-            activeGenreFilter={`All genres`}
-            showedFilmsCount={8}
-            onShowButtonClickHandler={noop}
-            isSignIn={`NO_AUTH`}
-            genres={getGenresList(filmsInfo)}
-            isErrorLoadingFilms={false}
-            onMyListClickHandler={onMyListClickHandler}
-          />
-        </Router>
-    );
-
-    const myList = main.find(`.btn--list`);
-    myList.forEach((btn) => btn.simulate(`click`));
-    expect(onMyListClickHandler).toHaveBeenCalledTimes(1);
-    expect(onMyListClickHandler).toHaveBeenCalledWith(Settings.id, !Settings.isFavoriteFilm);
   });
 });

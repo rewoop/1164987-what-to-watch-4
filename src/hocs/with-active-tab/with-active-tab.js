@@ -108,17 +108,14 @@ const withActiveTab = (Component) => {
         }).isRequired
     ).isRequired,
     getCommentByFilmId: PropTypes.func.isRequired,
-    comments: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.arrayOf(
-          PropTypes.shape({
-            filmGenre: PropTypes.string,
-            filmImage: PropTypes.string,
-            filmVideo: PropTypes.string,
-            filmTitle: PropTypes.string,
-          })
-      )
-    ]).isRequired,
+    comments: PropTypes.arrayOf(
+        PropTypes.shape({
+          filmGenre: PropTypes.string,
+          filmImage: PropTypes.string,
+          filmVideo: PropTypes.string,
+          filmTitle: PropTypes.string,
+        }).isRequired
+    ).isRequired,
   };
 
   return WithActiveTab;

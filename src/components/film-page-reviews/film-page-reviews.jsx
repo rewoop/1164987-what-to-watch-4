@@ -45,22 +45,20 @@ const FilmPageReviews = (props) => {
 };
 
 FilmPageReviews.propTypes = {
-  reviews: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          user: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-          }),
-          comment: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-          rating: PropTypes.number.isRequired,
-        }
-        ).isRequired
-    ).isRequired
-  ]).isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        user: PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        }),
+        comment: PropTypes.string,
+        date: PropTypes.string,
+        rating: PropTypes.number,
+      }
+      )
+  ).isRequired
+
 };
 
 export default FilmPageReviews;

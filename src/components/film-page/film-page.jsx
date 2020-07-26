@@ -17,10 +17,11 @@ const FilmPage = (props) => {
     setActiveTab,
     renderActiveTab,
     isSignIn,
-    onMyListClickHandler
+    onMyListClickHandler,
+    isFavoriteStatus
   } = props;
 
-  const {id, filmTitle, filmGenre, releaseDate, backgroundPoster, filmPoster, isFavoriteFilm} = film;
+  const {id, filmTitle, filmGenre, releaseDate, backgroundPoster, filmPoster} = film;
 
   const filteredFilms = sortedFilms.filter((currentFilm) => currentFilm.id !== id);
 
@@ -54,8 +55,8 @@ const FilmPage = (props) => {
                 </Link>
 
                 <button className="btn btn--list movie-card__button" type="button"
-                  onClick={() => onMyListClickHandler(id, !isFavoriteFilm)}>
-                  {isFavoriteFilm ?
+                  onClick={onMyListClickHandler}>
+                  {isFavoriteStatus ?
                     <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#in-list"/>
                     </svg> :
@@ -128,8 +129,8 @@ FilmPage.propTypes = {
     releaseDate: PropTypes.number.isRequired,
     backgroundPoster: PropTypes.string.isRequired,
     filmPoster: PropTypes.string.isRequired,
-    isFavoriteFilm: PropTypes.bool.isRequired,
   }),
+  isFavoriteStatus: PropTypes.bool.isRequired,
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,

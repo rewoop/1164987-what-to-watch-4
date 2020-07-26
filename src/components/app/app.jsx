@@ -3,7 +3,7 @@ import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list.js";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors.js";
-import {getGenres, getPromoFilm, getLoadingFilmsStatus, getLoadingPromoFilmStatus, getFavoriteFilms, getDisableFormStatus, getFilmComments, getErrorLoadingDataStatus} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getLoadingFilmsStatus, getLoadingPromoFilmStatus, getDisableFormStatus, getFilmComments, getErrorLoadingDataStatus} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus, getErrorAuthorizationStatus} from "../../reducer/user/selectors.js";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
@@ -23,8 +23,10 @@ import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 import MyList from "../my-list/my-list.jsx";
+import withFavoriteFilm from "../../hocs/with-favorite-film/with-favorite-film.js";
 
-const FilmPageWrapped = withActiveTab(FilmPage);
+const MainWrapped = withFavoriteFilm(Main);
+const FilmPageWrapped = withFavoriteFilm(withActiveTab(FilmPage));
 const FullVideoPlayerWrapped = withFullVideo(FullVideoPlayer);
 const AddReviewWrapped = withReview(AddReview);
 
@@ -33,7 +35,6 @@ const App = (props) => {
     isLoadingFilms,
     isLoadingPromoFilm,
     films,
-    favoriteFilms,
     login,
     isValidAuthorization,
     filmComments,
@@ -62,8 +63,8 @@ const App = (props) => {
       <Switch>
         <Route exact path={AppRoute.ROOT}
           render={() => {
-            return <Main
-              promoFilm={promoFilm}
+            return <MainWrapped
+              film={promoFilm}
               genres={genresList}
               films={activeGenreFilter === ALL_GENRES ? films : filmsByGenre}
               onGenreClickHandler={onGenreClickHandler}
@@ -82,7 +83,7 @@ const App = (props) => {
             return <SignIn
               onSubmit={(authData) => {
                 login(authData).then(() => {
-                  history.push(AppRoute.ROOT);
+                  history.goBack();
                 });
               }}
               isValid={isValidAuthorization}
@@ -132,14 +133,7 @@ const App = (props) => {
             />;
           }}>
         </PrivateRoute>
-        <PrivateRoute exact path={AppRoute.MY_LIST}
-          render={() => {
-            return <MyList
-              films={favoriteFilms}
-              isSignIn={authorizationStatus}
-            />;
-          }}>
-        </PrivateRoute>
+        <PrivateRoute exact path={AppRoute.MY_LIST} render={() => <MyList/>}> </PrivateRoute>
       </Switch>
     </Router>
   );
@@ -166,44 +160,21 @@ App.propTypes = {
       runTime: PropTypes.string.isRequired,
     })
   ]).isRequired,
-  favoriteFilms: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.shape({
-      filmTitle: PropTypes.string.isRequired,
-      filmVideo: PropTypes.string.isRequired,
-      filmGenre: PropTypes.string.isRequired,
-      releaseDate: PropTypes.number.isRequired,
-      backgroundPoster: PropTypes.string.isRequired,
-      filmPoster: PropTypes.string.isRequired,
-      ratingScore: PropTypes.number.isRequired,
-      ratingLevel: PropTypes.number.isRequired,
-      ratingCount: PropTypes.string.isRequired,
-      filmDescription: PropTypes.string.isRequired,
-      filmDirector: PropTypes.string.isRequired,
-      filmStarring: PropTypes.arrayOf(
-          PropTypes.string.isRequired
-      ).isRequired,
-      runTime: PropTypes.string.isRequired,
-    })
-  ]).isRequired,
-  filmComments: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.arrayOf(
-        PropTypes.shape({
-          filmGenre: PropTypes.string,
-          filmImage: PropTypes.string,
-          filmVideo: PropTypes.string,
-          filmTitle: PropTypes.string,
-        })
-    )
-  ]).isRequired,
+  filmComments: PropTypes.arrayOf(
+      PropTypes.shape({
+        filmGenre: PropTypes.string,
+        filmImage: PropTypes.string,
+        filmVideo: PropTypes.string,
+        filmTitle: PropTypes.string,
+      }).isRequired
+  ).isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
-        filmGenre: PropTypes.string.isRequired,
-        filmImage: PropTypes.string.isRequired,
-        filmVideo: PropTypes.string.isRequired,
-        filmTitle: PropTypes.string.isRequired,
+        filmGenre: PropTypes.string,
+        filmImage: PropTypes.string,
+        filmVideo: PropTypes.string,
+        filmTitle: PropTypes.string,
       }).isRequired
   ).isRequired,
   filmsByGenre: PropTypes.arrayOf(
@@ -239,7 +210,6 @@ const mapStateToProps = (state) => {
     filmComments: getFilmComments(state),
     activeGenreFilter: state.LIST.genre,
     films: state.DATA.films,
-    favoriteFilms: getFavoriteFilms(state),
     filmsByGenre: getFilmsByGenre(state),
     genresList: getGenres(state),
     runTime: formatRunTimeDate(getPromoFilm(state).filmRunTime),

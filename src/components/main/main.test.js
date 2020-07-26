@@ -34,7 +34,7 @@ it(`Should Main render correctly`, () => {
     .create(
         <Router history={history}>
           <Main
-            promoFilm={Settings}
+            film={Settings}
             films={films}
             onGenreClickHandler={noop}
             onShowButtonClickHandler={noop}
@@ -45,6 +45,7 @@ it(`Should Main render correctly`, () => {
             genres={getGenresList(films)}
             isErrorLoadingFilms={false}
             onMyListClickHandler={noop}
+            isFavoriteStatus={true}
           />
         </Router>, {
           createNodeMock: () => {

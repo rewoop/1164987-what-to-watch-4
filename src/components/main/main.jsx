@@ -10,7 +10,7 @@ import {AppRoute} from "../../const.js";
 
 const Main = (props) => {
   const {
-    promoFilm,
+    film,
     films,
     genres,
     onGenreClickHandler,
@@ -20,10 +20,11 @@ const Main = (props) => {
     showedFilmsCount,
     isSignIn,
     isErrorLoadingFilms,
-    onMyListClickHandler
+    onMyListClickHandler,
+    isFavoriteStatus
   } = props;
 
-  const {id, filmTitle, filmGenre, releaseDate, filmPoster, backgroundPoster, isFavoriteFilm} = promoFilm;
+  const {id, filmTitle, filmGenre, releaseDate, filmPoster, backgroundPoster} = film;
 
   return (
     <React.Fragment>
@@ -58,8 +59,8 @@ const Main = (props) => {
                   <span>Play</span>
                 </Link>
                 <button className="btn btn--list movie-card__button" type="button"
-                  onClick={() => onMyListClickHandler(id, !isFavoriteFilm)}>
-                  {isFavoriteFilm ?
+                  onClick={onMyListClickHandler}>
+                  {isFavoriteStatus ?
                     <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#in-list"/>
                     </svg> :
@@ -102,7 +103,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoFilm: PropTypes.oneOfType([
+  film: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -112,9 +113,9 @@ Main.propTypes = {
       releaseDate: PropTypes.number.isRequired,
       backgroundPoster: PropTypes.string.isRequired,
       filmPoster: PropTypes.string.isRequired,
-      isFavoriteFilm: PropTypes.bool.isRequired,
     })
   ]).isRequired,
+  isFavoriteStatus: PropTypes.bool.isRequired,
   activeGenreFilter: PropTypes.string.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({

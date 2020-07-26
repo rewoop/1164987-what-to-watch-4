@@ -14,6 +14,7 @@ const Settings = {
   filmGenre: `Thriller`,
   filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   releaseDate: 1996,
+  isFavoriteFilm: true,
   filmRunTime: 356,
   backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
   filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
@@ -30,6 +31,7 @@ const Settings = {
     `Willem Dafoe`,
     `Tom Cruz`
   ],
+  isFavoriteStatus: true,
 };
 
 const films = [
