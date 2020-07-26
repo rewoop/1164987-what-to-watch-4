@@ -2,14 +2,15 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 const FullVideoPlayer = (props) => {
-  const {title, onExitButtonClickHandler, progress, duration, isPlaying, formatDurationToTime, playbackToggleVideo, setFullScreen, children} = props;
+  const {title, progress, duration, isPlaying, formatDurationToTime, playbackToggleVideo, setFullScreen, children} = props;
 
   return <Fragment>
     <div className="player">
       {children}
-      <Link to={AppRoute.ROOT} type="button" className="player__exit" onClick={onExitButtonClickHandler}>Exit</Link>
+      <Link to={AppRoute.ROOT} onClick={() => history.goBack()} type="button" className="player__exit">Exit</Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -58,7 +59,6 @@ const FullVideoPlayer = (props) => {
 
 FullVideoPlayer.propTypes = {
   title: PropTypes.string.isRequired,
-  onExitButtonClickHandler: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,

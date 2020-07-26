@@ -32,6 +32,6 @@ export const AppRoute = {
   FILM_PAGE: `/film`,
   FILM_REVIEW: `/review`,
   VIDEO_PLAYER: `/player`,
-  // MY_LIST: `/mylist`,
+  MY_LIST: `/mylist`,
   ROOT: `/`,
 };

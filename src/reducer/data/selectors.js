@@ -9,12 +9,24 @@ export const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
 };
 
-export const getLoadingDataStatus = (state) => {
-  return state[NameSpace.DATA].isLoading;
+export const getFavoriteFilms = (state) => {
+  return state[NameSpace.DATA].favoriteFilms;
+};
+
+export const getLoadingFilmsStatus = (state) => {
+  return state[NameSpace.DATA].isLoadingFilms;
+};
+
+export const getLoadingPromoFilmStatus = (state) => {
+  return state[NameSpace.DATA].isLoadingPromoFilm;
 };
 
 export const getErrorLoadingDataStatus = (state) => {
   return state[NameSpace.DATA].isError;
+};
+
+export const getDisableFormStatus = (state) => {
+  return state[NameSpace.DATA].isDisableForm;
 };
 
 export const getFilms = (state) => {

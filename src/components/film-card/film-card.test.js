@@ -5,6 +5,7 @@ import {Router} from "react-router-dom";
 import history from "../../history.js";
 
 const filmInfo = {
+  id: 666,
   filmTitle: `Fantastic Beasts`,
   filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,

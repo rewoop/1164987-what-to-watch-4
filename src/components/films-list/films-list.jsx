@@ -6,7 +6,7 @@ import withVideo from "../../hocs/with-video/with-video";
 const FilmCardWrapped = withVideo(FilmCard);
 
 const FilmsList = (props) => {
-  const {films, onTitleClickHandler, onPosterClickHandler} = props;
+  const {films} = props;
 
   return (
     <div className="catalog__movies-list">
@@ -14,8 +14,6 @@ const FilmsList = (props) => {
         return <FilmCardWrapped
           key={`${i} - ${film.filmTitle}`}
           film={film}
-          onTitleClickHandler={onTitleClickHandler}
-          onPosterClickHandler={onPosterClickHandler}
         />;
       })}
     </div>
@@ -29,8 +27,6 @@ FilmsList.propTypes = {
         filmImage: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onTitleClickHandler: PropTypes.func.isRequired,
-  onPosterClickHandler: PropTypes.func.isRequired
 };
 
 export default FilmsList;

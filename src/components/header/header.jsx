@@ -22,9 +22,11 @@ const Header = (props) => {
 
         <div className="user-block">
           {isSignIn === AuthorizationStatus.AUTH ?
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
+            <Link to={AppRoute.MY_LIST}>
+              <div className="user-block__avatar">
+                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              </div>
+            </Link>
             :
             <Link to={AppRoute.LOGIN} style={{cursor: `pointer`, textDecoration: `none`, color: `inherit`}}>Sign In</Link>
           }

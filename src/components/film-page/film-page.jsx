@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmCard from "../film-card/film-card.jsx";
 import withVideo from "../../hocs/with-video/with-video";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {Link} from "react-router-dom";
@@ -14,16 +13,15 @@ const FilmCardWrapped = withVideo(FilmCard);
 const FilmPage = (props) => {
   const {film,
     sortedFilms,
-    onPlayButtonClickHandler,
     activeTab,
     setActiveTab,
     renderActiveTab,
-    onTitleClickHandler,
-    onPosterClickHandler,
-    onAddReviewClickHandler,
-    isSignIn} = props;
+    isSignIn,
+    onMyListClickHandler,
+    isFavoriteStatus
+  } = props;
 
-  const {id, filmTitle, filmGenre, releaseDate, filmVideo, backgroundPoster, filmPoster} = film;
+  const {id, filmTitle, filmGenre, releaseDate, backgroundPoster, filmPoster} = film;
 
   const filteredFilms = sortedFilms.filter((currentFilm) => currentFilm.id !== id);
 
@@ -46,10 +44,9 @@ const FilmPage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <Link to={AppRoute.VIDEO_PLAYER}
+                <Link to={`${AppRoute.FILM_PAGE}/${id}${AppRoute.VIDEO_PLAYER}`}
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={() => onPlayButtonClickHandler({filmTitle, filmVideo})}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
@@ -57,20 +54,23 @@ const FilmPage = (props) => {
                   <span>Play</span>
                 </Link>
 
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
+                <button className="btn btn--list movie-card__button" type="button"
+                  onClick={onMyListClickHandler}>
+                  {isFavoriteStatus ?
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"/>
+                    </svg> :
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"/>
+                    </svg>
+                  }
                   <span>My list</span>
                 </button>
 
-                {isSignIn === AuthorizationStatus.AUTH ?
-                  <Link to={AppRoute.FILM_REVIEW}
-                    className="btn movie-card__button"
-                    onClick={onAddReviewClickHandler}>
+                <Link to={`${AppRoute.FILM_PAGE}/${id}${AppRoute.FILM_REVIEW}`}
+                  className="btn movie-card__button">
                     Add review
-                  </Link>
-                  : ``}
+                </Link>
 
               </div>
             </div>
@@ -107,8 +107,6 @@ const FilmPage = (props) => {
                 return <FilmCardWrapped
                   key={currentFilm.filmTitle}
                   film={currentFilm}
-                  onTitleClickHandler={onTitleClickHandler}
-                  onPosterClickHandler={onPosterClickHandler}
                 />;
               })}
             </div>
@@ -132,9 +130,11 @@ FilmPage.propTypes = {
     backgroundPoster: PropTypes.string.isRequired,
     filmPoster: PropTypes.string.isRequired,
   }),
+  isFavoriteStatus: PropTypes.bool.isRequired,
   activeTab: PropTypes.string.isRequired,
   setActiveTab: PropTypes.func.isRequired,
   renderActiveTab: PropTypes.func.isRequired,
+  onMyListClickHandler: PropTypes.func.isRequired,
   sortedFilms: PropTypes.arrayOf(
       PropTypes.shape({
         filmTitle: PropTypes.string.isRequired,
@@ -142,10 +142,6 @@ FilmPage.propTypes = {
         filmGenre: PropTypes.string.isRequired,
       }).isRequired
   ).isRequired,
-  onPlayButtonClickHandler: PropTypes.func.isRequired,
-  onTitleClickHandler: PropTypes.func.isRequired,
-  onPosterClickHandler: PropTypes.func.isRequired,
-  onAddReviewClickHandler: PropTypes.func.isRequired,
   isSignIn: PropTypes.string.isRequired,
 };
 

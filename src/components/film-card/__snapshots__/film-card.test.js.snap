@@ -7,7 +7,7 @@ exports[`Should FilmCard render correctly 1`] = `
   onMouseLeave={[Function]}
 >
   <a
-    href="/film"
+    href="/film/666"
     onClick={[Function]}
   >
     <div
@@ -30,7 +30,7 @@ exports[`Should FilmCard render correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/film"
+      href="/film/666"
       onClick={[Function]}
     >
       Fantastic Beasts
