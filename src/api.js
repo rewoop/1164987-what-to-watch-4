@@ -27,6 +27,14 @@ export const createAPI = (onUnauthorized) => {
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
 
+      MySwal.fire({
+        icon: `warning`,
+        title: `Authorize please`,
+        position: `top`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       throw err;
     }
 

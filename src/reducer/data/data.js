@@ -1,5 +1,5 @@
 import {extend} from "../../utils.js";
-import filmAdapter from "../../components/adapters/film-adapter.js";
+import filmAdapter from "../../components/adapters/film-adapter.tsx";
 
 const initialState = {
   films: [],

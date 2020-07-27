@@ -1,3 +1,5 @@
+import {extend} from "../../utils.js";
+
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -5,12 +7,14 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isValidAuthorization: true
+  isValidAuthorization: true,
+  isError: false,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  IS_ERROR_AUTHORIZATION: `IS_ERROR_AUTHORIZATION`,
+  IS_INVALID_AUTHORIZATION: `IS_INVALID_AUTHORIZATION`,
+  IS_ERROR_AUTHORIZATION: `IS_ERROR_DATA`,
 };
 
 const ActionCreator = {
@@ -22,8 +26,14 @@ const ActionCreator = {
   },
   requireValidAuthorization: (isValid) => {
     return {
-      type: ActionType.IS_ERROR_AUTHORIZATION,
+      type: ActionType.IS_INVALID_AUTHORIZATION,
       payload: isValid,
+    };
+  },
+  errorAuthorization: (isError) => {
+    return {
+      type: ActionType.IS_ERROR_AUTHORIZATION,
+      payload: isError
     };
   }
 };
@@ -34,23 +44,28 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
-    case ActionType.IS_ERROR_AUTHORIZATION:
+    case ActionType.IS_INVALID_AUTHORIZATION:
       return Object.assign({}, state, {
         isValidAuthorization: action.payload,
       });
+    case ActionType.IS_ERROR_AUTHORIZATION:
+      return extend(state, {
+        isError: action.payload,
+      });
   }
-
   return state;
 };
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.errorAuthorization(false));
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.errorAuthorization(false));
       })
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        dispatch(ActionCreator.errorAuthorization(true));
       });
   },
 
