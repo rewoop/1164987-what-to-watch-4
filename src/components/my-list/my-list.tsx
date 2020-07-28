@@ -7,26 +7,11 @@ import withVideo from "../../hocs/with-video/with-video";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {getFavoriteFilms} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
+import {Films} from "../../types";
 
 interface Props {
-  films: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  loadFavoriteFilms: () => void,
+  films: Films;
+  loadFavoriteFilms: () => void;
 }
 
 const FilmCardWrapped = withVideo(FilmCard);

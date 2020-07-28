@@ -23,92 +23,29 @@ import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import MyList from "../my-list/my-list";
 import withFavoriteFilm from "../../hocs/with-favorite-film/with-favorite-film";
+import {Film, Films, FilmComments} from "../../types";
 
 interface Props {
-  promoFilm: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  },
-  filmComments: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  films: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  filmsByGenre: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  activeGenreFilter: string,
-  genresList: string[],
-  onGenreClickHandler: () => void,
-  onShowButtonClickHandler: () => void,
-  isMoreFilms: boolean,
-  showedFilmsCount: number,
-  authorizationStatus: string,
-  isValidAuthorization: boolean,
-  isLoadingFilms: boolean,
-  isLoadingPromoFilm: boolean,
-  isErrorLoadingFilms: boolean,
-  isDisableReviewForm: boolean,
-  login: (authData: any) => Promise<Props>,
-  postFilmComment: (activeFilmId: any, reviewData: any) => Promise<Props>,
-  onMyListClickHandler: (id: number, b: boolean) => void,
-  getCommentByFilmId: () => void,
+  promoFilm: Film;
+  filmComments: FilmComments;
+  films: Films;
+  filmsByGenre: Films;
+  activeGenreFilter: string;
+  genresList: string[];
+  onGenreClickHandler: () => void;
+  onShowButtonClickHandler: () => void;
+  isMoreFilms: boolean;
+  showedFilmsCount: number;
+  authorizationStatus: string;
+  isValidAuthorization: boolean;
+  isLoadingFilms: boolean;
+  isLoadingPromoFilm: boolean;
+  isErrorLoadingFilms: boolean;
+  isDisableReviewForm: boolean;
+  login: (authData: object) => Promise<object>;
+  postFilmComment: (activeFilmId: number, reviewData: object) => Promise<object>;
+  onMyListClickHandler: (id: number, b: boolean) => void;
+  getCommentByFilmId: () => void;
 }
 
 const MainWrapped = withFavoriteFilm(Main);

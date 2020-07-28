@@ -1,11 +1,11 @@
 import * as React from "react";
 
 interface Props {
-  genre: string,
-  releaseDate: number,
-  filmDirector: string,
-  filmStarring: string[],
-  runTime: string,
+  genre: string;
+  releaseDate: number;
+  filmDirector: string;
+  filmStarring: string[];
+  runTime: string;
 }
 
 const FilmPageDetails: React.FunctionComponent<Props> = (props: Props) => {

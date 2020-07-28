@@ -6,10 +6,10 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 
 interface Props {
-  authorizationStatus: string,
-  exact: boolean,
-  path: string,
-  render: (routeProps: RouteComponentProps<any>) => null,
+  authorizationStatus: string;
+  exact: boolean;
+  path: string;
+  render: (routeProps: RouteComponentProps<number> | null) => null;
 }
 
 const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {

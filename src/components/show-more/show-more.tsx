@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  onShowButtonClickHandler: () => void,
+  onShowButtonClickHandler: () => void;
 }
 
 const ShowMore: React.FunctionComponent<Props> = (props: Props) => {

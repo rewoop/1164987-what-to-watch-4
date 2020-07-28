@@ -1,25 +1,10 @@
 import * as React from "react";
 import FilmCard from "../film-card/film-card";
 import withVideo from "../../hocs/with-video/with-video";
+import {Films} from "../../types";
 
 interface Props {
-  films: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[]
+  films: Films;
 }
 
 const FilmCardWrapped = withVideo(FilmCard);

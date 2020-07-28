@@ -1,6 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import FullVideoPlayer from "./full-video-player.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import FullVideoPlayer from "./full-video-player";
+import {noop} from "../../utils";
 
 jest.mock(`react-router-dom`);
 
@@ -19,10 +20,10 @@ it(`Render FullVideoPlayer`, () => {
           progress={Settings.PROGRESS}
           duration={Settings.DURATION}
           isPlaying={Settings.IS_PLAYING}
-          formatDurationToTime={() => {}}
-          playbackToggleVideo={() => {}}
-          setFullScreen={() => {}}
-          onExitButtonClickHandler={() => {}}>
+          formatDurationToTime={noop}
+          playbackToggleVideo={noop}
+          setFullScreen={noop}
+        >
           <video/>
         </FullVideoPlayer>).toJSON();
 

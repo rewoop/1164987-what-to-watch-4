@@ -2,22 +2,22 @@ import * as React from "react";
 import {Subtract} from "utility-types";
 
 interface Props {
-  film: string,
+  film: string;
 }
 
 interface State {
-  isPlaying: boolean,
-  progress: number,
-  duration: number,
+  isPlaying: boolean;
+  progress: number;
+  duration: number;
 }
 
 interface InjectedProps {
-  progress: number,
-  duration: number,
-  isPlaying: boolean,
-  formatDurationToTime: () => void,
-  playbackToggleVideo: () => void,
-  setFullScreen: () => void,
+  progress: number;
+  duration: number;
+  isPlaying: boolean;
+  formatDurationToTime: () => void;
+  playbackToggleVideo: () => void;
+  setFullScreen: () => void;
 }
 
 const withFullVideo = (Component) => {
@@ -49,12 +49,9 @@ const withFullVideo = (Component) => {
 
     _formatDurationToTime(duration) {
       const time = parseInt(duration, 10);
-      let hours: any;
-      let minutes: any;
-      let seconds: any;
-      hours = Math.floor(time / 3600).toString().padStart(2, `0`);
-      minutes = Math.floor((time - (hours * 3600)) / 60).toString().padStart(2, `0`);
-      seconds = time - (hours * 3600) - +(minutes * 60).toString().padStart(2, `0`);
+      const hours: number = Math.floor(time / 3600);
+      const minutes: number = Math.floor((time - (hours * 3600)) / 60);
+      const seconds: number = time - (hours * 3600) - +(minutes * 60);
 
       return `${hours}:${minutes}:${seconds}`;
     }

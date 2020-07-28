@@ -40,3 +40,7 @@ export const formatRunTimeDate = (runtime) => {
 
   return `${hours}h ${minutes}m`;
 };
+
+export const noop = () => {
+  // do nothing
+};

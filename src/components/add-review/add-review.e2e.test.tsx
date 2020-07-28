@@ -1,28 +1,23 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import AddReview from "./add-review.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import AddReview from "./add-review";
+import {noop} from "../../utils";
+import {Film, PostReview} from "../../types";
+import {TestFilm} from "../../test-data";
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
-
-const noop = () => {};
+configure({adapter: new Adapter()});
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noop,
 };
 
-const Settings = {
+const Settings: PostReview = {
   rating: 5,
   comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
 };
 
-const film = {
-  filmTitle: `The Rock`,
-  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
-  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
-};
+const film: Film = TestFilm;
 
 it(`Should form be submited`, () => {
   const onSubmitHandler = jest.fn();

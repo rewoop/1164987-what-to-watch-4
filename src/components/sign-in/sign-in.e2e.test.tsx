@@ -1,13 +1,11 @@
-import React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import SignIn from "./sign-in.jsx";
+import * as React from "react";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import SignIn from "./sign-in";
 
 jest.mock(`react-router-dom`);
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+configure({adapter: new Adapter()});
 
 const Settings = {
   login: `vasya.petrov@yandex.ru`,

@@ -1,26 +1,18 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import GenresList from "./genres-list.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import GenresList from "./genres-list";
+import {Films} from "../../types";
+import {TestFilms} from "../../test-data";
 
-const films = [
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  }
-];
+const films: Films = TestFilms;
 
 const Settings = {
   activeFilter: `Action`,
-  genres: [`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))
+  genres: [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))))
 };
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+configure({adapter: new Adapter()});
 
 it(`Should genre be clicked`, () => {
   const onGenreClickHandler = jest.fn();
@@ -37,5 +29,5 @@ it(`Should genre be clicked`, () => {
   listItems.forEach((listItem) => listItem.simulate(`click`));
   expect(onGenreClickHandler).toHaveBeenCalledTimes(listItems.length);
   expect(onGenreClickHandler.mock.calls[0][0]).toBe(`All genres`);
-  expect(onGenreClickHandler.mock.calls[1][0]).toBe(`Comedy`);
+  expect(onGenreClickHandler.mock.calls[1][0]).toBe(`Thriller`);
 });

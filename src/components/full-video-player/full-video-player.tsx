@@ -4,14 +4,14 @@ import {AppRoute} from "../../const";
 import history from "../../history";
 
 interface Props {
-  title: string,
-  progress: number,
-  duration: number,
-  isPlaying: boolean,
-  formatDurationToTime: (duration: number) => void,
-  playbackToggleVideo: () => void,
-  setFullScreen: () => void,
-  children: any,
+  title: string;
+  progress: number;
+  duration: number;
+  isPlaying: boolean;
+  formatDurationToTime: (duration: number) => string;
+  playbackToggleVideo: () => void;
+  setFullScreen: () => void;
+  children: React.ReactNode;
 }
 
 const FullVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
@@ -28,7 +28,7 @@ const FullVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
             <progress className="player__progress" value={progress} max={duration}/>
             <div className="player__toggler" style={{left: ((progress * 100) / duration) + `%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{() => formatDurationToTime(duration)}</div>
+          <div className="player__time-value">{formatDurationToTime(duration)}</div>
         </div>
 
         <div className="player__controls-row">

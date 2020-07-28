@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import VideoPlayer from "./video-player.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import VideoPlayer from "./video-player";
 
 const mock = {
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,

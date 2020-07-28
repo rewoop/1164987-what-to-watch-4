@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 
 interface Props {
-  onSubmit: ({}) => void,
-  isValid: boolean,
+  onSubmit: ({}) => void;
+  isValid: boolean;
 }
 
 class SignIn extends React.PureComponent<Props> {

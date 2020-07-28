@@ -1,20 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import GenresList from "./genres-list.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import GenresList from "./genres-list";
+import {noop} from "../../utils";
+import {Films} from "../../types";
+import {TestFilms} from "../../test-data";
 
-const films = [
-  {
-    title: `Fantastic Beasts`,
-    image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    link: `movie-page.html`,
-    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    genre: `Comedy`
-  }
-];
+const films: Films = TestFilms;
 
 const Settings = {
   activeFilter: `Action`,
-  genres: [`All genres`].concat(Array.from(new Set(films.map((film) => film.genre))))
+  genres: [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))))
 };
 
 it(`Should GenresList render correctly`, () => {
@@ -22,7 +17,7 @@ it(`Should GenresList render correctly`, () => {
     .create(<GenresList
       activeGenreFilter={Settings.activeFilter}
       genres={Settings.genres}
-      onGenreClickHandler={() => {}}
+      onGenreClickHandler={noop}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

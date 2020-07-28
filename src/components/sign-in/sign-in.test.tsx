@@ -1,10 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import SignIn from "./sign-in.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import SignIn from "./sign-in";
 import {Router} from "react-router-dom";
-import history from "../../history.js";
-
-const noop = () => {};
+import history from "../../history";
+import {noop} from "../../utils";
 
 it(`SignIn component render correctly`, () => {
   const tree = renderer.create(

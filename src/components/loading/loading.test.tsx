@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Loading from "./loading.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Loading from "./loading";
 
 it(`Should Loading render correctly`, () => {
   const tree = renderer

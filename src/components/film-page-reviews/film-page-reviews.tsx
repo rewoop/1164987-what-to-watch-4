@@ -5,15 +5,15 @@ import Loader from 'react-loader-spinner';
 
 interface Props {
   reviews: {
-    id: number,
+    id: number;
     user: {
-      id: number,
-      name: string,
-    },
-    comment: string,
-    date: string,
-    rating: number,
-  }[]
+      id: number;
+      name: string;
+    };
+    comment: string;
+    date: string;
+    rating: number;
+  }[];
 }
 
 const FilmPageReviews: React.FunctionComponent<Props> = (props: Props) => {

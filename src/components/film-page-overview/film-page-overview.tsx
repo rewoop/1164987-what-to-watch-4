@@ -2,12 +2,12 @@ import * as React from "react";
 import {formatRatingScoreToLevel} from "../../utils";
 
 interface Props {
-  ratingScore: number,
-  ratingLevel: number,
-  ratingCount: string,
-  filmDescription: string,
-  filmDirector: string,
-  filmStarring: string[],
+  ratingScore: number;
+  ratingLevel: number;
+  ratingCount: string;
+  filmDescription: string;
+  filmDirector: string;
+  filmStarring: string[];
 }
 
 const MAX_FILM_STARRING = 4;

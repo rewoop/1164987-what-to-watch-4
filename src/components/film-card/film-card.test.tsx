@@ -1,8 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import FilmCard from "./film-card.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import FilmCard from "./film-card";
 import {Router} from "react-router-dom";
-import history from "../../history.js";
+import history from "../../history";
+import {noop} from "../../utils";
 
 const filmInfo = {
   id: 666,
@@ -17,10 +18,8 @@ it(`Should FilmCard render correctly`, () => {
         <Router history={history}>
           <FilmCard
             film={filmInfo}
-            onTitleClickHandler={() => {}}
-            onPosterClickHandler={() => {}}
             isPlaying={false}
-            setPlayingFilm={() => {}}
+            setPlayingFilm={noop}
           />
         </Router>
         , {

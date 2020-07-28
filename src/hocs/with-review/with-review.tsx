@@ -1,26 +1,23 @@
 import * as React from "react";
 import {Subtract} from "utility-types";
+import {Film} from "../../types";
 
 interface Props {
-  film: {
-    filmTitle: string,
-    backgroundPoster: string,
-    filmPoster: string,
-  },
-  onSubmit: ({}) => void,
-  isDisable: boolean,
+  film: Film;
+  onSubmit: ({}) => void;
+  isDisable: boolean;
 }
 
 interface State {
-  rating: number,
-  comment: string,
+  rating: number;
+  comment: string;
 }
 
 interface InjectedProps {
-  rating: number,
-  comment: string,
-  onSubmitHandler: (evt: React.FormEvent<HTMLFormElement>) => void,
-  onChangeHandler: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void,
+  rating: number;
+  comment: string;
+  onSubmitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
+  onChangeHandler: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const withReview = (Component) => {
@@ -45,7 +42,7 @@ const withReview = (Component) => {
       const value = target.name === `rating` ? parseInt(target.value, 10) : target.value;
       const name = target.name === `rating` ? `rating` : `comment`;
 
-      const newState = { [name]: value } as Pick<State, keyof State>;
+      const newState = {[name]: value} as Pick<State, keyof State>;
       this.setState(newState);
     }
 

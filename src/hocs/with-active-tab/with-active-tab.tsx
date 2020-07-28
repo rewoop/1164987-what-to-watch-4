@@ -5,48 +5,13 @@ import FilmPageOverview from "../../components/film-page-overview/film-page-over
 import FilmPageDetails from "../../components/film-page-details/film-page-details";
 import FilmPageReviews from "../../components/film-page-reviews/film-page-reviews";
 import {formatRunTimeDate} from "../../utils";
+import {Film, Films, FilmComments} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    filmTitle: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    filmRunTime: number,
-  },
-  sortedFilms: {
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-  }[],
-  getCommentByFilmId: (id: number) => void,
-  comments: {
-    id: number,
-    user: {
-      id: number,
-      name: string,
-    },
-    comment: string,
-    date: string,
-    rating: number,
-  }[],
+  film: Film;
+  sortedFilms: Films;
+  getCommentByFilmId: (id: number) => void;
+  comments: FilmComments;
 }
 
 interface State {
@@ -54,7 +19,7 @@ interface State {
 }
 
 interface InjectedProps {
-  activeTab: string,
+  activeTab: string;
   setActiveTab: (tab: string) => void;
   renderActiveTab: () => void;
 }

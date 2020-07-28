@@ -1,24 +1,9 @@
 import * as React from "react";
 import {Subtract} from "utility-types";
+import {Film} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  },
+  film: Film;
 }
 
 interface State {
@@ -27,7 +12,7 @@ interface State {
 
 interface InjectedProps {
   isPlaying: boolean;
-  setPlayingFilm: (isPlaying: boolean) => void,
+  setPlayingFilm: (isPlaying: boolean) => void;
 }
 
 const withVideo = (Component) => {

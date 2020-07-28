@@ -1,22 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import FilmPageReview from "./film-page-review";
+import {TestComment} from "../../test-data";
+import {FilmComment} from "../../types";
 
-const Settings = {
-  id: 1,
-  user: {
-    id: 2,
-    name: `Valera`,
-  },
-  comment: `lalala`,
-  date: `12 July 1996`,
-  rating: 5,
-};
+const commentMock: FilmComment = TestComment;
 
 it(`Should FilmPageReview render correctly`, () => {
   const tree = renderer
     .create(<FilmPageReview
-      review={Settings}
+      review={commentMock}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

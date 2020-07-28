@@ -1,22 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import withReview from "./with-review.tsx";
+import * as Adapter from "enzyme-adapter-react-16";
+import withReview from "./with-review";
 import {ReviewLength} from "../../const.js";
+import {noop} from "../../utils";
+import {Film, PostReview} from "../../types";
+import {TestFilm} from "../../test-data";
 
-const filmInfo = {
-  filmTitle: `The Rock`,
-  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
-  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
-};
+const filmInfo: Film = TestFilm;
 
-const Settings = {
+const Settings: PostReview = {
   rating: 5,
   comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
 };
 
-const AddReview = (props) => {
+interface Props {
+  isDisable: boolean;
+  onSubmitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
+  onChangeHandler: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const AddReview: React.FunctionComponent<Props> = (props: Props) => {
   const {isDisable, onSubmitHandler, onChangeHandler} = props;
 
   return (
@@ -34,15 +38,8 @@ const AddReview = (props) => {
   );
 };
 
-AddReview.propTypes = {
-  isDisable: PropTypes.bool.isRequired,
-  onSubmitHandler: PropTypes.func.isRequired,
-  onChangeHandler: PropTypes.func.isRequired,
-};
-
-const noop = () => {};
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noop
 };
 
 configure({adapter: new Adapter()});

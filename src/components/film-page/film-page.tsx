@@ -6,48 +6,17 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
+import {Film, Films} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  },
-  sortedFilms: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  isFavoriteStatus: boolean,
-  activeTab: string,
-  setActiveTab: () => void,
-  renderActiveTab: () => void,
-  onMyListClickHandler: () => void,
-  isSignIn: string,
+  film: Film;
+  sortedFilms: Films;
+  isFavoriteStatus: boolean;
+  activeTab: string;
+  setActiveTab: () => void;
+  renderActiveTab: () => void;
+  onMyListClickHandler: () => void;
+  isSignIn: string;
 }
 
 const FilmCardWrapped = withVideo(FilmCard);

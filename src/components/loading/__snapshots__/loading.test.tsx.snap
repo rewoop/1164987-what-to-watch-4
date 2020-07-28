@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Loading render correctly 1`] = `
+<div
+  className="sweet-loading"
+>
+  <div
+    className="css-m6my84"
+  >
+    <div
+      className="css-1ittl2f"
+    />
+    <div
+      className="css-8wwzaj"
+    />
+    <div
+      className="css-p4djol"
+    />
+    <div
+      className="css-12wxdfg"
+    />
+    <div
+      className="css-p0n8q2"
+    />
+    <div
+      className="css-13n574i"
+    />
+  </div>
+</div>
+`;

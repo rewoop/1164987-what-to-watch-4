@@ -1,36 +1,20 @@
-import React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as React from "react";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 import {Router} from "react-router-dom";
-import history from "../../history.js";
-
-const noop = () => {};
+import history from "../../history";
+import {noop} from "../../utils";
+import {Film, Films} from "../../types";
+import {TestFilm, TestFilms} from "../../test-data";
 
 const getGenresList = (films) => {
   return [`All genres`].concat(Array.from(new Set(films.map((film) => film.filmGenre))));
 };
 
-const filmsInfo = [
-  {
-    id: 666,
-    filmTitle: `Fantastic Beasts`,
-    filmImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    filmVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    filmGenre: `Comedy`
-  }
-];
+const Settings: Film = TestFilm;
 
-const Settings = {
-  id: 666,
-  filmTitle: `The Rock`,
-  filmGenre: `Thriller`,
-  filmVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  releaseDate: 1996,
-  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
-  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
-  isFavoriteFilm: true
-};
+const filmsInfo: Films = TestFilms;
 
 const setFilmsList = () => {
   for (let i = 0; filmsInfo.length < 10; i++) {
@@ -39,9 +23,7 @@ const setFilmsList = () => {
   return filmsInfo;
 };
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+configure({adapter: new Adapter()});
 
 describe(`Should Main work right`, () => {
   it(`Should show button be clicked`, () => {

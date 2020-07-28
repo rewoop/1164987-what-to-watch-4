@@ -1,21 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import AddReview from "./add-review.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import AddReview from "./add-review";
 import {Router} from "react-router-dom";
-import history from "../../history.js";
+import history from "../../history";
+import {noop} from "../../utils";
+import {Film, PostReview} from "../../types";
+import {TestFilm} from "../../test-data";
 
-const noop = () => {};
-
-const film = {
-  filmTitle: `The Rock`,
-  backgroundPoster: `img/bg-the-grand-budapest-hotel.jpg`,
-  filmPoster: `img/the-grand-budapest-hotel-poster.jpg`,
-};
-
-const Settings = {
+const Settings: PostReview = {
   rating: 5,
-  comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`
+  comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
 };
+
+const film: Film = TestFilm;
 
 it(`AddReview component render correctly`, () => {
   const tree = renderer.create(

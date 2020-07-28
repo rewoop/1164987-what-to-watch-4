@@ -1,9 +1,9 @@
 import * as React from "react";
 
 interface Props {
-  activeGenreFilter: string,
-  genres: string[],
-  onGenreClickHandler: (genre: string) => void,
+  activeGenreFilter: string;
+  genres: string[];
+  onGenreClickHandler: (genre: string) => void;
 }
 
 const GenresList: React.FunctionComponent<Props> = (props: Props) => {

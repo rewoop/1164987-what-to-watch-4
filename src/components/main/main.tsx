@@ -6,52 +6,21 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
+import {Film, Films} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  },
-  films: {
-    id: number,
-    filmTitle: string,
-    filmVideo: string,
-    filmGenre: string,
-    releaseDate: number,
-    backgroundPoster: string,
-    filmPoster: string,
-    ratingScore: number,
-    ratingLevel: number,
-    ratingCount: string,
-    filmDescription: string,
-    filmDirector: string,
-    filmStarring: string[],
-    runTime: string,
-    isFavoriteFilm: boolean
-  }[],
-  genres: string[],
-  isFavoriteStatus: boolean,
-  activeGenreFilter: string,
-  onGenreClickHandler: () => void,
-  onShowButtonClickHandler: () => void,
-  onMyListClickHandler: () => void,
-  isMoreFilms: boolean,
-  isErrorLoadingFilms: boolean,
-  isSignIn: string,
-  showedFilmsCount: number,
+  film: Film;
+  films: Films;
+  genres: string[];
+  isFavoriteStatus: boolean;
+  activeGenreFilter: string;
+  onGenreClickHandler: () => void;
+  onShowButtonClickHandler: () => void;
+  onMyListClickHandler: () => void;
+  isMoreFilms: boolean;
+  isErrorLoadingFilms: boolean;
+  isSignIn: string;
+  showedFilmsCount: number;
 }
 
 const Main: React.FunctionComponent<Props> = (props: Props) => {

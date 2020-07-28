@@ -2,8 +2,8 @@ import * as React from "react";
 import {Tab} from "../../const";
 
 interface Props {
-  onLinkClickHandler: (Tab: string) => void,
-  currentTab: string
+  onLinkClickHandler: (Tab: string) => void;
+  currentTab: string;
 }
 
 const Tabs: React.FunctionComponent<Props> = (props: Props) => {

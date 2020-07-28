@@ -2,19 +2,15 @@ import * as React from "react";
 import {ReviewLength} from "../../const";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
+import {Film} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    filmTitle: string,
-    backgroundPoster: string,
-    filmPoster: string,
-  },
-  isDisable: boolean,
-  rating: number,
-  comment: string,
-  onSubmitHandler: (evt: React.FormEvent<HTMLFormElement>) => void,
-  onChangeHandler: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void,
+  film: Film;
+  isDisable: boolean;
+  rating: number;
+  comment: string;
+  onSubmitHandler: (evt: React.FormEvent<HTMLFormElement>) => void;
+  onChangeHandler: (evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const AddReview: React.FunctionComponent<Props> = (props: Props) => {

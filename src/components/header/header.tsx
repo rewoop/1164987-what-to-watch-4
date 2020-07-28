@@ -4,7 +4,7 @@ import {AppRoute} from "../../const";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 interface Props {
-  isSignIn: string,
+  isSignIn: string;
 }
 
 const Header: React.FunctionComponent<Props> = (props: Props) => {

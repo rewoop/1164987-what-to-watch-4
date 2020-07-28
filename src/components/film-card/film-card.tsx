@@ -5,13 +5,13 @@ import {AppRoute} from "../../const";
 
 interface Props {
   film: {
-    id: number,
-    filmTitle: string,
-    filmImage: string,
-    filmVideo: string,
-  },
-  isPlaying: boolean,
-  setPlayingFilm: (b: boolean) => boolean,
+    id: number;
+    filmTitle: string;
+    filmImage: string;
+    filmVideo: string;
+  };
+  isPlaying: boolean;
+  setPlayingFilm: (b: boolean) => boolean;
 }
 
 const FilmCard: React.FunctionComponent<Props> = (props: Props) => {

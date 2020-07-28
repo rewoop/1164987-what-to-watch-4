@@ -1,16 +1,14 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Tabs from "./tabs.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import Tabs from "./tabs";
 import {Tab} from "../../const";
 
 const Settings = {
   currentTab: `overview`
 };
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+configure({adapter: new Adapter()});
 
 it(`Should tab be clicked`, () => {
   const onLinkClickHandler = jest.fn();

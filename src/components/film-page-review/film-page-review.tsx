@@ -1,17 +1,9 @@
 import * as React from "react";
 import {formatReviewDate} from "../../utils";
+import {FilmComment} from "../../types";
 
 interface Props {
-  review: {
-    id: number,
-    user: {
-      id: number,
-      name: string,
-    },
-    comment: string,
-    date: string,
-    rating: number,
-  }
+  review: FilmComment;
 }
 
 const FilmPageReview: React.FunctionComponent<Props> = (props: Props) => {

@@ -3,13 +3,11 @@ import {Subtract} from "utility-types";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
 import {AppRoute} from "../../const";
+import {Film} from "../../types";
 
 interface Props {
-  film: {
-    id: number,
-    isFavoriteFilm: boolean
-  },
-  isSignIn: string,
+  film: Film;
+  isSignIn: string;
 }
 
 interface State {
@@ -17,8 +15,8 @@ interface State {
 }
 
 interface InjectedProps {
-  isFavoriteStatus: boolean,
-  onMyListClickHandler: (id: number, b: boolean) => void,
+  isFavoriteStatus: boolean;
+  onMyListClickHandler: (id: number, b: boolean) => void;
 }
 
 const withFavoriteFilm = (Component) => {

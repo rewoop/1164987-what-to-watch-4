@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FilmsList render correctly 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <a
+      href="/film/1"
+      onClick={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          className="player__video"
+        />
+        <img
+          alt="The Rock"
+          height="175"
+          width="280"
+        />
+      </div>
+    </a>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="/film/1"
+        onClick={[Function]}
+      >
+        The Rock
+      </a>
+    </h3>
+  </article>
+</div>
+`;
