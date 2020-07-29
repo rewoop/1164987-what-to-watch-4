@@ -196,6 +196,11 @@ const reducer = (state = initialState, action) => {
         isDisableForm: action.payload,
       });
     case ActionType.SET_FAVORITE_FILMS:
+      const filmIndex = state.films
+        .findIndex((film) => film === state.films.find((currentFilm) => {
+          return currentFilm.id === action.payload;
+        }));
+
       return state.promoFilm.id === action.payload ?
         extend(state, {
           promoFilm: Object.assign({}, state.promoFilm, {
@@ -204,14 +209,10 @@ const reducer = (state = initialState, action) => {
         })
         :
         extend(state, {
-          films: state.films.map((film) => {
-            if (film.id === action.payload) {
-              return Object.assign({}, film, {
-                isFavoriteFilm: action.isFavorite
-              });
-            }
-            return film;
-          }),
+          films: []
+            .concat(state.films.slice(0, filmIndex),
+                Object.assign({}, state.films[filmIndex], {isFavoriteFilm: action.isFavorite}),
+                state.films.slice(filmIndex + 1)),
         });
   }
   return state;
