@@ -1,5 +1,5 @@
 import {extend} from "../../utils.js";
-import filmAdapter from "../../components/adapters/film-adapter.js";
+import filmAdapter from "../../components/adapters/film-adapter.tsx";
 
 const initialState = {
   films: [],
@@ -47,6 +47,13 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_FAVORITE_FILMS,
       payload: films
+    };
+  },
+  setFavoriteFilms: (filmId, isFavorite) => {
+    return {
+      type: ActionType.SET_FAVORITE_FILMS,
+      payload: filmId,
+      isFavorite,
     };
   },
   loadingFilms: (isLoadingFilms) => {
@@ -146,6 +153,7 @@ const Operation = {
     })
       .then(() => {
         dispatch(ActionCreator.errorLoadingData(false));
+        dispatch(ActionCreator.setFavoriteFilms(filmId, isFavorite));
       })
       .catch(() => {
         dispatch(ActionCreator.errorLoadingData(true));
@@ -187,8 +195,26 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isDisableForm: action.payload,
       });
-  }
+    case ActionType.SET_FAVORITE_FILMS:
+      const filmIndex = state.films
+        .findIndex((film) => film === state.films.find((currentFilm) => {
+          return currentFilm.id === action.payload;
+        }));
 
+      return state.promoFilm.id === action.payload ?
+        extend(state, {
+          promoFilm: Object.assign({}, state.promoFilm, {
+            isFavoriteFilm: action.isFavorite
+          }),
+        })
+        :
+        extend(state, {
+          films: []
+            .concat(state.films.slice(0, filmIndex),
+                Object.assign({}, state.films[filmIndex], {isFavoriteFilm: action.isFavorite}),
+                state.films.slice(filmIndex + 1)),
+        });
+  }
   return state;
 };
 

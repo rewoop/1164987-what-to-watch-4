@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FilmPageReviews render correctly 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+          style={
+            Object {
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+            }
+          }
+        >
+          Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Kate Muir
+          </cite>
+          <time
+            className="review__date"
+            dateTime="2016-12-24"
+          >
+            December 24, 2016
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        9
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  />
+</div>
+`;
