@@ -49,6 +49,13 @@ const ActionCreator = {
       payload: films
     };
   },
+  setFavoriteFilms: (filmId, isFavorite) => {
+    return {
+      type: ActionType.SET_FAVORITE_FILMS,
+      payload: filmId,
+      isFavorite,
+    };
+  },
   loadingFilms: (isLoadingFilms) => {
     return {
       type: ActionType.IS_LOADING_FILMS,
@@ -146,6 +153,7 @@ const Operation = {
     })
       .then(() => {
         dispatch(ActionCreator.errorLoadingData(false));
+        dispatch(ActionCreator.setFavoriteFilms(filmId, isFavorite));
       })
       .catch(() => {
         dispatch(ActionCreator.errorLoadingData(true));
@@ -187,8 +195,25 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isDisableForm: action.payload,
       });
+    case ActionType.SET_FAVORITE_FILMS:
+      return state.promoFilm.id === action.payload ?
+        extend(state, {
+          promoFilm: Object.assign({}, state.promoFilm, {
+            isFavoriteFilm: action.isFavorite
+          }),
+        })
+        :
+        extend(state, {
+          films: state.films.map((film) => {
+            if (film.id === action.payload) {
+              return Object.assign({}, film, {
+                isFavoriteFilm: action.isFavorite
+              });
+            }
+            return film;
+          }),
+        });
   }
-
   return state;
 };
 

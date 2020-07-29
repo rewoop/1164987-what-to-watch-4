@@ -40,6 +40,10 @@ const withActiveTab = (Component) => {
       this._renderActiveTab = this._renderActiveTab.bind(this);
     }
 
+    componentDidMount() {
+      this.props.getCommentByFilmId(this.props.film.id);
+    }
+
     _setActiveTab(tab) {
       this.setState({
         activeTab: tab
@@ -66,7 +70,6 @@ const withActiveTab = (Component) => {
             runTime={formatRunTimeDate(this.props.film.filmRunTime)}
           />;
         case Tab.REVIEWS:
-          this.props.getCommentByFilmId(this.props.film.id);
           return <FilmPageReviews
             reviews={this.props.comments}
           />;
