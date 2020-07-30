@@ -41,26 +41,6 @@ const withFullVideo = (Component) => {
       };
     }
 
-    _playbackToggleVideo() {
-      this.setState((prevState) => {
-        return {isPlaying: !prevState.isPlaying};
-      });
-    }
-
-    _formatDurationToTime(duration) {
-      const time = parseInt(duration, 10);
-      const hours: number = Math.floor(time / 3600);
-      const minutes: number = Math.floor((time - (hours * 3600)) / 60);
-      const seconds: number = time - (hours * 3600) - +(minutes * 60);
-
-      return `${hours}:${minutes}:${seconds}`;
-    }
-
-    _setFullScreen() {
-      const video = this._videoRef.current;
-      video.requestFullscreen();
-    }
-
     componentDidMount() {
       const {film} = this.props;
       const video = this._videoRef.current;
@@ -96,16 +76,42 @@ const withFullVideo = (Component) => {
       video.ontimeupdate = null;
       video.onloadedmetadata = null;
       video.src = ``;
+      video.controls = false;
     }
 
     componentDidUpdate() {
       const video = this._videoRef.current;
+
+      if (document.fullscreenElement === null) {
+        video.controls = false;
+      }
 
       if (this.state.isPlaying) {
         video.play();
       } else {
         video.pause();
       }
+    }
+
+    _playbackToggleVideo() {
+      this.setState((prevState) => {
+        return {isPlaying: !prevState.isPlaying};
+      });
+    }
+
+    _formatDurationToTime(duration) {
+      const time = parseInt(duration, 10);
+      const hours: number = Math.floor(time / 3600);
+      const minutes: number = Math.floor((time - (hours * 3600)) / 60);
+      const seconds: number = time - (hours * 3600) - +(minutes * 60);
+
+      return `${hours.toString().padStart(2, `0`)}:${minutes.toString().padStart(2, `0`)}:${seconds.toString().padStart(2, `0`)}`;
+    }
+
+    _setFullScreen() {
+      const video = this._videoRef.current;
+      video.requestFullscreen();
+      video.controls = true;
     }
 
     render() {

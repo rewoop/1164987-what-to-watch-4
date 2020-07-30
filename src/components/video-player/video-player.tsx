@@ -18,11 +18,6 @@ export default class VideoPlayer extends React.PureComponent<Props, {}> {
     this._timeoutPlayHandler = null;
   }
 
-  _timeoutClear() {
-    clearTimeout(this._timeoutPlayHandler);
-    this._timeoutPlayHandler = null;
-  }
-
   componentDidMount() {
     const {src, muted} = this.props;
     const video = this._videoRef.current;
@@ -50,6 +45,11 @@ export default class VideoPlayer extends React.PureComponent<Props, {}> {
       }
       video.load();
     }
+  }
+
+  _timeoutClear() {
+    clearTimeout(this._timeoutPlayHandler);
+    this._timeoutPlayHandler = null;
   }
 
   render() {

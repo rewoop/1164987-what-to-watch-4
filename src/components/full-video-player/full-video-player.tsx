@@ -8,7 +8,7 @@ interface Props {
   progress: number;
   duration: number;
   isPlaying: boolean;
-  formatDurationToTime: (duration: number) => string;
+  formatDurationToTime: (currentTime: number) => string;
   playbackToggleVideo: () => void;
   setFullScreen: () => void;
   children: React.ReactNode;
@@ -28,7 +28,7 @@ const FullVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
             <progress className="player__progress" value={progress} max={duration}/>
             <div className="player__toggler" style={{left: ((progress * 100) / duration) + `%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{formatDurationToTime(duration)}</div>
+          <div className="player__time-value">{formatDurationToTime(duration - progress)}</div>
         </div>
 
         <div className="player__controls-row">
