@@ -4,16 +4,17 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 
 const override = css`
   display: block;
-  margin: 0 auto;
+  margin: auto;
 `;
 
 const Loading = () => {
   return (
-    <div className="sweet-loading">
+    <div className="sweet-loading"
+    style={{height: `100vh`, backgroundColor: `#150202`}}>
       <PacmanLoader
         css={override}
         size={100}
-        color={`#150202`}
+        color={`#eee5b5`}
         loading={true}
       />
     </div>
