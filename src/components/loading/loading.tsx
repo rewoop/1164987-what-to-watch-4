@@ -10,7 +10,7 @@ const override = css`
 const Loading = () => {
   return (
     <div className="sweet-loading"
-    style={{height: `100vh`, backgroundColor: `#150202`}}>
+      style={{height: `100vh`, backgroundColor: `#150202`}}>
       <PacmanLoader
         css={override}
         size={100}

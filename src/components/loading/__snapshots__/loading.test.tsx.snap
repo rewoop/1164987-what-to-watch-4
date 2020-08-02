@@ -3,27 +3,33 @@
 exports[`Should Loading render correctly 1`] = `
 <div
   className="sweet-loading"
+  style={
+    Object {
+      "backgroundColor": "#150202",
+      "height": "100vh",
+    }
+  }
 >
   <div
-    className="css-m6my84"
+    className="css-1fnkusb"
   >
     <div
-      className="css-1ittl2f"
+      className="css-qgh95i"
     />
     <div
-      className="css-8wwzaj"
+      className="css-s09cay"
     />
     <div
-      className="css-p4djol"
+      className="css-9nhjxe"
     />
     <div
-      className="css-12wxdfg"
+      className="css-3emaeb"
     />
     <div
-      className="css-p0n8q2"
+      className="css-nr88wv"
     />
     <div
-      className="css-13n574i"
+      className="css-1m9fy0h"
     />
   </div>
 </div>
