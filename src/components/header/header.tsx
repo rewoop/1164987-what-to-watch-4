@@ -27,7 +27,7 @@ const Header: React.FunctionComponent<Props> = (props: Props) => {
           {isSignIn === AuthorizationStatus.AUTH ?
             <Link to={AppRoute.MY_LIST}>
               <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
               </div>
             </Link>
             :
