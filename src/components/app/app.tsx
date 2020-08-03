@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Switch, Route, Router} from "react-router-dom";
+import {Switch, Route, HashRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/list/list";
 import {getFilmsByGenre, isMoreFilm} from "../../reducer/list/selectors";
@@ -18,7 +18,6 @@ import {formatRunTimeDate} from "../../utils";
 import Loading from "../loading/loading";
 import AddReview from "../add-review/add-review";
 import withReview from "../../hocs/with-review/with-review";
-import history from "../../history";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import MyList from "../my-list/my-list";
@@ -82,10 +81,10 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
   }
 
   return (
-    <Router history={history}>
+    <HashRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}
-          render={() => {
+          render={(routeProps) => {
             return <MainWrapped
               film={promoFilm}
               genres={genresList}
@@ -98,15 +97,16 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
               isSignIn={authorizationStatus}
               isErrorLoadingFilms={isErrorLoadingFilms}
               onMyListClickHandler={onMyListClickHandler}
+              history={routeProps.history}
             />;
           }}>
         </Route>
         <Route exact path={AppRoute.LOGIN}
-          render={() => {
+          render={(routeProps) => {
             return <SignIn
               onSubmit={(authData) => {
                 login(authData).then(() => {
-                  history.goBack();
+                  routeProps.history.goBack();
                 });
               }}
               isValid={isValidAuthorization}
@@ -126,6 +126,7 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
               getCommentByFilmId={getCommentByFilmId}
               isSignIn={authorizationStatus}
               onMyListClickHandler={onMyListClickHandler}
+              history={routeProps.history}
             />;
           }}>
         </Route>
@@ -150,7 +151,7 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
               isDisable={isDisableReviewForm}
               onSubmit={(reviewData) => {
                 postFilmComment(activeFilm.id, reviewData).then(() => {
-                  history.push(`${AppRoute.FILM_PAGE}/${activeFilm.id}`);
+                  routeProps.history.push(`${AppRoute.FILM_PAGE}/${activeFilm.id}`);
                 });
               }}
             />;
@@ -158,7 +159,7 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
         </PrivateRoute>
         <PrivateRoute exact path={AppRoute.MY_LIST} render={() => <MyList/>}> </PrivateRoute>
       </Switch>
-    </Router>
+    </HashRouter>
   );
 };
 

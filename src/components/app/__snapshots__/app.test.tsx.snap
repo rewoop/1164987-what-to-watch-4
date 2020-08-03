@@ -26,7 +26,7 @@ Array [
       >
         <a
           className="logo__link"
-          href="/"
+          href="#/"
           onClick={[Function]}
         >
           <span
@@ -50,7 +50,7 @@ Array [
         className="user-block"
       >
         <a
-          href="/login"
+          href="#/login"
           onClick={[Function]}
           style={
             Object {
@@ -107,7 +107,7 @@ Array [
           >
             <a
               className="btn btn--play movie-card__button"
-              href="/film/1/player"
+              href="#/film/1/player"
               onClick={[Function]}
               type="button"
             >
@@ -193,7 +193,7 @@ Array [
           onMouseLeave={[Function]}
         >
           <a
-            href="/film/1"
+            href="#/film/1"
             onClick={[Function]}
           >
             <div
@@ -214,7 +214,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/film/1"
+              href="#/film/1"
               onClick={[Function]}
             >
               The Rock
@@ -232,7 +232,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="/"
+          href="#/"
           onClick={[Function]}
         >
           <span

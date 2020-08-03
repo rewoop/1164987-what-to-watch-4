@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Subtract} from "utility-types";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import history from "../../history";
 import {AppRoute} from "../../const";
 import {Film} from "../../types";
 
@@ -35,7 +34,7 @@ const withFavoriteFilm = (Component) => {
     }
 
     _handleClick() {
-      const {film, isSignIn, onMyListClickHandler} = this.props;
+      const {film, isSignIn, onMyListClickHandler, history} = this.props;
 
       this.setState((prevState) => {
         return {
